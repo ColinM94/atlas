@@ -3,6 +3,7 @@ import { createRootRoute, Outlet } from "@tanstack/react-router";
 
 import { pb } from "inits/backend";
 import { useAppStore } from "stores/useAppStore/useAppStore";
+import { Header } from "components/header/header";
 
 import styles from "./styles.module.scss";
 
@@ -32,7 +33,7 @@ const Root = () => {
   return (
     <>
       <div className={styles.container}>
-        {/* <Header className={styles.header} /> */}
+        <Header />
 
         <div className={styles.content}>
           <Outlet />

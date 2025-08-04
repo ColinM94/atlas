@@ -1,8 +1,8 @@
-import { classes } from 'utils/classes';
-import { Icon } from 'components/icon/icon';
+import { classes } from "utils/classes";
+import { Icon } from "components/icon/icon";
 
-import { ButtonProps } from './types';
-import styles from './styles.module.scss';
+import { ButtonProps } from "./types";
+import styles from "./styles.module.scss";
 
 export const Button = (props: ButtonProps) => {
   return (
@@ -12,7 +12,8 @@ export const Button = (props: ButtonProps) => {
         styles.container,
         styles[props.type],
         props.className,
-        props.type === 'secondary' && `layer${props.layer ?? 0} layer${props.layer ?? 0}Hover`
+        props.type === "secondary" &&
+          `layer${props.layer ?? 0} layer${props.layer ?? 0}Hover`
       )}
     >
       {props.label}

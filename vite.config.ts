@@ -19,7 +19,7 @@ export default defineConfig({
     alias: {
       assets: resolve(__dirname, "src/assets"),
       components: resolve(__dirname, "src/components"),
-      consts: resolve(__dirname, "src/consts"),
+      consts: resolve(__dirname, "src/constants"),
       hooks: resolve(__dirname, "src/hooks"),
       inits: resolve(__dirname, "src/inits"),
       layouts: resolve(__dirname, "src/layouts"),
