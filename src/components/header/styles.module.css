@@ -1,0 +1,14 @@
+.container {
+  background-color: var(--color-surface0);
+  padding-block: var(--spacing-secondary);
+  padding-inline: var(--spacing-primary);
+  align-items: center;
+  flex-direction: row;
+
+  .email {
+  }
+
+  .refreshButton {
+    margin-left: auto;
+  }
+}

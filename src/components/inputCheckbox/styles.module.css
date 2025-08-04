@@ -1,0 +1,22 @@
+.container {
+  gap: var(--spacing-primary);
+  flex-direction: row;
+  border-radius: var(--roundness);
+  background-color: var(--color-surface0);
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+
+  .icon {
+  }
+
+  .input {
+    color: var(--color-text-primary);
+  }
+
+  input[type="checkbox"] {
+    height: 25px;
+    aspect-ratio: 1;
+    display: none;
+  }
+}

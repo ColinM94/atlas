@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  flex: 1;
+
+  .header {
+    width: 100%;
+  }
+
+  .content {
+    flex: 1;
+    gap: var(--spacing-primary);
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: var(--spacing-primary);
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,28 @@
+.container {
+  flex-direction: row;
+  padding: var(--spacing-primary);
+  background-color: var(--color-surface0);
+  align-items: center;
+  gap: var(--spacing-primary);
+
+  .dragContainer {
+    user-select: none;
+
+    .dragIcon {
+      color: var(--color-text-secondary);
+      margin-left: auto;
+      cursor: move;
+    }
+  }
+
+  .description {
+  }
+
+  .buttons {
+    margin-left: auto;
+    flex-direction: row;
+
+    .deleteButton {
+    }
+  }
+}

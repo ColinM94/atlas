@@ -1,0 +1,41 @@
+.container {
+  padding: var(--spacing-primary);
+  gap: var(--spacing-secondary);
+  align-items: center;
+  cursor: pointer;
+  border-radius: var(--roundness);
+  justify-content: center;
+  flex-direction: row;
+
+  .icon {
+    color: var(--color-text-primary);
+  }
+
+  .label {
+    color: var(--color-text-primary);
+  }
+}
+
+.surface0 {
+  background-color: var(--color-surface0);
+
+  &:hover {
+    background-color: var(--color-surface1);
+  }
+}
+
+.surface1 {
+  background-color: var(--color-surface1);
+
+  &:hover {
+    background-color: var(--color-surface2);
+  }
+}
+
+.surface2 {
+  background-color: var(--color-surface2);
+
+  &:hover {
+    background-color: var(--color-surface3);
+  }
+}

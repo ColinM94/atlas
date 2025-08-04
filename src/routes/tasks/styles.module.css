@@ -1,0 +1,53 @@
+.createTaskCard {
+  flex-direction: column;
+  gap: var(--spacing-primary);
+}
+
+.container {
+  gap: var(--spacing-primary);
+  width: 100%;
+
+  .tasks {
+    .task {
+      flex-direction: row;
+      gap: var(--spacing-primary);
+      align-items: center;
+      padding: var(--spacing-primary);
+      background-color: var(--color-surface0);
+      cursor: pointer;
+      border-radius: var(--roundness);
+
+      .name {
+        flex: 1;
+      }
+
+      .checkbox {
+      }
+    }
+
+    .floating {
+      position: absolute;
+      border: 1px solid var(--color-surface3);
+      z-index: 99;
+      width: calc(100% - var(--spacing-primary));
+    }
+  }
+
+  .createTaskForm {
+    gap: var(--spacing-primary);
+  }
+
+  .dropZone {
+    height: 40px;
+    background-color: var(--color-surface3);
+    transition-property: height padding;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    overflow: hidden;
+  }
+
+  .dropZoneHidden {
+    height: 0px;
+    padding: 0px;
+  }
+}

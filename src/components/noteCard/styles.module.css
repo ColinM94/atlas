@@ -1,0 +1,6 @@
+.container {
+  padding: var(--spacing-primary);
+  border-radius: var(--roundness);
+  background-color: var(--color-surface0);
+  flex-direction: column;
+}

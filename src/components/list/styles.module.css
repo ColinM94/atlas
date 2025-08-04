@@ -1,0 +1,48 @@
+.container {
+  padding: var(--spacing-primary);
+  padding-top: 0;
+  margin: calc(var(--spacing-primary) * -1);
+  overflow-x: hidden;
+  flex: 1;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dropZone {
+    transition: height 0.3s;
+    transition: padding 0.3s;
+    background-color: var(--color-surface1);
+
+    * {
+      visibility: hidden;
+    }
+  }
+
+  .dropZoneShow {
+    height: fit-content;
+    margin-block: calc(var(--spacing-primary) + var(--spacing-tertiary));
+  }
+
+  .dropZoneHide {
+    height: 0;
+    padding: 0;
+    margin-block: var(--spacing-secondary);
+  }
+
+  .dropZoneNoTransition {
+    transition: none !important;
+  }
+
+  .item {
+    transition: height 0.3s;
+  }
+
+  .draggedItem {
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    background-color: var(--color-surface3);
+    margin: 0;
+  }
+}

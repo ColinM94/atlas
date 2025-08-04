@@ -1,0 +1,25 @@
+.container {
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .card {
+    gap: var(--spacing-primary);
+    width: min(300px, 100%);
+
+    .form {
+      gap: var(--spacing-primary);
+
+      .toggles {
+        margin-bottom: calc(var(--spacing-primary) * 2);
+      }
+
+      .button {
+        margin-top: var(--spacing-primary);
+        background-color: var(--color-primary);
+      }
+    }
+  }
+}
