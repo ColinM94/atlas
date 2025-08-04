@@ -9,75 +9,48 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TasksIndexRouteImport } from './routes/tasks/index'
 import { Route as SettingsIndexRouteImport } from './routes/settings/index'
-import { Route as NotesIndexRouteImport } from './routes/notes/index'
-import { Route as CalendarIndexRouteImport } from './routes/calendar/index'
+import { Route as HomeIndexRouteImport } from './routes/home/index'
 
-const TasksIndexRoute = TasksIndexRouteImport.update({
-  id: '/tasks/',
-  path: '/tasks/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SettingsIndexRoute = SettingsIndexRouteImport.update({
   id: '/settings/',
   path: '/settings/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NotesIndexRoute = NotesIndexRouteImport.update({
-  id: '/notes/',
-  path: '/notes/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CalendarIndexRoute = CalendarIndexRouteImport.update({
-  id: '/calendar/',
-  path: '/calendar/',
+const HomeIndexRoute = HomeIndexRouteImport.update({
+  id: '/home/',
+  path: '/home/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/calendar': typeof CalendarIndexRoute
-  '/notes': typeof NotesIndexRoute
+  '/home': typeof HomeIndexRoute
   '/settings': typeof SettingsIndexRoute
-  '/tasks': typeof TasksIndexRoute
 }
 export interface FileRoutesByTo {
-  '/calendar': typeof CalendarIndexRoute
-  '/notes': typeof NotesIndexRoute
+  '/home': typeof HomeIndexRoute
   '/settings': typeof SettingsIndexRoute
-  '/tasks': typeof TasksIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/calendar/': typeof CalendarIndexRoute
-  '/notes/': typeof NotesIndexRoute
+  '/home/': typeof HomeIndexRoute
   '/settings/': typeof SettingsIndexRoute
-  '/tasks/': typeof TasksIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/calendar' | '/notes' | '/settings' | '/tasks'
+  fullPaths: '/home' | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/calendar' | '/notes' | '/settings' | '/tasks'
-  id: '__root__' | '/calendar/' | '/notes/' | '/settings/' | '/tasks/'
+  to: '/home' | '/settings'
+  id: '__root__' | '/home/' | '/settings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  CalendarIndexRoute: typeof CalendarIndexRoute
-  NotesIndexRoute: typeof NotesIndexRoute
+  HomeIndexRoute: typeof HomeIndexRoute
   SettingsIndexRoute: typeof SettingsIndexRoute
-  TasksIndexRoute: typeof TasksIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/tasks/': {
-      id: '/tasks/'
-      path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof TasksIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/settings/': {
       id: '/settings/'
       path: '/settings'
@@ -85,28 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/notes/': {
-      id: '/notes/'
-      path: '/notes'
-      fullPath: '/notes'
-      preLoaderRoute: typeof NotesIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/calendar/': {
-      id: '/calendar/'
-      path: '/calendar'
-      fullPath: '/calendar'
-      preLoaderRoute: typeof CalendarIndexRouteImport
+    '/home/': {
+      id: '/home/'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  CalendarIndexRoute: CalendarIndexRoute,
-  NotesIndexRoute: NotesIndexRoute,
+  HomeIndexRoute: HomeIndexRoute,
   SettingsIndexRoute: SettingsIndexRoute,
-  TasksIndexRoute: TasksIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

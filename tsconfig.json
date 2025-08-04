@@ -12,7 +12,7 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "moduleDetection": "force",
-    "verbatimModuleSyntax": true,
+    // "verbatimModuleSyntax": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 

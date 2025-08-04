@@ -1,11 +1,20 @@
-import { MaterialSymbol } from "material-symbols";
+import { MaterialSymbol } from 'material-symbols';
+import { ButtonClickEvent, Layer } from 'types/general';
 
-export interface ButtonProps {
-  icon?: MaterialSymbol;
+interface ButtonPropsBase {
   label?: string;
-  onClick: () => void;
-  surface?: 0 | 1 | 2;
+  icon?: MaterialSymbol;
+  onClick: (e: ButtonClickEvent) => void;
   className?: string;
-  iconClassName?: string;
-  labelClassName?: string;
 }
+
+interface ButtonPropsGeneral extends ButtonPropsBase {
+  type: 'primary' | 'danger';
+}
+
+export interface ButtonPropsSecondary extends ButtonPropsBase {
+  type: 'secondary';
+  layer?: Layer;
+}
+
+export type ButtonProps = ButtonPropsGeneral | ButtonPropsSecondary;

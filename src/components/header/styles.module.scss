@@ -1,0 +1,19 @@
+.container {
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-block: vars.$spacing-tertiary;
+  padding-inline: vars.$spacing-primary;
+  position: sticky;
+  top: 0;
+  background-color: vars.$color-background;
+  z-index: 1;
+
+  .menuButton {
+    margin-right: auto;
+    background-color: vars.$color-background;
+  }
+
+  .settingsButton {
+    background-color: vars.$color-background;
+  }
+}

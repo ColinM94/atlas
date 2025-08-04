@@ -1,0 +1,150 @@
+@font-face {
+  font-family: 'Fredoka';
+  src: url('assets/fonts/Fredoka-Variable.woff2');
+  font-display: swap;
+}
+
+* :not(head, script, video) {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  box-sizing: border-box;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  font-style: inherit;
+  font-variant: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  vertical-align: baseline;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+ins > div {
+  position: unset;
+}
+
+html,
+#root,
+body {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  background-color: vars.$color-background;
+  font-size: 62.5%;
+  scroll-behavior: smooth !important;
+
+  ::-webkit-scrollbar {
+    border-radius: vars.$roundness;
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: vars.$roundness;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: vars.$color-surface;
+    border-radius: vars.$roundness;
+    border: 1px solid vars.$color-surface3;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+img,
+image,
+svg {
+  max-width: 100%;
+  pointer-events: none;
+}
+
+body {
+  font-family: 'Fredoka', Calibri, 'Trebuchet MS', sans-serif;
+  color: vars.$color-text-primary;
+  background-color: vars.$color-background;
+  line-height: vars.$line-height;
+  font-size: 62.5%;
+}
+
+h1 {
+  font-size: vars.$font-size-heading;
+}
+
+h2 {
+  font-size: vars.$font-size-heading2;
+}
+
+h3,
+h4,
+h5,
+h6,
+p,
+div,
+span {
+  font-size: vars.$font-size-body;
+}
+
+a {
+  font-size: vars.$font-size-body;
+  text-decoration: none;
+  color: vars.$color-link;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+option {
+  font-size: vars.$font-size-body;
+}
+
+.layer0 {
+  background-color: vars.$color-surface;
+}
+
+.layer0Hover {
+  &:hover {
+    background-color: vars.$color-surface2;
+  }
+}
+
+.layer1 {
+  background-color: vars.$color-surface2;
+}
+
+.layer1Hover {
+  &:hover {
+    background-color: vars.$color-surface3;
+  }
+}
+
+.layer2 {
+  background-color: vars.$color-surface3;
+}
+
+.layer3Hover {
+  &:hover {
+    background-color: vars.$color-surface4;
+  }
+}
+
+.layer3 {
+  background-color: vars.$color-surface4;
+}
+
+.layer3Hover {
+  &:hover {
+    background-color: vars.$color-surface5;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}

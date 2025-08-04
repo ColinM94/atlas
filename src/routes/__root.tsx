@@ -1,21 +1,17 @@
 import * as React from "react";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 
-import { useAppStore } from "stores/appStore";
-import { Login } from "components/login/login";
-import { Navbar } from "components/navbar/navbar";
 import { pb } from "inits/backend";
+import { useAppStore } from "stores/useAppStore/useAppStore";
 
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 
 const Root = () => {
-  const { user, updateAppStore } = useAppStore();
-
   const [isInitialising, setIsInitialising] = React.useState(true);
 
   const initialise = () => {
     if (pb.authStore.isValid) {
-      updateAppStore({
+      useAppStore.setState({
         user: {
           id: pb.authStore.record?.id || "",
         },
@@ -42,8 +38,6 @@ const Root = () => {
           <Outlet />
         </div>
       </div>
-
-      <Navbar />
 
       {/* <TanStackRouterDevtools /> */}
     </>

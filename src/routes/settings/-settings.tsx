@@ -1,16 +1,14 @@
-import { Button } from "components/button/button";
-import { useAppStore } from "stores/appStore";
+import { useAppStore } from "stores/useAppStore/useAppStore";
 import { pb } from "inits/backend";
+import { Button } from "components/button/button";
 
 import styles from "./styles.module.css";
 
 export const Settings = () => {
-  const { updateAppStore } = useAppStore();
-
   const handleSignOut = () => {
     pb.authStore.clear();
 
-    updateAppStore({
+    useAppStore.setState({
       user: {
         id: "",
       },
@@ -22,6 +20,7 @@ export const Settings = () => {
       <Button
         label="Sign Out"
         onClick={handleSignOut}
+        type="secondary"
         className={styles.signOutButton}
       />
     </>

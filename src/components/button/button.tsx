@@ -1,36 +1,22 @@
-import { classes } from "utils/classes";
-import { Icon } from "components/icon/icon";
+import { classes } from 'utils/classes';
+import { Icon } from 'components/icon/icon';
 
-import { ButtonProps } from "./types";
-import styles from "./styles.module.css";
+import { ButtonProps } from './types';
+import styles from './styles.module.scss';
 
 export const Button = (props: ButtonProps) => {
-  const {
-    icon,
-    label,
-    onClick,
-    surface = 0,
-    className,
-    iconClassName,
-    labelClassName,
-  } = props;
-
   return (
     <button
-      onClick={onClick}
+      onClick={props.onClick}
       className={classes(
-        className,
         styles.container,
-        styles[`surface${surface}`]
+        styles[props.type],
+        props.className,
+        props.type === 'secondary' && `layer${props.layer ?? 0} layer${props.layer ?? 0}Hover`
       )}
     >
-      {icon && (
-        <Icon icon={icon} className={classes(styles.icon, iconClassName)} />
-      )}
-
-      {label && (
-        <div className={classes(styles.label, labelClassName)}>{label}</div>
-      )}
+      {props.label}
+      {props.icon && <Icon icon={props.icon} />}
     </button>
   );
 };

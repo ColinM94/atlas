@@ -1,0 +1,33 @@
+.container {
+  cursor: pointer;
+  color: vars.$color-text-primary;
+  border-radius: vars.$roundness;
+  padding: vars.$spacing-secondary;
+
+  &:hover {
+  }
+}
+
+.primary {
+  background-color: vars.$color-primary;
+
+  &:hover {
+    background-color: vars.$color-primary-hover;
+  }
+}
+
+.secondary {
+  background-color: vars.$color-secondary;
+
+  &:hover {
+    background-color: vars.$color-secondary-hover;
+  }
+}
+
+.danger {
+  background-color: vars.$color-danger;
+
+  &:hover {
+    background-color: vars.$color-danger-hover;
+  }
+}

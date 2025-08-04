@@ -31,4 +31,14 @@ export default defineConfig({
       utils: resolve(__dirname, "src/utils"),
     },
   },
+  css: {
+    preprocessorMaxWorkers: true,
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+        @use "styles/vars.scss";
+        `,
+      },
+    },
+  },
 });
