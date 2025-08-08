@@ -1,17 +1,14 @@
-import { Button } from 'components/button/button';
-import { pickFromAppStore, useAppStore } from 'stores/useAppStore/useAppStore';
+import { Button } from "components/button/button";
+import { useAppStoreSlice } from "stores/useAppStore/useAppStore";
 
-import { Props } from './types';
-import styles from './styles.module.scss';
+import styles from "./styles.module.scss";
 
-export const Header = (props: Props) => {
-  const {} = props;
-
-  const { showNavbar } = pickFromAppStore('showNavbar');
+export const Header = () => {
+  const { darkMode, showNavbar } = useAppStoreSlice("darkMode", "showNavbar");
 
   return (
     <div className={styles.container}>
-      <Button
+      {/* <Button
         icon="menu"
         type="secondary"
         onClick={() => {
@@ -21,14 +18,15 @@ export const Header = (props: Props) => {
         }}
         // layer={1}
         className={styles.menuButton}
-      />
+      /> */}
 
-      {showNavbar ? 'Show Nav' : 'Hide Nav'}
+      {showNavbar ? "Show Nav" : "Hide Nav"}
+      {darkMode ? "Dark Mode Yes" : "Dark Mode No"}
 
       <Button
         icon="settings"
         type="secondary"
-        onClick={() => alert('Show Settings')}
+        onClick={() => alert("Show Settings")}
         // layer={1}
         className={styles.settingsButton}
       />
