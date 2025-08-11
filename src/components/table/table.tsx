@@ -6,15 +6,16 @@ import styles from "./styles.module.scss";
 
 interface TableProps<T> {
   data: T[];
-  items: (data: T, index: number) => Cell[];
-  onRowClick?: (data: T) => void;
-  keyExtractor: (data: T) => string;
+  items: (dataItem: T, index: number) => Cell[];
+  onRowClick?: (dataItem: T) => void;
+  keyExtractor: (dataItem: T) => string;
   rowHeight?: number;
   overscan?: number;
 }
 
 interface CellBase {
   id: string;
+  onClick?: () => void;
   heading?: string;
 }
 
@@ -116,7 +117,7 @@ export const Table = <T,>(props: TableProps<T>) => {
                   styles.row,
                   onRowClick && styles.rowClickable,
                   (visibleRange.start + index) % 2 === 0
-                    ? styles.rowEvens
+                    ? styles.rowEven
                     : styles.rowOdd
                 )}
                 onClick={() => onRowClick?.(row.data)}
@@ -124,7 +125,18 @@ export const Table = <T,>(props: TableProps<T>) => {
               >
                 {row.cells.map((cell) => {
                   return (
-                    <td key={cell.id} className={styles[`${cell.type}Cell`]}>
+                    <td
+                      key={cell.id}
+                      onClick={(e) => {
+                        if (!cell.onClick) return;
+                        e.stopPropagation();
+                        cell?.onClick();
+                      }}
+                      className={classes(
+                        styles[`${cell.type}Cell`],
+                        cell.onClick && styles.cellClickable
+                      )}
+                    >
                       {cell.type === "text" && cell.value}
                       {cell.type === "image" && (
                         <img src={cell.url} className={styles.image} />

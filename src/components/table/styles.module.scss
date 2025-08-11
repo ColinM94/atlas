@@ -1,9 +1,12 @@
 .container {
-  background-color: vars.$color-surface;
   overflow-y: auto;
+  padding: vars.$spacing-primary;
+  padding-top: 0;
+  margin-top: vars.$spacing-primary;
 
   .table {
     border-collapse: collapse;
+    border-radius: vars.$roundness;
   }
 
   .heading {
@@ -22,6 +25,14 @@
 
     &:hover {
       background-color: vars.$color-surface3;
+    }
+  }
+
+  .cellClickable {
+    cursor: pointer;
+
+    &:hover {
+      background-color: vars.$color-surface4;
     }
   }
 

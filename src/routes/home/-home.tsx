@@ -32,6 +32,7 @@ export const Home = () => {
             type: "text",
             value: person.firstName,
             heading: "First Name",
+            onClick: () => alert(person.firstName),
           },
           {
             id: "lastName",
