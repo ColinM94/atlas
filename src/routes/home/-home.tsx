@@ -1,5 +1,6 @@
-import { Button } from "components/button/button";
+import { Table } from "components/table/table";
 import { useAppStore } from "stores/useAppStore/useAppStore";
+import { people } from "./-people";
 
 export const Home = () => {
   // const { darkMode, showNavbar } = useAppStoreSlice("darkMode", "showNavbar");
@@ -17,18 +18,37 @@ export const Home = () => {
   };
 
   return (
-    <div
-      style={{
-        height: 200,
-        width: "100%",
-        border: "1px solid dodgerblue",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "row",
-        gap: 10,
-      }}
-    >
-      <div>Controls</div>
+    <>
+      <Table
+        data={people}
+        items={(person) => [
+          {
+            id: "avatar",
+            type: "image",
+            url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2U2akySBgSHUK-foX-9SGFmLk6zEuGYNNqw&s",
+          },
+          {
+            id: "firstName",
+            type: "text",
+            value: person.firstName,
+            heading: "First Name",
+          },
+          {
+            id: "lastName",
+            type: "text",
+            value: person.lastName,
+            heading: "Last Name",
+          },
+          {
+            id: "age",
+            type: "text",
+            value: person.age,
+            heading: "Age",
+          },
+        ]}
+        keyExtractor={(item) => item.id}
+      />
+      {/* <div>Controls</div>
       <Button
         // label={darkMode ? "Disable Dark Mode" : "Enable Dark Mode"}
         label="Toggle Dark Mode"
@@ -41,7 +61,7 @@ export const Home = () => {
         label="Toggle Navbar"
         onClick={toggleShowNavbar}
         type="primary"
-      />
-    </div>
+      /> */}
+    </>
   );
 };

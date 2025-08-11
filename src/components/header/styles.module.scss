@@ -1,12 +1,12 @@
 .container {
+  width: 100%;
+  top: 0;
+  z-index: 1;
   flex-direction: row;
   justify-content: flex-end;
   padding-block: vars.$spacing-tertiary;
   padding-inline: vars.$spacing-primary;
-  position: sticky;
-  top: 0;
   background-color: vars.$color-background;
-  z-index: 1;
 
   .menuButton {
     margin-right: auto;

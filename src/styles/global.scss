@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'Fredoka';
-  src: url('assets/fonts/Fredoka-Variable.woff2');
+  font-family: "Fredoka";
+  src: url("assets/fonts/Fredoka-Variable.woff2");
   font-display: swap;
 }
 
-* :not(head, script, video) {
+* :not(head, script, video, table, tr, th, td, thead, tbody, tfoot) {
   padding: 0;
   margin: 0;
   display: flex;
@@ -66,7 +66,7 @@ svg {
 }
 
 body {
-  font-family: 'Fredoka', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Fredoka", Calibri, "Trebuchet MS", sans-serif;
   color: vars.$color-text-primary;
   background-color: vars.$color-background;
   line-height: vars.$line-height;

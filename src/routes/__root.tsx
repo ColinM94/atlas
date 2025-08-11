@@ -33,7 +33,7 @@ const Root = () => {
   return (
     <>
       <div className={styles.container}>
-        <Header />
+        {/* <Header /> */}
 
         <div className={styles.content}>
           <Outlet />
