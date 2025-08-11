@@ -46,6 +46,7 @@ export const Home = () => {
             heading: "Age",
           },
         ]}
+        onRowClick={(data) => alert("Click")}
         keyExtractor={(item) => item.id}
       />
       {/* <div>Controls</div>

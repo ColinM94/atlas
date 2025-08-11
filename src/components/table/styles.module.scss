@@ -17,11 +17,20 @@
     height: 50px;
   }
 
-  .rowEven {
-    background-color: vars.$color-surface2;
+  .rowClickable {
+    cursor: pointer;
+
+    &:hover {
+      background-color: vars.$color-surface3;
+    }
   }
 
   .rowOdd {
+    background-color: vars.$color-surface;
+  }
+
+  .rowEven {
+    background-color: vars.$color-surface2;
   }
 
   .cell {

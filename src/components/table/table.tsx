@@ -6,8 +6,9 @@ import styles from "./styles.module.scss";
 
 interface TableProps<T> {
   data: T[];
-  items: (item: T, index: number) => Cell[];
-  keyExtractor: (item: T) => string;
+  items: (data: T, index: number) => Cell[];
+  onRowClick?: (data: T) => void;
+  keyExtractor: (data: T) => string;
   rowHeight?: number;
   overscan?: number;
 }
@@ -29,20 +30,29 @@ interface CellText extends CellBase {
 
 type Cell = CellText | CellImage;
 
-interface Row {
+interface Row<T> {
   id: string;
   cells: Cell[];
+  data: T;
 }
 
 export const Table = <T,>(props: TableProps<T>) => {
-  const { data, items, keyExtractor, rowHeight = 40, overscan = 5 } = props;
+  const {
+    data,
+    items,
+    keyExtractor,
+    onRowClick,
+    rowHeight = 40,
+    overscan = 5,
+  } = props;
 
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [visibleRange, setVisibleRange] = React.useState({ start: 0, end: 20 });
 
-  const rows: Row[] = data.map((dataItem, index) => ({
+  const rows: Row<T>[] = data.map((dataItem, index) => ({
     id: keyExtractor(dataItem),
     cells: items(dataItem, index),
+    data: dataItem,
   }));
 
   const handleScroll = () => {
@@ -104,10 +114,12 @@ export const Table = <T,>(props: TableProps<T>) => {
                 key={row.id}
                 className={classes(
                   styles.row,
+                  onRowClick && styles.rowClickable,
                   (visibleRange.start + index) % 2 === 0
-                    ? styles.rowEven
+                    ? styles.rowEvens
                     : styles.rowOdd
                 )}
+                onClick={() => onRowClick?.(row.data)}
                 style={{ height: rowHeight }}
               >
                 {row.cells.map((cell) => {
