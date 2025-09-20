@@ -4,7 +4,21 @@
   font-display: swap;
 }
 
-* :not(head, script, video, table, tr, th, td, thead, tbody, tfoot) {
+*
+  :not(
+    head,
+    script,
+    video,
+    table,
+    tr,
+    th,
+    td,
+    thead,
+    tbody,
+    tfoot,
+    .TanStackRouterDevtools,
+    .TanStackRouterDevtools *
+  ) {
   padding: 0;
   margin: 0;
   display: flex;

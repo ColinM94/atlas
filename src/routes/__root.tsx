@@ -1,10 +1,12 @@
 import * as React from "react";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 import { pb } from "inits/backend";
 import { useAppStore } from "stores/useAppStore/useAppStore";
 
 import styles from "./styles.module.scss";
+import { classes } from "utils/classes";
 
 const Root = () => {
   const [isInitialising, setIsInitialising] = React.useState(true);
@@ -39,7 +41,7 @@ const Root = () => {
         </div>
       </div>
 
-      {/* <TanStackRouterDevtools /> */}
+      <TanStackRouterDevtools />
     </>
   );
 };
