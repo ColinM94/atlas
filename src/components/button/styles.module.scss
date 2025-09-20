@@ -3,6 +3,7 @@
   color: vars.$color-text-primary;
   border-radius: vars.$roundness;
   padding: vars.$spacing-secondary;
+  user-select: none;
 
   &:hover {
   }
@@ -17,11 +18,6 @@
 }
 
 .secondary {
-  background-color: vars.$color-secondary;
-
-  &:hover {
-    background-color: vars.$color-secondary-hover;
-  }
 }
 
 .danger {

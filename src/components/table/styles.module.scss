@@ -66,6 +66,17 @@
     }
   }
 
+  .buttonCell {
+    @extend .cell;
+    width: 0;
+    min-width: fit-content;
+    padding: vars.$spacing-secondary;
+
+    .button {
+      max-height: calc(100% - vars.$spacing-primary);
+    }
+  }
+
   .cell {
     .text {
     }

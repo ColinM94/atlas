@@ -1,0 +1,18 @@
+.header {
+  flex-direction: row;
+  gap: vars.$spacing-secondary;
+  padding-inline: vars.$spacing-primary;
+  align-items: center;
+
+  .backButton {
+  }
+
+  .headerIcon {
+    font-size: 32px;
+    color: vars.$color-text-secondary;
+  }
+
+  .headerName {
+    font-size: 32px;
+  }
+}

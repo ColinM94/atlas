@@ -27,3 +27,5 @@ export type FormSubmitEvent = React.FormEvent<HTMLFormElement>;
 export type DatabaseRecord = {
   id: string;
 };
+
+export type Layer = 0 | 1 | 2 | 3;

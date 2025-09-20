@@ -3,6 +3,8 @@ import * as React from "react";
 import { classes } from "utils/classes";
 
 import styles from "./styles.module.scss";
+import { MaterialSymbol } from "material-symbols";
+import { Button } from "components/button/button";
 
 interface TableProps<T> {
   data: T[];
@@ -29,7 +31,12 @@ interface CellText extends CellBase {
   value: string;
 }
 
-type Cell = CellText | CellImage;
+interface CellButton extends CellBase {
+  type: "button";
+  icon: MaterialSymbol;
+}
+
+type Cell = CellText | CellImage | CellButton;
 
 interface Row<T> {
   id: string;
@@ -110,42 +117,61 @@ export const Table = <T,>(props: TableProps<T>) => {
 
           {rows
             .slice(visibleRange.start, visibleRange.end + 1)
-            .map((row, index) => (
-              <tr
-                key={row.id}
-                className={classes(
-                  styles.row,
-                  onRowClick && styles.rowClickable,
-                  (visibleRange.start + index) % 2 === 0
-                    ? styles.rowEven
-                    : styles.rowOdd
-                )}
-                onClick={() => onRowClick?.(row.data)}
-                style={{ height: rowHeight }}
-              >
-                {row.cells.map((cell) => {
-                  return (
-                    <td
-                      key={cell.id}
-                      onClick={(e) => {
-                        if (!cell.onClick) return;
-                        e.stopPropagation();
-                        cell?.onClick();
-                      }}
-                      className={classes(
-                        styles[`${cell.type}Cell`],
-                        cell.onClick && styles.cellClickable
-                      )}
-                    >
-                      {cell.type === "text" && cell.value}
-                      {cell.type === "image" && (
-                        <img src={cell.url} className={styles.image} />
-                      )}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
+            .map((row, index) => {
+              const isEvenRow = (visibleRange.start + index) % 2 === 0;
+
+              return (
+                <tr
+                  key={row.id}
+                  onKeyDown={(e) => console.log(e.key)}
+                  onClick={(e) => {
+                    onRowClick?.(row.data);
+                  }}
+                  style={{ height: rowHeight }}
+                  className={classes(
+                    styles.row,
+                    onRowClick && styles.rowClickable,
+                    isEvenRow ? styles.rowEven : styles.rowOdd
+                  )}
+                >
+                  {row.cells.map((cell) => {
+                    const isCellClickable =
+                      cell.type !== "button" && Boolean(cell?.onClick);
+
+                    return (
+                      <td
+                        key={cell.id}
+                        onClick={(e) => {
+                          if (!isCellClickable) return;
+                          e.stopPropagation();
+                          cell?.onClick();
+                        }}
+                        className={classes(
+                          styles[`${cell.type}Cell`],
+                          isCellClickable && styles.cellClickable
+                        )}
+                      >
+                        {cell.type === "text" && cell.value}
+
+                        {cell.type === "image" && (
+                          <img src={cell.url} className={styles.image} />
+                        )}
+
+                        {cell.type === "button" && (
+                          <Button
+                            type="secondary"
+                            icon={cell.icon}
+                            onClick={cell.onClick}
+                            layer={2}
+                            className={styles.button}
+                          />
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
 
           {afterHeight > 0 && (
             <tr style={{ height: afterHeight }}>

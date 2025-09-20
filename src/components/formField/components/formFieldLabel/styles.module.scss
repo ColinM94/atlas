@@ -1,0 +1,49 @@
+.container {
+  align-items: flex-start;
+  flex: 1;
+  justify-content: center;
+}
+
+.titleContainer {
+  flex-direction: row;
+  gap: vars.$spacing-tertiary;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+
+  .title {
+    display: inline-block;
+    font-size: vars.$font-size-heading;
+    flex-direction: row;
+    align-items: center;
+    gap: vars.$spacing-tertiary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    // margin-bottom: 2px;
+
+    @media (min-width: vars.$breakpoint-small) {
+      // max-width: calc(100% - vars.$font-size-body);
+    }
+  }
+
+  .tooltipBtn {
+    color: vars.$color-text-secondary;
+  }
+
+  .tooltipIcon {
+    font-size: calc(vars.$font-size-body * 1.2) !important;
+    margin-left: -(vars.$spacing-tertiary);
+  }
+}
+
+.subtitleContainer {
+  .subtitle {
+    color: vars.$color-text-secondary;
+    font-size: vars.$font-size-body;
+    overflow-wrap: anywhere;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}

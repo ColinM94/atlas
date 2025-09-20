@@ -9,68 +9,106 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SettingsIndexRouteImport } from './routes/settings/index'
-import { Route as HomeIndexRouteImport } from './routes/home/index'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as SectionsSectionsRouteImport } from './routes/_sections/_sections'
+import { Route as SectionsTasksIndexRouteImport } from './routes/_sections/tasks/index'
+import { Route as SectionsSettingsIndexRouteImport } from './routes/_sections/settings/index'
 
-const SettingsIndexRoute = SettingsIndexRouteImport.update({
-  id: '/settings/',
-  path: '/settings/',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HomeIndexRoute = HomeIndexRouteImport.update({
-  id: '/home/',
-  path: '/home/',
+const SectionsSectionsRoute = SectionsSectionsRouteImport.update({
+  id: '/_sections/_sections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SectionsTasksIndexRoute = SectionsTasksIndexRouteImport.update({
+  id: '/_sections/tasks/',
+  path: '/tasks/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SectionsSettingsIndexRoute = SectionsSettingsIndexRouteImport.update({
+  id: '/_sections/settings/',
+  path: '/settings/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/home': typeof HomeIndexRoute
-  '/settings': typeof SettingsIndexRoute
+  '/': typeof IndexRoute
+  '/settings': typeof SectionsSettingsIndexRoute
+  '/tasks': typeof SectionsTasksIndexRoute
 }
 export interface FileRoutesByTo {
-  '/home': typeof HomeIndexRoute
-  '/settings': typeof SettingsIndexRoute
+  '/': typeof IndexRoute
+  '/settings': typeof SectionsSettingsIndexRoute
+  '/tasks': typeof SectionsTasksIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/home/': typeof HomeIndexRoute
-  '/settings/': typeof SettingsIndexRoute
+  '/': typeof IndexRoute
+  '/_sections/_sections': typeof SectionsSectionsRoute
+  '/_sections/settings/': typeof SectionsSettingsIndexRoute
+  '/_sections/tasks/': typeof SectionsTasksIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/home' | '/settings'
+  fullPaths: '/' | '/settings' | '/tasks'
   fileRoutesByTo: FileRoutesByTo
-  to: '/home' | '/settings'
-  id: '__root__' | '/home/' | '/settings/'
+  to: '/' | '/settings' | '/tasks'
+  id:
+    | '__root__'
+    | '/'
+    | '/_sections/_sections'
+    | '/_sections/settings/'
+    | '/_sections/tasks/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  HomeIndexRoute: typeof HomeIndexRoute
-  SettingsIndexRoute: typeof SettingsIndexRoute
+  IndexRoute: typeof IndexRoute
+  SectionsSectionsRoute: typeof SectionsSectionsRoute
+  SectionsSettingsIndexRoute: typeof SectionsSettingsIndexRoute
+  SectionsTasksIndexRoute: typeof SectionsTasksIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/settings/': {
-      id: '/settings/'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsIndexRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/home/': {
-      id: '/home/'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof HomeIndexRouteImport
+    '/_sections/_sections': {
+      id: '/_sections/_sections'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof SectionsSectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_sections/tasks/': {
+      id: '/_sections/tasks/'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof SectionsTasksIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_sections/settings/': {
+      id: '/_sections/settings/'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SectionsSettingsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  HomeIndexRoute: HomeIndexRoute,
-  SettingsIndexRoute: SettingsIndexRoute,
+  IndexRoute: IndexRoute,
+  SectionsSectionsRoute: SectionsSectionsRoute,
+  SectionsSettingsIndexRoute: SectionsSettingsIndexRoute,
+  SectionsTasksIndexRoute: SectionsTasksIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
-import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
 export default defineConfig({
   plugins: [
@@ -19,7 +19,7 @@ export default defineConfig({
     alias: {
       assets: resolve(__dirname, "src/assets"),
       components: resolve(__dirname, "src/components"),
-      consts: resolve(__dirname, "src/constants"),
+      constants: resolve(__dirname, "src/constants"),
       hooks: resolve(__dirname, "src/hooks"),
       inits: resolve(__dirname, "src/inits"),
       layouts: resolve(__dirname, "src/layouts"),

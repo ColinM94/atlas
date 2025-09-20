@@ -106,42 +106,42 @@ option {
 }
 
 .layer0 {
-  background-color: vars.$color-surface;
+  background-color: vars.$color-background;
 }
 
 .layer0Hover {
+  &:hover {
+    background-color: vars.$color-surface;
+  }
+}
+
+.layer1 {
+  background-color: vars.$color-surface;
+}
+
+.layer1Hover {
   &:hover {
     background-color: vars.$color-surface2;
   }
 }
 
-.layer1 {
+.layer2 {
   background-color: vars.$color-surface2;
 }
 
-.layer1Hover {
+.layer2Hover {
   &:hover {
     background-color: vars.$color-surface3;
   }
 }
 
-.layer2 {
+.layer3 {
   background-color: vars.$color-surface3;
 }
 
 .layer3Hover {
   &:hover {
     background-color: vars.$color-surface4;
-  }
-}
-
-.layer3 {
-  background-color: vars.$color-surface4;
-}
-
-.layer3Hover {
-  &:hover {
-    background-color: vars.$color-surface5;
   }
 }
 

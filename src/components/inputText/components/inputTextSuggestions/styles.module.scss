@@ -1,0 +1,35 @@
+.container {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  width: 100%;
+  border: 1px solid vars.$color-outline;
+  padding: 0;
+  z-index: 2;
+  overflow-y: auto;
+  height: 75px;
+
+  .selectedSuggestion {
+    background-color: vars.$color-surface;
+  }
+
+  .suggestion {
+    cursor: pointer;
+    padding: vars.$spacing-secondary;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    .suggestionText {
+      flex: 1;
+    }
+
+    &:active {
+      filter: brightness(vars.$active-brightness-filter);
+    }
+
+    .icon {
+      font-size: vars.$icon-size-small;
+    }
+  }
+}

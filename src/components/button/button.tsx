@@ -8,6 +8,7 @@ export const Button = (props: ButtonProps) => {
   return (
     <button
       onClick={props.onClick}
+      // onMouseEnter={props.onMouseEnter}
       className={classes(
         styles.container,
         styles[props.type],

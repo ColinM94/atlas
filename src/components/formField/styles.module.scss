@@ -1,0 +1,26 @@
+.cardContainer {
+  background-color: vars.$color-surface;
+  padding: vars.$spacing-primary;
+}
+
+.container {
+  gap: vars.$spacing-secondary;
+
+  .labelContainer {
+    flex: 2;
+    white-space: nowrap;
+  }
+
+  .inputContainer {
+    // flex: 1 !important;
+    min-width: 50px;
+    flex: 1;
+  }
+}
+
+.horizontal {
+  @media (min-width: vars.$breakpoint-small) {
+    flex-direction: row;
+    gap: vars.$spacing-primary;
+  }
+}

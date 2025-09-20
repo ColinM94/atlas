@@ -1,19 +1,20 @@
-import { MaterialSymbol } from 'material-symbols';
-import { ButtonClickEvent, Layer } from 'types/general';
+import { MaterialSymbol } from "material-symbols";
+import { Layer } from "types/general";
 
 interface ButtonPropsBase {
   label?: string;
   icon?: MaterialSymbol;
-  onClick: (e: ButtonClickEvent) => void;
+  onClick: (e: HTMLButtonElement["onclick"]) => void;
+  // onMouseEnter: HTMLButtonElement["onmouseenter"];
   className?: string;
 }
 
 interface ButtonPropsGeneral extends ButtonPropsBase {
-  type: 'primary' | 'danger';
+  type: "primary" | "danger";
 }
 
 export interface ButtonPropsSecondary extends ButtonPropsBase {
-  type: 'secondary';
+  type: "secondary";
   layer?: Layer;
 }
 
