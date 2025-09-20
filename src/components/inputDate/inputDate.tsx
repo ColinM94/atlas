@@ -113,7 +113,7 @@ export const InputDate = (props: InputDateProps) => {
         ref={ref}
       />
 
-      <Icon icon="calendar_view_month" className={styles.icon} />
+      <Icon icon="calendar_month" className={styles.icon} />
     </FormField>
   );
 };
