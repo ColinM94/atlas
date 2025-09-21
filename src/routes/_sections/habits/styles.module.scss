@@ -1,0 +1,31 @@
+.container {
+  gap: vars.$spacing-primary;
+  padding: vars.$spacing-primary;
+
+  .headings {
+    flex-direction: row;
+    gap: vars.$spacing-primary;
+
+    .heading {
+      font-size: 13px;
+    }
+  }
+
+  .label {
+    white-space: nowrap;
+    min-width: 120px;
+  }
+
+  .row {
+    flex-direction: row;
+    gap: vars.$spacing-primary;
+    align-items: center;
+
+    .date {
+      background-color: vars.$color-surface;
+      padding: vars.$spacing-primary;
+      background-color: rgb(73, 161, 73);
+      background-color: rgb(156, 26, 26);
+    }
+  }
+}

@@ -6,7 +6,6 @@ import { pb } from "inits/backend";
 import { useAppStore } from "stores/useAppStore/useAppStore";
 
 import styles from "./styles.module.scss";
-import { classes } from "utils/classes";
 
 const Root = () => {
   const [isInitialising, setIsInitialising] = React.useState(true);

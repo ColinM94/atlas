@@ -8,7 +8,7 @@ import { subscribeToCollection } from "services/database/subscribeToCollection";
 import { deleteRecord } from "services/database/deleteRecord";
 import { formatDate } from "utils/formatDate";
 import { mergeReducer } from "utils/mergeReducer";
-import { Task } from "types/tasks";
+import { Task } from "types/task";
 import { DatabaseRecord } from "types/general";
 import { InputDate } from "components/inputDate/inputDate";
 

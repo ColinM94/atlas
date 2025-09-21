@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SectionsSectionsRouteImport } from './routes/_sections/_sections'
 import { Route as SectionsTasksIndexRouteImport } from './routes/_sections/tasks/index'
 import { Route as SectionsSettingsIndexRouteImport } from './routes/_sections/settings/index'
+import { Route as SectionsHabitsIndexRouteImport } from './routes/_sections/habits/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -33,14 +34,21 @@ const SectionsSettingsIndexRoute = SectionsSettingsIndexRouteImport.update({
   path: '/settings/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SectionsHabitsIndexRoute = SectionsHabitsIndexRouteImport.update({
+  id: '/_sections/habits/',
+  path: '/habits/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/habits': typeof SectionsHabitsIndexRoute
   '/settings': typeof SectionsSettingsIndexRoute
   '/tasks': typeof SectionsTasksIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/habits': typeof SectionsHabitsIndexRoute
   '/settings': typeof SectionsSettingsIndexRoute
   '/tasks': typeof SectionsTasksIndexRoute
 }
@@ -48,18 +56,20 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_sections/_sections': typeof SectionsSectionsRoute
+  '/_sections/habits/': typeof SectionsHabitsIndexRoute
   '/_sections/settings/': typeof SectionsSettingsIndexRoute
   '/_sections/tasks/': typeof SectionsTasksIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/settings' | '/tasks'
+  fullPaths: '/' | '/habits' | '/settings' | '/tasks'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/settings' | '/tasks'
+  to: '/' | '/habits' | '/settings' | '/tasks'
   id:
     | '__root__'
     | '/'
     | '/_sections/_sections'
+    | '/_sections/habits/'
     | '/_sections/settings/'
     | '/_sections/tasks/'
   fileRoutesById: FileRoutesById
@@ -67,6 +77,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SectionsSectionsRoute: typeof SectionsSectionsRoute
+  SectionsHabitsIndexRoute: typeof SectionsHabitsIndexRoute
   SectionsSettingsIndexRoute: typeof SectionsSettingsIndexRoute
   SectionsTasksIndexRoute: typeof SectionsTasksIndexRoute
 }
@@ -101,12 +112,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SectionsSettingsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_sections/habits/': {
+      id: '/_sections/habits/'
+      path: '/habits'
+      fullPath: '/habits'
+      preLoaderRoute: typeof SectionsHabitsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SectionsSectionsRoute: SectionsSectionsRoute,
+  SectionsHabitsIndexRoute: SectionsHabitsIndexRoute,
   SectionsSettingsIndexRoute: SectionsSettingsIndexRoute,
   SectionsTasksIndexRoute: SectionsTasksIndexRoute,
 }
