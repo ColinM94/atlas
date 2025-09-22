@@ -8,6 +8,7 @@ export const Button = (props: ButtonProps) => {
   return (
     <button
       onClick={props.onClick}
+      style={props.style}
       // onMouseEnter={props.onMouseEnter}
       className={classes(
         styles.container,
@@ -18,7 +19,7 @@ export const Button = (props: ButtonProps) => {
       )}
     >
       {props.label}
-      {props.icon && <Icon icon={props.icon} />}
+      {props.icon && <Icon icon={props.icon} className={props.iconClassName} />}
     </button>
   );
 };

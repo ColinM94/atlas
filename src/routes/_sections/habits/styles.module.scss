@@ -1,31 +1,75 @@
 .container {
   gap: vars.$spacing-primary;
   padding: vars.$spacing-primary;
+  overflow: auto;
+  border: 2px solid green;
 
-  .headings {
-    flex-direction: row;
-    gap: vars.$spacing-primary;
+  .header {
+    margin-left: 120px;
 
-    .heading {
-      font-size: 13px;
+    .headerMonth {
+      font-size: vars.$font-size-display;
+    }
+
+    .headerYear {
+      font-size: vars.$font-size-display;
+      color: vars.$color-text-secondary;
+      margin-bottom: -8px;
     }
   }
 
-  .label {
-    white-space: nowrap;
-    min-width: 120px;
+  .daysOfMonth {
+    flex-direction: row;
+    gap: vars.$spacing-primary;
+    padding-left: calc(120px + vars.$spacing-primary);
+    border-radius: vars.$roundness;
+
+    .dayOfMonth {
+      font-size: 13px;
+      aspect-ratio: 1;
+      height: 40px;
+      background-color: vars.$color-surface;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
-  .row {
+  .habit {
     flex-direction: row;
     gap: vars.$spacing-primary;
     align-items: center;
+    padding-inline-end: vars.$spacing-primary;
 
-    .date {
+    .habitName {
+      white-space: nowrap;
+      max-width: 120px;
+      min-width: 120px;
+    }
+
+    .habitDay {
       background-color: vars.$color-surface;
       padding: vars.$spacing-primary;
-      background-color: rgb(73, 161, 73);
-      background-color: rgb(156, 26, 26);
+      cursor: pointer;
+      height: 40px;
+      min-width: 40px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .habitDayUnset {
+      background-color: vars.$color-surface;
+    }
+
+    .habitDayDone {
+      background-color: #398039ff;
+    }
+
+    .habitDayNotDone {
+      background-color: #9c1a1a;
+    }
+
+    .habitIcon {
+      font-size: vars.$icon-size-small;
     }
   }
 }
