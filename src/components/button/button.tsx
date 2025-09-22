@@ -18,7 +18,9 @@ export const Button = (props: ButtonProps) => {
           `layer${props.layer ?? 0} layer${props.layer ?? 0}Hover`
       )}
     >
-      {props.label}
+      <div className={classes(styles.label, props.labelClassName)}>
+        {props.label}
+      </div>
       {props.icon && <Icon icon={props.icon} className={props.iconClassName} />}
     </button>
   );

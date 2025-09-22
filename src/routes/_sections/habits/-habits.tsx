@@ -1,14 +1,15 @@
 import * as React from "react";
+import { MaterialSymbol } from "material-symbols";
+
 import { subscribeToCollection } from "services/database/subscribeToCollection";
 import { updateRecord } from "services/database/updateRecord";
 import { Habit } from "types/habit";
 import { Button } from "components/button/button";
 import { daysInMonth } from "utils/daysInMonth";
 import { months } from "constants/general";
+import { classes } from "utils/classes";
 
 import styles from "./styles.module.scss";
-import { MaterialSymbol } from "material-symbols";
-import { classes } from "utils/classes";
 
 export const Habits: React.FC = () => {
   const [habits, setHabits] = React.useState<Habit[]>([]);
@@ -55,7 +56,7 @@ export const Habits: React.FC = () => {
     const totalDays = daysInMonth(year, monthIndex);
 
     return (
-      <React.Fragment key={monthIndex}>
+      <div className={styles.month} key={monthIndex}>
         <div className={styles.header}>
           <div className={styles.headerMonth}>{months[monthIndex]}</div>
           <div />
@@ -76,16 +77,16 @@ export const Habits: React.FC = () => {
             {Array.from({ length: totalDays }, (_, i) => {
               const date = formatDate(year, monthIndex, i + 1);
 
-              let icon: MaterialSymbol | undefined = undefined;
+              // let icon: MaterialSymbol | undefined = undefined;
               let className = styles.habitDayUnset;
 
               if (habit.dates?.[date] === true) {
-                icon = "check";
+                // icon = "check";
                 className = styles.habitDayDone;
               }
 
               if (habit.dates?.[date] === false) {
-                icon = "close";
+                // icon = "close";
                 className = styles.habitDayNotDone;
               }
 
@@ -103,7 +104,7 @@ export const Habits: React.FC = () => {
             })}
           </div>
         ))}
-      </React.Fragment>
+      </div>
     );
   };
 

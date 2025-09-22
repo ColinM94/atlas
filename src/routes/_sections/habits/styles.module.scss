@@ -1,33 +1,41 @@
+$labelWidth: 110px;
+$cellHeight: 35px;
+
 .container {
   gap: vars.$spacing-primary;
   padding: vars.$spacing-primary;
   overflow: auto;
-  border: 2px solid green;
+  gap: calc(vars.$spacing-primary * 2);
 
   .header {
-    margin-left: 120px;
+    margin-left: 110px;
+    padding-left: vars.$spacing-secondary;
 
     .headerMonth {
       font-size: vars.$font-size-display;
     }
 
     .headerYear {
-      font-size: vars.$font-size-display;
+      font-size: vars.$font-size-heading;
       color: vars.$color-text-secondary;
-      margin-bottom: -8px;
+      margin-bottom: -16px;
     }
+  }
+
+  .month {
+    gap: vars.$spacing-secondary;
   }
 
   .daysOfMonth {
     flex-direction: row;
     gap: vars.$spacing-primary;
-    padding-left: calc(120px + vars.$spacing-primary);
+    padding-left: calc(110px + vars.$spacing-primary);
     border-radius: vars.$roundness;
 
     .dayOfMonth {
       font-size: 13px;
       aspect-ratio: 1;
-      height: 40px;
+      height: $cellHeight;
       background-color: vars.$color-surface;
       justify-content: center;
       align-items: center;
@@ -42,16 +50,16 @@
 
     .habitName {
       white-space: nowrap;
-      max-width: 120px;
-      min-width: 120px;
+      max-width: 110px;
+      min-width: 110px;
     }
 
     .habitDay {
       background-color: vars.$color-surface;
       padding: vars.$spacing-primary;
       cursor: pointer;
-      height: 40px;
-      min-width: 40px;
+      height: $cellHeight;
+      min-width: $cellHeight;
       justify-content: center;
       align-items: center;
     }

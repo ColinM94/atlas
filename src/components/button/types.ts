@@ -6,6 +6,7 @@ interface ButtonPropsBase {
   label?: string | number;
   icon?: MaterialSymbol;
   onClick: (e: HTMLButtonElement["onclick"]) => void;
+  labelClassName?: string;
   // onMouseEnter: HTMLButtonElement["onmouseenter"];
   style?: CSSProperties;
   className?: string;
