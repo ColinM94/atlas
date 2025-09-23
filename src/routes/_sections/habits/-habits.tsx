@@ -1,5 +1,4 @@
 import * as React from "react";
-import { MaterialSymbol } from "material-symbols";
 
 import { subscribeToCollection } from "services/database/subscribeToCollection";
 import { updateRecord } from "services/database/updateRecord";
@@ -16,7 +15,7 @@ export const Habits: React.FC = () => {
 
   // Fetch habits once
   React.useEffect(() => {
-    subscribeToCollection({
+    void subscribeToCollection({
       collection: "habits",
       setData: setHabits,
     });

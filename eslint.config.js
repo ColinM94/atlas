@@ -16,7 +16,7 @@ export default defineConfig([
   reactCompiler.configs.recommended,
   {
     files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
-    ignores: ["dist"],
+    ignores: ["dist", "routeTree.gen.ts"],
     languageOptions: {
       parserOptions: {
         projectService: true,
