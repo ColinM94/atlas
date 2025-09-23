@@ -6,9 +6,9 @@ export const sections: Record<string, Section> = {
     icon: "check_box",
     name: "Tasks",
   },
-  habitTracker: {
+  habits: {
     id: "habits",
     icon: "autorenew",
     name: "Habit Tracker",
   },
-};
+} as const;

@@ -1,0 +1,26 @@
+.container {
+  flex-direction: column;
+  gap: vars.$spacing-primary;
+  padding: vars.$spacing-primary;
+
+  .section {
+    flex-direction: row;
+    background-color: vars.$color-surface;
+    padding: vars.$spacing-primary;
+    gap: vars.$spacing-secondary;
+    border-radius: vars.$roundness;
+    cursor: pointer;
+    align-items: center;
+
+    &:hover {
+      background-color: vars.$color-surface2;
+    }
+
+    .sectionIcon {
+      color: vars.$color-text-secondary;
+    }
+
+    .sectionName {
+    }
+  }
+}

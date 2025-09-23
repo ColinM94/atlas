@@ -1,9 +1,8 @@
 import { useNavigate } from "@tanstack/react-router";
-import { Icon } from "components/icon/icon";
 
-import { useAppStore } from "stores/useAppStore/useAppStore";
 import { Section } from "types/section";
 import { sections } from "constants/sections";
+import { Icon } from "components/icon/icon";
 
 import styles from "./styles.module.scss";
 
@@ -14,14 +13,11 @@ export const Home = () => {
     return (
       <div
         onClick={() => {
-          useAppStore.setState({
-            selectedSection: section.id,
-          });
-
           void navigate({
             to: `/${section.id}`,
           });
         }}
+        key={section.id}
         className={styles.section}
       >
         <Icon icon={section.icon} className={styles.sectionIcon} />
@@ -31,7 +27,7 @@ export const Home = () => {
   };
 
   return (
-    <div className={styles.home}>
+    <div className={styles.container}>
       {Object.values(sections).map((section) => renderSection(section))}
     </div>
   );

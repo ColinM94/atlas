@@ -1,42 +1,22 @@
-.container {
-  width: 100%;
-  height: 100%;
+.header {
+  flex-direction: row;
+  padding-inline: vars.$spacing-primary;
+  padding-top: vars.$spacing-primary;
 
-  .header {
-    width: 100%;
+  .backButton {
   }
 
-  .content {
-    flex: 1;
-    gap: var(--spacing-primary);
-    padding: var(--spacing-primary);
-    overflow: auto;
-  }
+  .heading {
+    flex-direction: row;
+    align-items: center;
+    gap: vars.$spacing-secondary;
 
-  .home {
-    flex-direction: column;
-    gap: vars.$spacing-primary;
-    padding: vars.$spacing-primary;
+    .headingIcon {
+      font-size: 30px;
+    }
 
-    .section {
-      flex-direction: row;
-      background-color: vars.$color-surface;
-      padding: vars.$spacing-primary;
-      gap: vars.$spacing-secondary;
-      border-radius: vars.$roundness;
-      cursor: pointer;
-      align-items: center;
-
-      &:hover {
-        background-color: vars.$color-surface2;
-      }
-
-      .sectionIcon {
-        color: vars.$color-text-secondary;
-      }
-
-      .sectionName {
-      }
+    .headingLabel {
+      font-size: vars.$font-size-display;
     }
   }
 }

@@ -1,18 +1,15 @@
 import { createWithEqualityFn } from "zustand/traditional";
 import { shallow } from "zustand/shallow";
-import { sections } from "constants/sections";
 
 type AppStoreState = {
   showNavbar: boolean;
   darkMode: boolean;
-  selectedSection: keyof typeof sections;
 };
 
 export const useAppStore = createWithEqualityFn<AppStoreState>()(
   () => ({
     showNavbar: false,
     darkMode: false,
-    selectedSection: "task",
   }),
   shallow
 );
