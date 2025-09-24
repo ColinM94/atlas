@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { useLocation } from "wouter";
 
 import { Section } from "types/section";
 import { sections } from "constants/sections";
@@ -6,16 +6,14 @@ import { Icon } from "components/icon/icon";
 
 import styles from "./styles.module.scss";
 
-export const Home = () => {
-  const navigate = useNavigate();
+export const HomePage = () => {
+  const [, navigate] = useLocation();
 
   const renderSection = (section: Section) => {
     return (
       <div
         onClick={() => {
-          void navigate({
-            to: `/${section.id}`,
-          });
+          navigate(section.id);
         }}
         key={section.id}
         className={styles.section}

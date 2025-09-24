@@ -14,7 +14,7 @@ import { InputDate } from "components/inputDate/inputDate";
 
 import styles from "./styles.module.scss";
 
-export const Tasks = () => {
+export const TasksPage = () => {
   const [tasks, setTasks] = React.useState<Task[]>([]);
 
   const [newTask, updateNewTask] = React.useReducer(

@@ -10,7 +10,7 @@ import { classes } from "utils/classes";
 
 import styles from "./styles.module.scss";
 
-export const Habits: React.FC = () => {
+export const HabitsPage = () => {
   const [habits, setHabits] = React.useState<Habit[]>([]);
 
   React.useEffect(() => {
@@ -99,11 +99,11 @@ export const Habits: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.header}>
         <div className={styles.headerYear}>2025</div>
       </div>
       {months.map((_, index) => renderMonth(index))}
-    </div>
+    </>
   );
 };

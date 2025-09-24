@@ -11,18 +11,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tanstack/react-router": "^1.131.49",
     "material-symbols": "^0.35.2",
     "pocketbase": "^0.26.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "wouter": "^3.7.1",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
-    "@tanstack/react-router-devtools": "^1.131.49",
-    "@tanstack/router-devtools": "^1.131.49",
-    "@tanstack/router-plugin": "^1.131.49",
     "@types/node": "^24.5.2",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",

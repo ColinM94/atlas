@@ -1,21 +1,12 @@
-import {
-  createFileRoute,
-  Outlet,
-  useLocation,
-  useNavigate,
-} from "@tanstack/react-router";
-
 import { Button } from "components/button/button";
-import { sections } from "constants/sections";
-import { getCurrentRouteName } from "utils/getCurrentRouteName";
 
 import styles from "./styles.module.scss";
+import { useLocation } from "wouter";
 
-const SectionsLayout = () => {
-  const navigate = useNavigate();
+export const SectionsLayout = () => {
+  const [location, navigate] = useLocation();
 
-  const { pathname } = useLocation();
-  const name = getCurrentRouteName(pathname);
+  const name = getCurrentRouteName(location);
   const section = sections[name || ""];
 
   return (
@@ -34,11 +25,7 @@ const SectionsLayout = () => {
         </div>
       </div>
 
-      <Outlet />
+      {/* <Outlet /> */}
     </>
   );
 };
-
-export const Route = createFileRoute("/_sections")({
-  component: SectionsLayout,
-});
