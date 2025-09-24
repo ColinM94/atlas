@@ -1,0 +1,19 @@
+.container {
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+
+  .code {
+    font-size: 50px;
+    color: vars.$color-text-secondary;
+  }
+
+  .message {
+    font-size: 40px;
+  }
+
+  .homeButton {
+    margin-top: vars.$spacing-primary * 2;
+    font-size: 25px;
+  }
+}

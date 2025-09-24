@@ -1,17 +1,26 @@
 $labelWidth: 110px;
 $cellHeight: 35px;
 
+.container {
+  gap: vars.$spacing-primary * 2;
+}
+
 .header {
-  margin-left: 110px;
-  padding-left: vars.$spacing-secondary;
+  padding-left: 110px;
+  margin-left: vars.$spacing-primary;
+
+  // flex-direction: row;
+  // align-items: center;
+  gap: vars.$spacing-primary;
 
   .headerMonth {
     font-size: vars.$font-size-display;
   }
 
   .headerYear {
-    font-size: vars.$font-size-heading;
+    font-size: 45px;
     color: vars.$color-text-secondary;
+    margin-bottom: -14px;
   }
 }
 

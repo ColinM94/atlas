@@ -1,11 +1,12 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { Link, Route, Switch } from "wouter";
+import { Route, Switch } from "wouter";
 import "material-symbols/rounded.css";
 
 import { HomePage } from "pages/homePage/homePage";
 import { HabitsPage } from "pages/habitsPage/habitsPage";
 import { TasksPage } from "pages/tasksPage/tasksPage";
+import { NotFoundPage } from "pages/notFoundPage/notFoundPage";
 
 import "./styles/global.scss";
 import "./styles/theme.scss";
@@ -28,14 +29,8 @@ export const App = () => {
             <TasksPage />
           </Route>
 
-          <Route>
-            <div className={styles.pageNotFound}>
-              <div className={styles.pageNotFoundCode}>404</div>
-              <div className={styles.pageNotFoundMessage}>Page not found!</div>
-              <Link to="/" className={styles.pageNotFoundButton}>
-                Go Back
-              </Link>
-            </div>
+          <Route path="*">
+            <NotFoundPage />
           </Route>
         </Switch>
       </div>

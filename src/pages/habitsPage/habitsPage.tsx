@@ -13,6 +13,8 @@ import styles from "./styles.module.scss";
 export const HabitsPage = () => {
   const [habits, setHabits] = React.useState<Habit[]>([]);
 
+  const years = [2025, 2024, 2023, 2022, 2021];
+
   React.useEffect(() => {
     void subscribeToCollection({
       collection: "habits",
@@ -41,15 +43,14 @@ export const HabitsPage = () => {
     setHabits((prev) => prev.map((h) => (h.id === habitId ? updatedHabit : h)));
   };
 
-  const renderMonth = (monthIndex: number) => {
-    const year = 2025;
+  const renderMonth = (monthIndex: number, year: number) => {
     const totalDays = daysInMonth(year, monthIndex);
 
     return (
       <div className={styles.month} key={monthIndex}>
         <div className={styles.header}>
+          {monthIndex === 11 && <div className={styles.headerYear}>{year}</div>}
           <div className={styles.headerMonth}>{months[monthIndex]}</div>
-          <div />
         </div>
 
         <div className={styles.daysOfMonth}>
@@ -99,11 +100,10 @@ export const HabitsPage = () => {
   };
 
   return (
-    <>
-      <div className={styles.header}>
-        <div className={styles.headerYear}>2025</div>
-      </div>
-      {months.map((_, index) => renderMonth(index))}
-    </>
+    <div className={styles.container}>
+      {years.map((year) =>
+        Array.from({ length: 12 }, (_, i) => renderMonth(11 - i, year))
+      )}
+    </div>
   );
 };
