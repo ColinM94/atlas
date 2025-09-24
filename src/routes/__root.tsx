@@ -33,7 +33,9 @@ const Root = () => {
   return (
     <>
       <div className={styles.container}>
-        <Outlet />
+        <div className={styles.content}>
+          <Outlet />
+        </div>
       </div>
 
       <TanStackRouterDevtools />

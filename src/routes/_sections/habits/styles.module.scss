@@ -6,6 +6,7 @@ $cellHeight: 35px;
   padding: vars.$spacing-primary;
   overflow: auto;
   gap: calc(vars.$spacing-primary * 2);
+  min-width: fit-content;
 
   .header {
     margin-left: 110px;
@@ -31,11 +32,12 @@ $cellHeight: 35px;
     gap: vars.$spacing-primary;
     padding-left: calc(110px + vars.$spacing-primary);
     border-radius: vars.$roundness;
+    width: 100%;
 
     .dayOfMonth {
       font-size: 13px;
       aspect-ratio: 1;
-      height: $cellHeight;
+      flex: 1;
       background-color: vars.$color-surface;
       justify-content: center;
       align-items: center;
@@ -46,7 +48,7 @@ $cellHeight: 35px;
     flex-direction: row;
     gap: vars.$spacing-primary;
     align-items: center;
-    padding-inline-end: vars.$spacing-primary;
+    flex: 1;
 
     .habitName {
       white-space: nowrap;
@@ -58,10 +60,10 @@ $cellHeight: 35px;
       background-color: vars.$color-surface;
       padding: vars.$spacing-primary;
       cursor: pointer;
-      height: $cellHeight;
-      min-width: $cellHeight;
       justify-content: center;
       align-items: center;
+      flex: 1;
+      aspect-ratio: 1;
     }
 
     .habitDayUnset {

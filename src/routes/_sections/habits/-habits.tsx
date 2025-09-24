@@ -13,7 +13,6 @@ import styles from "./styles.module.scss";
 export const Habits: React.FC = () => {
   const [habits, setHabits] = React.useState<Habit[]>([]);
 
-  // Fetch habits once
   React.useEffect(() => {
     void subscribeToCollection({
       collection: "habits",
@@ -21,20 +20,13 @@ export const Habits: React.FC = () => {
     });
   }, []);
 
-  // Sort habits alphabetically but memoize to avoid resorting on every render
-  const sortedHabits = React.useMemo(
-    () => [...habits].sort((a, b) => a.name.localeCompare(b.name)),
-    [habits]
-  );
+  const sortedHabits = habits.toSorted((a, b) => a.name.localeCompare(b.name));
 
-  const formatDate = (year: number, monthIndex: number, day: number) =>
-    `${year}.${String(monthIndex + 1).padStart(2, "0")}.${String(day).padStart(
-      2,
-      "0"
-    )}`;
+  const formatDate = (year: number, month: number, day: number) =>
+    `${year}.${String(month).padStart(2, "0")}.${String(day).padStart(2, "0")}`;
 
   const toggleHabit = async (habitId: string, date: string) => {
-    const habit = habits.find((h) => h.id === habitId);
+    const habit = habits.find((habit) => habit.id === habitId);
     if (!habit) return;
 
     const updatedDates = { ...habit.dates, [date]: !habit.dates?.[date] };
@@ -46,7 +38,6 @@ export const Habits: React.FC = () => {
       data: updatedHabit,
     });
 
-    // Optimistically update UI
     setHabits((prev) => prev.map((h) => (h.id === habitId ? updatedHabit : h)));
   };
 
@@ -74,7 +65,7 @@ export const Habits: React.FC = () => {
             <div className={styles.habitName}>{habit.name}</div>
 
             {Array.from({ length: totalDays }, (_, i) => {
-              const date = formatDate(year, monthIndex, i + 1);
+              const date = formatDate(year, monthIndex + 1, i + 1);
 
               // let icon: MaterialSymbol | undefined = undefined;
               let className = styles.habitDayUnset;
@@ -95,7 +86,7 @@ export const Habits: React.FC = () => {
                   type="secondary"
                   // icon={icon}
                   layer={1}
-                  onClick={() => toggleHabit(habit.id, date)}
+                  onClick={() => void toggleHabit(habit.id, date)}
                   iconClassName={styles.habitIcon}
                   className={classes(styles.habitDay, className)}
                 />
