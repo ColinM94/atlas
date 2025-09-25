@@ -45,7 +45,7 @@ export const InputText = <T extends string>(props: InputTextProps<T>) => {
     else onKeyDown?.(e);
   };
 
-  const handleBlur = async (e: React.FocusEvent<HTMLInputElement, Element>) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     e.preventDefault();
     e.stopPropagation();
   };

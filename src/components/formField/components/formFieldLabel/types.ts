@@ -1,7 +1,6 @@
 export interface Props {
-  label?: string;
-  subtitle?: string;
+  label: string | undefined;
+  subtitle: string | undefined;
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
-  showTooltip: boolean;
   className?: string;
 }

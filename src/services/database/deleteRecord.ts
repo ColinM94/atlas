@@ -16,7 +16,9 @@ export const deleteRecord = async (
     const success = await pb.collection(collection).delete(id);
 
     if (!success)
-      throw `Failed to delete record in collection: ${collection} with id ${id}`;
+      throw new Error(
+        `Failed to delete record in collection: ${collection} with id ${id}`
+      );
 
     return {
       data: undefined,
@@ -24,7 +26,7 @@ export const deleteRecord = async (
     };
   } catch (error) {
     trackError({
-      error,
+      error: error as Error,
       source: "deleteRecord",
     });
     return {

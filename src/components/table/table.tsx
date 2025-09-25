@@ -1,10 +1,10 @@
 import * as React from "react";
+import { MaterialSymbol } from "material-symbols";
 
 import { classes } from "utils/classes";
+import { Button } from "components/button/button";
 
 import styles from "./styles.module.scss";
-import { MaterialSymbol } from "material-symbols";
-import { Button } from "components/button/button";
 
 interface TableProps<T> {
   data: T[];
@@ -63,34 +63,33 @@ export const Table = <T,>(props: TableProps<T>) => {
     data: dataItem,
   }));
 
-  const handleScroll = () => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const scrollTop = container.scrollTop;
-    const viewportHeight = container.clientHeight;
-
-    const startIndex = Math.floor(scrollTop / rowHeight) - overscan;
-    const endIndex =
-      Math.ceil((scrollTop + viewportHeight) / rowHeight) + overscan;
-
-    setVisibleRange({
-      start: Math.max(0, startIndex),
-      end: Math.min(rows.length - 1, endIndex),
-    });
-  };
-
   React.useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    handleScroll();
+    const handleScroll = () => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      const scrollTop = container.scrollTop;
+      const viewportHeight = container.clientHeight;
+
+      const startIndex = Math.floor(scrollTop / rowHeight) - overscan;
+      const endIndex =
+        Math.ceil((scrollTop + viewportHeight) / rowHeight) + overscan;
+
+      setVisibleRange({
+        start: Math.max(0, startIndex),
+        end: Math.min(rows.length - 1, endIndex),
+      });
+    };
+
     container.addEventListener("scroll", handleScroll);
 
     return () => {
       container.removeEventListener("scroll", handleScroll);
     };
-  }, [rows.length]);
+  }, [overscan, rowHeight, rows.length]);
 
   const beforeHeight = visibleRange.start * rowHeight;
   const afterHeight = (rows.length - visibleRange.end - 1) * rowHeight;
@@ -124,7 +123,7 @@ export const Table = <T,>(props: TableProps<T>) => {
                 <tr
                   key={row.id}
                   onKeyDown={(e) => console.log(e.key)}
-                  onClick={(e) => {
+                  onClick={() => {
                     onRowClick?.(row.data);
                   }}
                   style={{ height: rowHeight }}
@@ -144,7 +143,7 @@ export const Table = <T,>(props: TableProps<T>) => {
                         onClick={(e) => {
                           if (!isCellClickable) return;
                           e.stopPropagation();
-                          cell?.onClick();
+                          cell.onClick?.();
                         }}
                         className={classes(
                           styles[`${cell.type}Cell`],
@@ -161,7 +160,7 @@ export const Table = <T,>(props: TableProps<T>) => {
                           <Button
                             type="secondary"
                             icon={cell.icon}
-                            onClick={cell.onClick}
+                            onClick={cell?.onClick}
                             layer={2}
                             className={styles.button}
                           />

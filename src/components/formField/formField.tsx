@@ -8,8 +8,6 @@ export const FormField = (props: Props) => {
     labelContainerClassName,
     label,
     labelDescription,
-    tooltipTitle,
-    tooltipMessage,
     children,
     inputContainerClassName,
     title,
@@ -31,7 +29,6 @@ export const FormField = (props: Props) => {
         className,
         horizontal && styles.horizontal,
         enableCardContainer && styles.cardContainer,
-
         onClick && "clickable"
       )}
       id={id}
@@ -49,7 +46,6 @@ export const FormField = (props: Props) => {
         <FormFieldLabel
           label={`${label}${required ? "*" : ""}`}
           subtitle={labelDescription}
-          showTooltip={Boolean(tooltipTitle || tooltipMessage)}
           className={classes(labelContainerClassName, styles.labelContainer)}
         />
       )}

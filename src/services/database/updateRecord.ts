@@ -24,7 +24,7 @@ export const updateRecord = async <T>(
     };
   } catch (error) {
     trackError({
-      error,
+      error: error as Error,
       source: "updateRecord",
     });
 

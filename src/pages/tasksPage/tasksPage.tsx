@@ -26,14 +26,14 @@ export const TasksPage = () => {
   );
 
   React.useEffect(() => {
-    subscribeToCollection({
+    void subscribeToCollection({
       collection: "tasks",
       setData: setTasks,
     });
   }, []);
 
   const handleAdd = () => {
-    createRecord({
+    void createRecord({
       collection: "tasks",
       data: newTask,
     });
@@ -53,7 +53,7 @@ export const TasksPage = () => {
           {
             id: "dueDate",
             type: "text",
-            value: formatDate(task.date || 0),
+            value: formatDate(task.dueDate || 0),
             heading: "Due Date",
           },
           {
@@ -62,7 +62,7 @@ export const TasksPage = () => {
             value: "Delete",
             icon: "delete",
             onClick: () =>
-              deleteRecord({
+              void deleteRecord({
                 collection: "tasks",
                 id: task.id,
               }),

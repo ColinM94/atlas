@@ -1,4 +1,4 @@
-import { Children } from 'types';
+import { Children } from "types/general";
 
 export interface Props extends FormFieldProps {
   children: Children;
@@ -12,13 +12,11 @@ export interface FormFieldProps {
   labelDescription?: string;
   labelContainerClassName?: string;
   inputContainerClassName?: string;
-  tooltipTitle?: string;
-  tooltipMessage?: string;
   title?: string;
   horizontal?: boolean;
   required?: boolean;
   onClick?: () => void;
-  labelPosition?: 'before' | 'after';
+  labelPosition?: "before" | "after";
   children?: Children;
   layer?: 1 | 2 | 3;
   enableCardContainer?: boolean;

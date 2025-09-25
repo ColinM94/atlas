@@ -21,7 +21,10 @@ export const Button = (props: ButtonProps) => {
       <div className={classes(styles.label, props.labelClassName)}>
         {props.label}
       </div>
-      {props.icon && <Icon icon={props.icon} className={props.iconClassName} />}
+
+      {props.icon && (
+        <Icon icon={props.icon} className={classes(props.iconClassName)} />
+      )}
     </button>
   );
 };

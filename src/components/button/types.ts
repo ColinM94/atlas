@@ -1,11 +1,13 @@
-import { MaterialSymbol } from "material-symbols";
 import { CSSProperties } from "react";
+import { MaterialSymbol } from "material-symbols";
 import { Layer } from "types/general";
 
 interface ButtonPropsBase {
   label?: string | number;
   icon?: MaterialSymbol;
-  onClick: (e: HTMLButtonElement["onclick"]) => void;
+  onClick:
+    | ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
+    | undefined;
   labelClassName?: string;
   // onMouseEnter: HTMLButtonElement["onmouseenter"];
   style?: CSSProperties;

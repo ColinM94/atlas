@@ -78,7 +78,7 @@ export const InputDate = (props: InputDateProps) => {
     return string.slice(0, slice);
   };
 
-  const date = React.useMemo(() => {
+  const date = () => {
     let sliceAmount = 10;
     if (type === "date") sliceAmount = 10;
     if (type === "datetime") sliceAmount = 16;
@@ -89,12 +89,12 @@ export const InputDate = (props: InputDateProps) => {
     const result = formatISOLocal(utcDate, sliceAmount);
 
     return result;
-  }, [value, type]);
+  };
 
-  const inputType = React.useMemo(() => {
+  const inputType = () => {
     if (type === "date") return "date";
     if (type === "datetime") return "datetime-local";
-  }, []);
+  };
 
   return (
     <FormField
@@ -103,8 +103,8 @@ export const InputDate = (props: InputDateProps) => {
       onClick={() => ref.current?.showPicker()}
     >
       <input
-        type={inputType}
-        value={date}
+        type={inputType()}
+        value={date()}
         onChange={handleChange}
         className={classes(styles.input, inputClassName)}
         placeholder={placeholder}

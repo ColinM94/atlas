@@ -12,7 +12,7 @@ export const listRecords = async <T>(params: Params): RequestResponse<T[]> => {
     const { collection, filter } = params;
 
     const resultList = await pb.collection(collection).getFullList<T>({
-      filter,
+      filter: filter || "",
     });
 
     return {
@@ -21,7 +21,7 @@ export const listRecords = async <T>(params: Params): RequestResponse<T[]> => {
     };
   } catch (error) {
     trackError({
-      error,
+      error: error as Error,
       source: "listRecords",
     });
     return {

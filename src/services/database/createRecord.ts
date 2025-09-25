@@ -22,7 +22,7 @@ export const createRecord = async <T>(
     };
   } catch (error) {
     trackError({
-      error,
+      error: error as Error,
       source: "createRecord",
     });
 

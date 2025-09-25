@@ -1,4 +1,5 @@
 import { MaterialSymbol } from "material-symbols";
+import { Children } from "types/general";
 import { FormFieldProps } from "../formField/types";
 
 export interface InputTextProps<T extends string> extends FormFieldProps {
@@ -16,4 +17,5 @@ export interface InputTextProps<T extends string> extends FormFieldProps {
   focusOnLoad?: boolean;
   characterLimit?: number;
   showDisabledStyle?: boolean;
+  children?: Children;
 }
