@@ -1,0 +1,89 @@
+.container {
+  gap: vars.$spacing-secondary;
+  min-width: fit-content;
+  width: 100%;
+
+  .header {
+    padding-left: 110px;
+    margin-left: vars.$spacing-primary;
+
+    // flex-direction: row;
+    // align-items: center;
+    gap: vars.$spacing-primary;
+
+    .headerMonth {
+      font-size: vars.$font-size-display;
+    }
+
+    .headerYear {
+      font-size: 45px;
+      color: vars.$color-text-secondary;
+      margin-bottom: -14px;
+    }
+  }
+
+  .daysOfMonth {
+    flex-direction: row;
+    gap: vars.$spacing-primary;
+    padding-left: calc(110px + vars.$spacing-primary);
+    flex: 1;
+
+    .dayOfMonth {
+      font-size: 13px;
+      aspect-ratio: 1;
+      flex: 1;
+      background-color: vars.$color-surface;
+      border-radius: vars.$roundness;
+      justify-content: center;
+      align-items: center;
+      color: vars.$color-text-secondary;
+    }
+  }
+
+  .habit {
+    flex-direction: row;
+    gap: vars.$spacing-primary;
+    align-items: center;
+    flex: 1;
+
+    .habitName {
+      white-space: nowrap;
+      max-width: 110px;
+      min-width: 110px;
+    }
+
+    .habitDay {
+      background-color: vars.$color-surface;
+      padding: vars.$spacing-primary;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      aspect-ratio: 1;
+    }
+
+    .habitDayUnset {
+      background-color: vars.$color-surface;
+    }
+
+    .habitDayDone {
+      background-color: #398039ff;
+
+      &:hover {
+        background-color: rgb(67, 184, 67);
+      }
+    }
+
+    .habitDayNotDone {
+      background-color: #9c1a1a;
+
+      &:hover {
+        background-color: #bc1919;
+      }
+    }
+
+    .habitIcon {
+      font-size: vars.$icon-size-small;
+    }
+  }
+}

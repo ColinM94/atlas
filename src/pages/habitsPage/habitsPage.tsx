@@ -3,11 +3,8 @@ import * as React from "react";
 import { subscribeToCollection } from "services/database/subscribeToCollection";
 import { updateRecord } from "services/database/updateRecord";
 import { Habit } from "types/habit";
-import { Button } from "components/button/button";
-import { daysInMonth } from "utils/daysInMonth";
-import { months } from "constants/general";
-import { classes } from "utils/classes";
 
+import { HabitsMonth } from "./habitsMonth/habitsMonth";
 import styles from "./styles.module.scss";
 
 export const HabitsPage = () => {
@@ -23,9 +20,6 @@ export const HabitsPage = () => {
   }, []);
 
   const sortedHabits = habits.toSorted((a, b) => a.name.localeCompare(b.name));
-
-  const formatDate = (year: number, month: number, day: number) =>
-    `${year}.${String(month).padStart(2, "0")}.${String(day).padStart(2, "0")}`;
 
   const toggleHabit = async (habitId: string, date: string) => {
     const habit = habits.find((habit) => habit.id === habitId);
@@ -43,66 +37,17 @@ export const HabitsPage = () => {
     setHabits((prev) => prev.map((h) => (h.id === habitId ? updatedHabit : h)));
   };
 
-  const renderMonth = (monthIndex: number, year: number) => {
-    const totalDays = daysInMonth(year, monthIndex);
-
-    return (
-      <div className={styles.month} key={monthIndex}>
-        <div className={styles.header}>
-          {monthIndex === 11 && <div className={styles.headerYear}>{year}</div>}
-          <div className={styles.headerMonth}>{months[monthIndex]}</div>
-        </div>
-
-        <div className={styles.daysOfMonth}>
-          {Array.from({ length: totalDays }, (_, i) => (
-            <div key={i} className={styles.dayOfMonth}>
-              {i + 1}
-            </div>
-          ))}
-        </div>
-
-        {sortedHabits.map((habit) => (
-          <div key={habit.id} className={styles.habit}>
-            <div className={styles.habitName}>{habit.name}</div>
-
-            {Array.from({ length: totalDays }, (_, i) => {
-              const date = formatDate(year, monthIndex + 1, i + 1);
-
-              // let icon: MaterialSymbol | undefined = undefined;
-              let className = styles.habitDayUnset;
-
-              if (habit.dates?.[date] === true) {
-                // icon = "check";
-                className = styles.habitDayDone;
-              }
-
-              if (habit.dates?.[date] === false) {
-                // icon = "close";
-                className = styles.habitDayNotDone;
-              }
-
-              return (
-                <Button
-                  key={i}
-                  type="secondary"
-                  // icon={icon}
-                  layer={1}
-                  onClick={() => void toggleHabit(habit.id, date)}
-                  iconClassName={styles.habitIcon}
-                  className={classes(styles.habitDay, className)}
-                />
-              );
-            })}
-          </div>
-        ))}
-      </div>
-    );
-  };
-
   return (
     <div className={styles.container}>
       {years.map((year) =>
-        Array.from({ length: 12 }, (_, i) => renderMonth(11 - i, year))
+        Array.from({ length: 12 }, (_, i) => (
+          <HabitsMonth
+            habits={sortedHabits}
+            month={12 - i}
+            year={year}
+            onHabitDayClick={(habitId, date) => void toggleHabit(habitId, date)}
+          />
+        ))
       )}
     </div>
   );
