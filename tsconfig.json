@@ -27,7 +27,8 @@
     "noUnusedLocals": true,
     "allowUnusedLabels": false,
     "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "allowJs": true
   },
-  "include": ["src", "global.d.ts"]
+  "include": ["src", "global.d.ts", "vite.config.ts", "eslint.config.mjs"]
 }

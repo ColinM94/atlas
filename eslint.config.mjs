@@ -8,6 +8,9 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 
 export default defineConfig([
+  {
+    ignores: ["dist"],
+  },
   eslint.configs.recommended,
   tseslint.configs.recommendedTypeChecked,
   react.configs.flat["jsx-runtime"],
@@ -15,8 +18,6 @@ export default defineConfig([
   reactRefresh.configs.vite,
   reactCompiler.configs.recommended,
   {
-    files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
-    ignores: ["dist", "routeTree.gen.ts"],
     languageOptions: {
       parserOptions: {
         projectService: true,
@@ -26,7 +27,6 @@ export default defineConfig([
         ...globals.browser,
       },
     },
-
     rules: {},
   },
 ]);
