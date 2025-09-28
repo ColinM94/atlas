@@ -12,7 +12,7 @@ export const listRecords = async <T>(params: Params): RequestResponse<T[]> => {
     const { collection, filter } = params;
 
     const resultList = await pb.collection(collection).getFullList<T>({
-      filter: filter || "",
+      ...(filter && { filter }),
     });
 
     return {

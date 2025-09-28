@@ -16,7 +16,8 @@ export interface DateData {
   processingTime: number;
   isAlreadyProcessed?: boolean;
   /** year.month. e.g. 2024.5 */
-  month: string;
+  year: number;
+  month: number;
   dayOfMonth: number;
 }
 
@@ -49,6 +50,8 @@ export const getDateInfo = ({ daysAgo, date }: Props) => {
   const startOfDay = startDate.getTime();
   const endOfDay = startOfDay + 86399999;
   const dayOfMonth = startDate.getDate();
+  const month = Number(startDate.getMonth() + 1);
+  const year = Number(startDate.getFullYear());
 
   const todaysDate = dateToYearMonthDay(currentDate, "utc");
   const daysAgoDate = dateToYearMonthDay(
@@ -67,7 +70,8 @@ export const getDateInfo = ({ daysAgo, date }: Props) => {
     isFullDay,
     isFinishedProcessing: false,
     processingTime: 0,
-    month: `${startDate.getUTCFullYear()}.${startDate.getMonth()}`,
+    month,
+    year,
     dayOfMonth,
   };
 

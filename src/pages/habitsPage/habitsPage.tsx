@@ -1,54 +1,94 @@
 import * as React from "react";
 
 import { subscribeToCollection } from "services/database/subscribeToCollection";
-import { updateRecord } from "services/database/updateRecord";
-import { Habit } from "types/habit";
+import { Habit, HabitDataYears } from "types/habit";
+import { daysInMonth } from "utils/daysInMonth";
+import { getDateInfo } from "utils/getDateInfo";
 
-import { HabitsMonth } from "./habitsMonth/habitsMonth";
+import { HabitsYear } from "./habitsYear/habitsYear";
 import styles from "./styles.module.scss";
+import { listRecords } from "services/database/listRecords";
 
 export const HabitsPage = () => {
   const [habits, setHabits] = React.useState<Habit[]>([]);
 
-  const years = [2025, 2024, 2023, 2022, 2021];
-
   React.useEffect(() => {
-    void subscribeToCollection({
+    void subscribeToCollection<Habit>({
       collection: "habits",
-      setData: setHabits,
+      onData: setHabits,
     });
+
+    void (async () => {
+      const response = await listRecords<Habit>({
+        collection: "habits",
+      });
+
+      if (response.success) {
+        const sortedHabits = response.data.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+        setHabits(sortedHabits);
+      }
+    })();
   }, []);
 
-  const sortedHabits = habits.toSorted((a, b) => a.name.localeCompare(b.name));
+  // const dataByYear = () => {
+  //   const data: HabitDataYears = {};
 
-  const toggleHabit = async (habitId: string, date: string) => {
-    const habit = habits.find((habit) => habit.id === habitId);
-    if (!habit) return;
+  //   for (let year = 2020; year <= 2025; year++) {
+  //     if (!data[year]) {
+  //       data[year] = {};
+  //     }
 
-    const updatedDates = { ...habit.dates, [date]: !habit.dates?.[date] };
-    const updatedHabit: Habit = { ...habit, dates: updatedDates };
+  //     for (let month = 1; month <= 12; month++) {
+  //       data[year][month] = {
+  //         numDaysInMonth: daysInMonth(year, month),
+  //         month,
+  //         year,
+  //         habits: {},
+  //       };
 
-    await updateRecord<Habit>({
-      id: habitId,
-      collection: "habits",
-      data: updatedHabit,
-    });
+  //       habits.forEach((habit) => {
+  //         data[year][month].habits[habit.id] = {
+  //           id: habit.id,
+  //           name: habit.name,
+  //           dates: {},
+  //         };
+  //       });
+  //     }
+  //   }
 
-    setHabits((prev) => prev.map((h) => (h.id === habitId ? updatedHabit : h)));
-  };
+  //   habits.forEach((habit) => {
+  //     Object.keys(habit.dates).forEach((date) => {
+  //       const { year, month } = getDateInfo({ date });
+
+  //       if (!year || !month) return;
+
+  //       data[year][month].habits[habit.id].dates[date] = habit.dates[date];
+  //     });
+  //   });
+
+  //   return data;
+  // };
+
+  const years = [2025, 2024, 2023];
 
   return (
     <div className={styles.container}>
-      {years.map((year) =>
-        Array.from({ length: 12 }, (_, i) => (
+      {/* {Object.keys(data).map((year) => {
+        const yearData = data[Number(year)];
+
+        return Object.keys(yearData).map((month) => (
           <HabitsMonth
-            habits={sortedHabits}
-            month={12 - i}
-            year={year}
-            onHabitDayClick={(habitId, date) => void toggleHabit(habitId, date)}
+            data={yearData[Number(month)]}
+            key={`${year}_${month}`}
           />
-        ))
-      )}
+        ));
+      })} */}
+
+      {years.map((year) => (
+        <HabitsYear habits={habits} year={year} />
+      ))}
     </div>
   );
 };

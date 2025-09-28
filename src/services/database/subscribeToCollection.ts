@@ -31,6 +31,8 @@ export const subscribeToCollection = async <T>(params: Params<T>) => {
           ...data.filter((record) => record.id !== e.record.id),
           e.record,
         ];
+
+        console.log(data);
         onData(data);
       }
 
