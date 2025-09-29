@@ -10,6 +10,7 @@ export const Button = (props: ButtonProps) => {
       onClick={props.onClick}
       style={props.style}
       // onMouseEnter={props.onMouseEnter}
+      title={props.title}
       className={classes(
         styles.container,
         styles[props.type],

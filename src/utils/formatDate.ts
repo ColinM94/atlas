@@ -5,18 +5,21 @@
  * @param mode - The mode for formatting the date. Can be either 'local' (default) or 'utc'. Determines whether the local or UTC time is used.
  * @returns A string representing the formatted date in "DD.MM.YY" format.
  */
-export const formatDate = (date: Date | number | string, mode: 'local' | 'utc' = 'local') => {
-  if (typeof date === 'string') {
-    date = new Date(date.replaceAll('.', '-'));
+export const formatDate = (
+  date: Date | number | string,
+  mode: "local" | "utc" = "local"
+) => {
+  if (typeof date === "string") {
+    date = new Date(date.replaceAll(".", "-"));
   }
 
-  const value = typeof date === 'number' ? new Date(date) : date;
+  const value = typeof date === "number" ? new Date(date) : date;
 
   let day;
   let month;
   let year;
 
-  if (mode === 'utc') {
+  if (mode === "utc") {
     day = value.getUTCDate();
     month = value.getUTCMonth() + 1;
     year = value.getUTCFullYear() % 100;
@@ -26,9 +29,9 @@ export const formatDate = (date: Date | number | string, mode: 'local' | 'utc' =
     year = value.getFullYear() % 100;
   }
 
-  const dayString = day.toString().padStart(2, '0');
-  const monthString = month.toString().padStart(2, '0');
-  const yearString = year.toString().padStart(2, '0');
+  const dayString = day.toString().padStart(2, "0");
+  const monthString = month.toString().padStart(2, "0");
+  const yearString = year.toString().padStart(2, "0");
 
-  return dayString + '.' + monthString + '.' + yearString;
+  return dayString + "." + monthString + "." + yearString;
 };

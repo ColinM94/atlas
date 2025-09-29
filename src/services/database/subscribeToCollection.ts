@@ -7,15 +7,17 @@ type Item<T> = T & DatabaseRecord;
 interface Params<T> {
   collection: Collection;
   onData: (data: Item<T>[]) => void;
+  filter?: string;
 }
 
 export const subscribeToCollection = async <T>(params: Params<T>) => {
-  const { onData, collection } = params;
+  const { onData, collection, filter } = params;
 
   let data: Item<T>[] = [];
 
   const response = await listRecords<Item<T>>({
     collection,
+    filter: filter || "",
   });
 
   if (response.success) {
@@ -32,7 +34,6 @@ export const subscribeToCollection = async <T>(params: Params<T>) => {
           e.record,
         ];
 
-        console.log(data);
         onData(data);
       }
 

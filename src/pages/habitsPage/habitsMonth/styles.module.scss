@@ -38,6 +38,10 @@
       align-items: center;
       color: vars.$color-text-secondary;
     }
+
+    .dayOfMonthDisabled {
+      visibility: hidden;
+    }
   }
 
   .habit {
@@ -82,8 +86,19 @@
       }
     }
 
+    .habitDayDisabled {
+      user-select: none;
+      background-color: transparent;
+      cursor: unset;
+    }
+
     .habitIcon {
       font-size: vars.$icon-size-small;
     }
+  }
+
+  .filler {
+    flex: 1;
+    aspect-ratio: 1;
   }
 }

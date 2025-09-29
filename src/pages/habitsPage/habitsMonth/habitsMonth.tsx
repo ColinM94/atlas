@@ -1,103 +1,143 @@
+import * as React from "react";
+
 import { months } from "constants/general";
 import { daysInMonth } from "utils/daysInMonth";
-import { Habit } from "types/habit";
+import { classes } from "utils/classes";
+import { Habit, HabitData } from "types/habit";
+import { Button } from "components/button/button";
+import { subscribeToCollection } from "services/database/subscribeToCollection";
 
 import styles from "./styles.module.scss";
-import { formatDate } from "utils/formatDate";
-import { Button } from "components/button/button";
-import { classes } from "utils/classes";
+import { updateRecord } from "services/database/updateRecord";
+import { createRecord } from "services/database/createRecord";
 
 interface Props {
   year: number;
   month: number;
   habits: Habit[];
-  // data: HabitDataMonth;
-  // onHabitDayClick: (habitId: string, date: string) => void;
 }
 
 export const HabitsMonth = (props: Props) => {
   const { habits, year, month } = props;
-  // const { data } = props;
 
-  // const { habits, month, numDaysInMonth, year } = data;
+  const [habitsData, setHabitsData] = React.useState<HabitData[]>([]);
 
-  // const formatDate = (year: number, month: number, day: number) =>
-  //   `${year}.${String(month).padStart(2, "0")}.${String(day).padStart(2, "0")}`;
+  React.useEffect(() => {
+    void subscribeToCollection<HabitData[]>({
+      collection: "habitsData",
+      onData: setHabitsData,
+      filter: 'date >= "2025-01-01" && date <= "2025-01-31"',
+    });
+  }, []);
 
-  // const toggleHabit = async (habitId: string, date: string) => {
-  //   const habit = Object.values(habits).find((habit) => habit.id === habitId);
-  //   if (!habit) return;
+  const formatDate = (year: number, month: number, day: number) =>
+    `${year}.${String(month).padStart(2, "0")}.${String(day).padStart(2, "0")}`;
 
-  //   const updatedDates = { ...habit.dates, [date]: !habit.dates?.[date] };
-  //   const updatedHabit: Habit = { ...habit, dates: updatedDates };
+  const toggleHabit = async (habitId: string, date: string) => {
+    const habit = habitsData.find(
+      (item) => item.habitId === habitId && item.date === date
+    );
 
-  //   await updateRecord<Habit>({
-  //     id: habitId,
-  //     collection: "habits",
-  //     data: updatedHabit,
-  //   });
-  // };
-
-  // const sortedHabits =
+    if (!habit) {
+      await createRecord<HabitData>({
+        collection: "habitsData",
+        data: {
+          date,
+          habitId,
+          isAchieved: true,
+        },
+      });
+    } else {
+      await updateRecord<HabitData>({
+        id: habitId,
+        collection: "habits",
+        data: {
+          isAchieved: !habit.isAchieved,
+        },
+      });
+    }
+  };
 
   const numberOfDays = daysInMonth(year, month);
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={styles.headerMonth}>{months[month]}</div>
+        <div className={styles.headerMonth}>{months[month - 1]}</div>
       </div>
 
       <div className={styles.daysOfMonth}>
-        {Array.from({ length: numberOfDays }, (_, i) => (
-          <div key={i} className={styles.dayOfMonth}>
-            {i + 1}
-          </div>
-        ))}
+        {Array.from({ length: 31 }, (_, i) => {
+          return (
+            <div
+              key={i}
+              className={classes(
+                styles.dayOfMonth,
+                i > numberOfDays && styles.dayOfMonthDisabled
+              )}
+            >
+              {i + 1}
+            </div>
+          );
+        })}
       </div>
       {/* <div className={styles.header}>
         {month === 12 && <div className={styles.headerYear}>{year}</div>}
         <div className={styles.headerMonth}>{months[month - 1]}</div>
       </div> */}
 
-      {habits.map((habit) => {
-        // const habit = habits[habitId];
+      {habits
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((habit) => {
+          // const habit = habits[habitId];
 
-        return (
-          <div key={habit.name} className={styles.habit}>
-            <div className={styles.habitName}>{habit.name}</div>
+          return (
+            <div key={habit.name} className={styles.habit}>
+              <div className={styles.habitName}>{habit.name}</div>
 
-            {Array.from({ length: numberOfDays }, (_, i) => {
-              const date = formatDate(year, month, i + 1);
+              {Array.from({ length: 31 }, (_, i) => {
+                const date = formatDate(year, month, i + 1);
 
-              // let icon: MaterialSymbol | undefined = undefined;
-              let className = styles.habitDayUnset;
+                // let icon: MaterialSymbol | undefined = undefined;
+                // let className = styles.habitDayUnset;
 
-              if (habit.dates?.[date] === true) {
-                // icon = "check";
-                className = styles.habitDayDone;
-              }
+                // if (habit.dates?.[date] === true) {
+                //   // icon = "check";
+                //   className = styles.habitDayDone;
+                // }
 
-              if (habit.dates?.[date] === false) {
-                // icon = "close";
-                className = styles.habitDayNotDone;
-              }
+                // if (habit.dates?.[date] === false) {
+                //   // icon = "close";
+                //   className = styles.habitDayNotDone;
+                // }
 
-              return (
-                <Button
-                  key={i}
-                  type="secondary"
-                  // icon={icon}
-                  layer={1}
-                  // onClick={() => void toggleHabit(habit.id, date)}
-                  iconClassName={styles.habitIcon}
-                  className={classes(styles.habitDay, className)}
-                />
-              );
-            })}
-          </div>
-        );
-      })}
+                const data = habitsData.find(
+                  (item) => item.date === date && item.habitId === habit.id
+                );
+
+                return (
+                  <Button
+                    key={i}
+                    type="secondary"
+                    // icon={icon}
+                    layer={1}
+                    title={date}
+                    onClick={() => void toggleHabit(habit.id, date)}
+                    iconClassName={styles.habitIcon}
+                    className={classes(
+                      styles.habitDay,
+                      i > numberOfDays && styles.habitDayDisabled,
+                      data?.isAchieved
+                        ? styles.habitDayDone
+                        : styles.habitDayNotDone
+                      // className
+                    )}
+                  />
+                );
+              })}
+            </div>
+          );
+        })}
     </div>
   );
 };

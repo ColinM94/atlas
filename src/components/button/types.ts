@@ -9,6 +9,7 @@ interface ButtonPropsBase {
     | ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
     | undefined;
   labelClassName?: string;
+  title?: string;
   // onMouseEnter: HTMLButtonElement["onmouseenter"];
   style?: CSSProperties;
   className?: string;
