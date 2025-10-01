@@ -1,18 +1,23 @@
 import { pb } from "inits/backend";
+import { RecordFullListOptions, SendOptions } from "pocketbase";
 import { Collection, RequestResponse } from "types/general";
 import { trackError } from "utils/trackError";
 
-interface Params {
+export interface ListRecordsParams {
   collection: Collection;
-  filter?: string;
+  filter?: RecordFullListOptions["filter"];
+  requestKey?: SendOptions["requestKey"];
 }
 
-export const listRecords = async <T>(params: Params): RequestResponse<T[]> => {
+export const listRecords = async <T>(
+  params: ListRecordsParams
+): RequestResponse<T[]> => {
   try {
-    const { collection, filter } = params;
+    const { collection, filter, requestKey } = params;
 
     const resultList = await pb.collection(collection).getFullList<T>({
       ...(filter && { filter }),
+      ...(requestKey && { requestKey }),
     });
 
     return {
@@ -23,6 +28,7 @@ export const listRecords = async <T>(params: Params): RequestResponse<T[]> => {
     trackError({
       error: error as Error,
       source: "listRecords",
+      description: `Collection: ${params.collection}`,
     });
     return {
       success: false,

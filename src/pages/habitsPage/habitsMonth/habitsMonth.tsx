@@ -1,15 +1,18 @@
-import * as React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import React from "react";
 
 import { months } from "constants/general";
 import { daysInMonth } from "utils/daysInMonth";
 import { classes } from "utils/classes";
+import { numberOfDaysInMonth } from "utils/numberOfDaysInMonth";
 import { Habit, HabitData } from "types/habit";
 import { Button } from "components/button/button";
-import { subscribeToCollection } from "services/database/subscribeToCollection";
-
-import styles from "./styles.module.scss";
 import { updateRecord } from "services/database/updateRecord";
 import { createRecord } from "services/database/createRecord";
+import { pb } from "inits/backend";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   year: number;
@@ -22,23 +25,33 @@ export const HabitsMonth = (props: Props) => {
 
   const [habitsData, setHabitsData] = React.useState<HabitData[]>([]);
 
-  React.useEffect(() => {
-    void subscribeToCollection<HabitData[]>({
-      collection: "habitsData",
-      onData: setHabitsData,
-      filter: 'date >= "2025-01-01" && date <= "2025-01-31"',
+  const numDays = numberOfDaysInMonth(year, month);
+
+  const loadData = async () => {
+    const yearString = String(year);
+    const monthString = String(month).padStart(2, "0");
+
+    const value = await pb.collection("habitsData").getFullList<HabitData>({
+      filter: `date ~ '${yearString}-${monthString}'`,
+      requestKey: `habitData_${year}_${month}`,
     });
-  }, []);
+
+    setHabitsData(value);
+  };
+
+  React.useEffect(() => {
+    loadData();
+  }, [month, year]);
 
   const formatDate = (year: number, month: number, day: number) =>
-    `${year}.${String(month).padStart(2, "0")}.${String(day).padStart(2, "0")}`;
+    `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
-  const toggleHabit = async (habitId: string, date: string) => {
-    const habit = habitsData.find(
-      (item) => item.habitId === habitId && item.date === date
-    );
-
-    if (!habit) {
+  const toggleHabit = async (
+    date: string,
+    habitId: string,
+    habitData: HabitData | undefined
+  ) => {
+    if (!habitData) {
       await createRecord<HabitData>({
         collection: "habitsData",
         data: {
@@ -49,13 +62,15 @@ export const HabitsMonth = (props: Props) => {
       });
     } else {
       await updateRecord<HabitData>({
-        id: habitId,
-        collection: "habits",
+        id: habitData.id,
+        collection: "habitsData",
         data: {
-          isAchieved: !habit.isAchieved,
+          isAchieved: !habitData.isAchieved,
         },
       });
     }
+
+    loadData();
   };
 
   const numberOfDays = daysInMonth(year, month);
@@ -63,7 +78,9 @@ export const HabitsMonth = (props: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={styles.headerMonth}>{months[month - 1]}</div>
+        <div className={styles.headerMonth}>
+          {months[month - 1]} {year}
+        </div>
       </div>
 
       <div className={styles.daysOfMonth}>
@@ -95,7 +112,7 @@ export const HabitsMonth = (props: Props) => {
             <div key={habit.name} className={styles.habit}>
               <div className={styles.habitName}>{habit.name}</div>
 
-              {Array.from({ length: 31 }, (_, i) => {
+              {Array.from({ length: numDays }, (_, i) => {
                 const date = formatDate(year, month, i + 1);
 
                 // let icon: MaterialSymbol | undefined = undefined;
@@ -111,8 +128,8 @@ export const HabitsMonth = (props: Props) => {
                 //   className = styles.habitDayNotDone;
                 // }
 
-                const data = habitsData.find(
-                  (item) => item.date === date && item.habitId === habit.id
+                const habitDataItem = habitsData.find(
+                  (item) => item.habitId === habit.id && item.date === date
                 );
 
                 return (
@@ -122,12 +139,14 @@ export const HabitsMonth = (props: Props) => {
                     // icon={icon}
                     layer={1}
                     title={date}
-                    onClick={() => void toggleHabit(habit.id, date)}
+                    onClick={() =>
+                      void toggleHabit(date, habit.id, habitDataItem)
+                    }
                     iconClassName={styles.habitIcon}
                     className={classes(
                       styles.habitDay,
                       i > numberOfDays && styles.habitDayDisabled,
-                      data?.isAchieved
+                      habitDataItem?.isAchieved
                         ? styles.habitDayDone
                         : styles.habitDayNotDone
                       // className

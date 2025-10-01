@@ -1,23 +1,22 @@
 import { pb } from "inits/backend";
-import { Collection, DatabaseRecord } from "types/general";
-import { listRecords } from "./listRecords";
+import { DatabaseRecord } from "types/general";
+import { listRecords, ListRecordsParams } from "./listRecords";
 
 type Item<T> = T & DatabaseRecord;
 
-interface Params<T> {
-  collection: Collection;
+interface Params<T> extends ListRecordsParams {
   onData: (data: Item<T>[]) => void;
-  filter?: string;
 }
 
 export const subscribeToCollection = async <T>(params: Params<T>) => {
-  const { onData, collection, filter } = params;
+  const { onData, collection, filter, requestKey } = params;
 
   let data: Item<T>[] = [];
 
   const response = await listRecords<Item<T>>({
     collection,
-    filter: filter || "",
+    filter,
+    requestKey,
   });
 
   if (response.success) {

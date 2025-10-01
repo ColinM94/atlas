@@ -33,5 +33,5 @@ export const formatDate = (
   const monthString = month.toString().padStart(2, "0");
   const yearString = year.toString().padStart(2, "0");
 
-  return dayString + "." + monthString + "." + yearString;
+  return dayString + "-" + monthString + "-" + yearString;
 };
