@@ -26,9 +26,11 @@ export const HabitsPage = () => {
     };
   }, []);
 
+  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getUTCMonth() + 1;
+
   const years = () => {
     const tempYears = [];
-    const currentYear = new Date().getFullYear();
 
     for (let i = 2025; i <= currentYear; i++) {
       tempYears.push(i);
@@ -37,20 +39,26 @@ export const HabitsPage = () => {
     return tempYears;
   };
 
-  const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const months = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
   return (
     <div className={styles.container}>
-      {years().map((year) =>
-        months.map((month) => (
-          <HabitsMonth
-            habits={habits}
-            year={year}
-            month={month}
-            key={`${year}.${month}`}
-          />
-        ))
-      )}
+      {years().map((year) => (
+        <>
+          {months.map((month) => {
+            if (year === currentYear && month > currentMonth) return;
+
+            return (
+              <HabitsMonth
+                habits={habits}
+                year={year}
+                month={month}
+                key={`${year}.${month}`}
+              />
+            );
+          })}
+        </>
+      ))}
     </div>
   );
 };
