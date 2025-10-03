@@ -26,12 +26,22 @@ export const HabitsPage = () => {
     };
   }, []);
 
-  const years = [2025, 2024];
+  const years = () => {
+    const tempYears = [];
+    const currentYear = new Date().getFullYear();
+
+    for (let i = 2025; i <= currentYear; i++) {
+      tempYears.push(i);
+    }
+
+    return tempYears;
+  };
+
   const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   return (
     <div className={styles.container}>
-      {years.map((year) =>
+      {years().map((year) =>
         months.map((month) => (
           <HabitsMonth
             habits={habits}
