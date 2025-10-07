@@ -8,12 +8,14 @@ interface Props {
   year: number;
   month: number;
   numDaysInMonth: number;
+  isCurrentYear: boolean;
+  isCurrentMonth: boolean;
   //   show: boolean;
   //   setShow: (show: boolean) => void;
 }
 
 export const HabitsMonthHeader = (props: Props) => {
-  const { year, month, numDaysInMonth } = props;
+  const { year, month, numDaysInMonth, isCurrentYear, isCurrentMonth } = props;
 
   return (
     <>
@@ -35,13 +37,17 @@ export const HabitsMonthHeader = (props: Props) => {
       <div className={styles.daysOfMonth}>
         {Array.from({ length: numDaysInMonth }, (_, i) => {
           const dayName = nameOfDay(year, month, i + 1);
+          const isCurrentDay = Boolean(
+            isCurrentYear && isCurrentMonth && i === new Date().getDate() - 1
+          );
 
           return (
             <div
               key={i}
               className={classes(
                 styles.dayOfMonth,
-                i > numDaysInMonth && styles.dayOfMonthDisabled
+                i > numDaysInMonth && styles.dayOfMonthDisabled,
+                isCurrentDay && styles.currentDayOfMonth
               )}
             >
               <div title={dayName} className={styles.dayOfMonthLetter}>

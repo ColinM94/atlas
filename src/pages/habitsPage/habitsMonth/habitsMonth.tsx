@@ -9,21 +9,22 @@ import { Habit, HabitData } from "types/habit";
 import { Button } from "components/button/button";
 import { updateRecord } from "services/database/updateRecord";
 import { createRecord } from "services/database/createRecord";
+import { deleteRecord } from "services/database/deleteRecord";
 import { pb } from "inits/backend";
 
 import { HabitsMonthHeader } from "./components/habitsMonthHeader/habitsMonthHeader";
 import styles from "./styles.module.scss";
-import { deleteRecord } from "services/database/deleteRecord";
 
 interface Props {
   year: number;
   month: number;
   habits: Habit[];
-  // isCurrentYear: boolean;
+  isCurrentYear: boolean;
+  isCurrentMonth: boolean;
 }
 
 export const HabitsMonth = (props: Props) => {
-  const { habits, year, month } = props;
+  const { habits, year, month, isCurrentYear, isCurrentMonth } = props;
 
   const [habitsData, setHabitsData] = React.useState<HabitData[]>([]);
   // const [show, setShow] = React.useState(isCurrentYear);
@@ -88,6 +89,8 @@ export const HabitsMonth = (props: Props) => {
         year={year}
         month={month}
         numDaysInMonth={numDaysInMonth}
+        isCurrentYear={isCurrentYear}
+        isCurrentMonth={isCurrentMonth}
         // show={show}
         // setShow={setShow}
       />

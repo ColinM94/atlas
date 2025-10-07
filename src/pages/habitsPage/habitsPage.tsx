@@ -41,7 +41,8 @@ export const HabitsPage = () => {
                 habits={habits}
                 year={year}
                 month={month}
-                // isCurrentYear={year === currentYear}
+                isCurrentYear={year === currentYear}
+                isCurrentMonth={month === currentMonth}
                 key={`${year}.${month}`}
               />
             );
