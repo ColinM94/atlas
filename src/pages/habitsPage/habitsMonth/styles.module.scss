@@ -2,55 +2,9 @@
   gap: vars.$spacing-secondary;
   min-width: fit-content;
   width: 100%;
-
-  .header {
-    padding-left: 110px;
-    margin-left: vars.$spacing-primary;
-
-    // flex-direction: row;
-    // align-items: center;
-    gap: vars.$spacing-primary;
-
-    .headerMonth {
-      font-size: vars.$font-size-display;
-    }
-
-    .headerYear {
-      font-size: 45px;
-      color: vars.$color-text-secondary;
-      margin-bottom: -14px;
-    }
-  }
-
-  .daysOfMonth {
-    flex-direction: row;
-    gap: vars.$spacing-primary;
-    padding-left: calc(110px + vars.$spacing-primary);
-    flex: 1;
-
-    .dayOfMonth {
-      font-size: 13px;
-      aspect-ratio: 1;
-      flex: 1;
-      background-color: vars.$color-surface;
-      border-radius: vars.$roundness;
-      justify-content: center;
-      align-items: center;
-      color: vars.$color-text-secondary;
-
-      .dayOfMonthLetter {
-        color: vars.$color-text-tertiary;
-        font-size: 12px;
-      }
-
-      .dayOfMonthNumber {
-      }
-    }
-
-    .dayOfMonthDisabled {
-      visibility: hidden;
-    }
-  }
+  padding-right: vars.$spacing-primary;
+  padding: vars.$spacing-primary;
+  border-radius: vars.$roundness;
 
   .habit {
     flex-direction: row;
@@ -74,11 +28,11 @@
       aspect-ratio: 1;
     }
 
-    .habitDayUnset {
+    .habitDayUnselected {
       background-color: vars.$color-surface;
     }
 
-    .habitDayDone {
+    .habitDaySuccess {
       background-color: #398039ff;
 
       &:hover {
@@ -86,7 +40,7 @@
       }
     }
 
-    .habitDayNotDone {
+    .habitDayFailed {
       background-color: #9c1a1a;
 
       &:hover {

@@ -1,0 +1,48 @@
+.heading {
+  flex-direction: row;
+  padding-left: 110px;
+  margin-left: vars.$spacing-primary;
+  gap: vars.$spacing-primary;
+  cursor: pointer;
+  user-select: none;
+
+  .headingMonth {
+    font-size: vars.$font-size-display;
+  }
+
+  .headingYear {
+    font-size: 45px;
+    color: vars.$color-text-secondary;
+    margin-bottom: -14px;
+  }
+}
+
+.daysOfMonth {
+  flex-direction: row;
+  gap: vars.$spacing-primary;
+  padding-left: calc(110px + vars.$spacing-primary);
+  flex: 1;
+
+  .dayOfMonth {
+    font-size: 13px;
+    aspect-ratio: 1;
+    flex: 1;
+    background-color: vars.$color-surface;
+    border-radius: vars.$roundness;
+    justify-content: center;
+    align-items: center;
+    color: vars.$color-text-secondary;
+
+    .dayOfMonthLetter {
+      color: vars.$color-text-tertiary;
+      font-size: 12px;
+    }
+
+    .dayOfMonthNumber {
+    }
+  }
+
+  .dayOfMonthDisabled {
+    visibility: hidden;
+  }
+}

@@ -24,7 +24,7 @@ export const HabitsPage = () => {
   const currentMonth = new Date().getUTCMonth() + 1;
 
   const years = () => {
-    return Array.from({ length: currentYear - 2025 + 1 }, (_, i) => 2025 + i);
+    return Array.from({ length: currentYear - 2023 + 1 }, (_, i) => 2025 + i);
   };
 
   const months = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
@@ -41,6 +41,7 @@ export const HabitsPage = () => {
                 habits={habits}
                 year={year}
                 month={month}
+                isCurrentYear={year === currentYear}
                 key={`${year}.${month}`}
               />
             );
