@@ -13,6 +13,7 @@ import { pb } from "inits/backend";
 
 import { HabitsMonthHeader } from "./components/habitsMonthHeader/habitsMonthHeader";
 import styles from "./styles.module.scss";
+import { deleteRecord } from "services/database/deleteRecord";
 
 interface Props {
   year: number;
@@ -61,12 +62,17 @@ export const HabitsMonth = (props: Props) => {
           isAchieved: true,
         },
       });
-    } else {
+    } else if (habitData.isAchieved === false) {
+      await deleteRecord({
+        id: habitData.id,
+        collection: "habitsData",
+      });
+    } else if (habitData.isAchieved === true) {
       await updateRecord<HabitData>({
         id: habitData.id,
         collection: "habitsData",
         data: {
-          isAchieved: !habitData.isAchieved,
+          isAchieved: false,
         },
       });
     }
