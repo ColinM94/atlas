@@ -32,7 +32,7 @@ export const HabitsPage = () => {
   return (
     <div className={styles.container}>
       {years().map((year) => (
-        <>
+        <React.Fragment key={year}>
           {months.map((month) => {
             if (year === currentYear && month > currentMonth) return;
 
@@ -41,12 +41,12 @@ export const HabitsPage = () => {
                 habits={habits}
                 year={year}
                 month={month}
-                isCurrentYear={year === currentYear}
+                // isCurrentYear={year === currentYear}
                 key={`${year}.${month}`}
               />
             );
           })}
-        </>
+        </React.Fragment>
       ))}
     </div>
   );
