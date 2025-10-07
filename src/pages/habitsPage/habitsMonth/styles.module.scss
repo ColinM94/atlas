@@ -37,6 +37,14 @@
       justify-content: center;
       align-items: center;
       color: vars.$color-text-secondary;
+
+      .dayOfMonthLetter {
+        color: vars.$color-text-tertiary;
+        font-size: 12px;
+      }
+
+      .dayOfMonthNumber {
+      }
     }
 
     .dayOfMonthDisabled {
