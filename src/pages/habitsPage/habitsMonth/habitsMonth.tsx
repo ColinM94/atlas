@@ -11,6 +11,7 @@ import { Button } from "components/button/button";
 import { updateRecord } from "services/database/updateRecord";
 import { createRecord } from "services/database/createRecord";
 import { pb } from "inits/backend";
+import { nameOfDay } from "utils/nameOfDay";
 
 import styles from "./styles.module.scss";
 
@@ -85,6 +86,8 @@ export const HabitsMonth = (props: Props) => {
 
       <div className={styles.daysOfMonth}>
         {Array.from({ length: 31 }, (_, i) => {
+          const dayName = nameOfDay(year, month, i + 1);
+
           return (
             <div
               key={i}
@@ -93,7 +96,10 @@ export const HabitsMonth = (props: Props) => {
                 i > numberOfDays && styles.dayOfMonthDisabled
               )}
             >
-              {i + 1}
+              <div title={dayName} className={styles.dayOfMonthLetter}>
+                {dayName[0]}
+              </div>
+              <div className={styles.dayOfMonthNumber}>{i + 1}</div>
             </div>
           );
         })}
