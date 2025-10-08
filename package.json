@@ -8,7 +8,8 @@
     "serve": "./pocketbase/pocketbase.exe serve --http='0.0.0.0:8090'",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "visualise": "pnpm dlx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
     "material-symbols": "^0.35.2",
