@@ -23,15 +23,16 @@ export const HabitsPage = () => {
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getUTCMonth() + 1;
 
-  const years = () => {
-    return Array.from({ length: currentYear - 2023 + 1 }, (_, i) => 2025 + i);
-  };
+  const years = Array.from(
+    { length: currentYear - 2023 + 1 },
+    (_, i) => 2025 + i
+  );
 
   const months = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
   return (
     <div className={styles.container}>
-      {years().map((year) => (
+      {years.map((year) => (
         <React.Fragment key={year}>
           {months.map((month) => {
             if (year === currentYear && month > currentMonth) return;
