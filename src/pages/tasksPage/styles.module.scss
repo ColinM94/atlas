@@ -8,10 +8,3 @@
   right: vars.$spacing-primary;
   z-index: 1;
 }
-
-.newTask {
-  flex-direction: row;
-  background-color: vars.$color-surface;
-  align-items: center;
-  gap: vars.$spacing-primary;
-}

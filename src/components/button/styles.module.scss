@@ -4,6 +4,7 @@
   border-radius: vars.$roundness;
   padding: vars.$spacing-secondary;
   user-select: none;
+  flex-direction: row;
 
   &:hover {
   }
