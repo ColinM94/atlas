@@ -4,6 +4,7 @@ import { subscribeToCollection } from "services/database/subscribeToCollection";
 import { Habit } from "types/habit";
 
 import { HabitsMonth } from "./habitsMonth/habitsMonth";
+import { MainLayout } from "layouts/mainLayout/mainLayout";
 
 export const HabitsPage = () => {
   const [habits, setHabits] = React.useState<Habit[]>([]);
@@ -31,23 +32,27 @@ export const HabitsPage = () => {
 
   const months = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
-  return years.map((year) => (
-    <React.Fragment key={year}>
-      {months.map((month) => {
-        if (year === currentYear && month > currentMonth) return;
-        if (year <= currentYear && month < startMonth) return;
+  return (
+    <MainLayout>
+      {years.map((year) => (
+        <React.Fragment key={year}>
+          {months.map((month) => {
+            if (year === currentYear && month > currentMonth) return;
+            if (year <= currentYear && month < startMonth) return;
 
-        return (
-          <HabitsMonth
-            habits={habits}
-            year={year}
-            month={month}
-            isCurrentYear={year === currentYear}
-            isCurrentMonth={month === currentMonth}
-            key={`${year}.${month}`}
-          />
-        );
-      })}
-    </React.Fragment>
-  ));
+            return (
+              <HabitsMonth
+                habits={habits}
+                year={year}
+                month={month}
+                isCurrentYear={year === currentYear}
+                isCurrentMonth={month === currentMonth}
+                key={`${year}.${month}`}
+              />
+            );
+          })}
+        </React.Fragment>
+      ))}
+    </MainLayout>
+  );
 };

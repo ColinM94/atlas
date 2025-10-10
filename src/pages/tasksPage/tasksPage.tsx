@@ -5,9 +5,10 @@ import { subscribeToCollection } from "services/database/subscribeToCollection";
 import { deleteRecord } from "services/database/deleteRecord";
 import { formatDate } from "utils/formatDate";
 import { Task } from "types/task";
+import { MainLayout } from "layouts/mainLayout/mainLayout";
+import { Button } from "components/button/button";
 
 import { TasksCreator } from "./components/tasksCreator/tasksCreator";
-import { Button } from "components/button/button";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = React.useState<Task[]>([]);
@@ -36,7 +37,7 @@ export const TasksPage = () => {
   };
 
   return (
-    <>
+    <MainLayout>
       <Table
         data={tasks}
         items={(task) => [
@@ -71,6 +72,6 @@ export const TasksPage = () => {
       />
 
       <TasksCreator show={showCreator} setShow={setShowCreator} />
-    </>
+    </MainLayout>
   );
 };
