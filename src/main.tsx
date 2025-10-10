@@ -10,31 +10,28 @@ import { NotFoundPage } from "pages/notFoundPage/notFoundPage";
 
 import "./styles/global.scss";
 import "./styles/theme.scss";
-import styles from "./styles.module.scss";
 
 export const App = () => {
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <Switch>
-          <Route path="/">
-            <HomePage />
-          </Route>
+    <>
+      <Switch>
+        <Route path="/">
+          <HomePage />
+        </Route>
 
-          <Route path="/habits">
-            <HabitsPage />
-          </Route>
+        <Route path="/habits">
+          <HabitsPage />
+        </Route>
 
-          <Route path="/tasks">
-            <TasksPage />
-          </Route>
+        <Route path="/tasks">
+          <TasksPage />
+        </Route>
 
-          <Route path="*">
-            <NotFoundPage />
-          </Route>
-        </Switch>
-      </div>
-    </div>
+        <Route path="*">
+          <NotFoundPage />
+        </Route>
+      </Switch>
+    </>
   );
 };
 

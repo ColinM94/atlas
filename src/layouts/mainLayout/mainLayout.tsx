@@ -2,6 +2,8 @@ import { useLocation } from "wouter";
 
 import { Children } from "types/general";
 import { Button } from "components/button/button";
+import { sections } from "constants/sections";
+import { getCurrentRouteName } from "utils/getCurrentRouteName";
 
 import styles from "./styles.module.scss";
 
@@ -14,8 +16,11 @@ export const MainLayout = (props: Props) => {
 
   const { children } = props;
 
+  const id = getCurrentRouteName(location);
+  const name = id ? sections[id].name : "";
+
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.header}>
         {location !== "/" && (
           <Button
@@ -26,9 +31,11 @@ export const MainLayout = (props: Props) => {
             className={styles.backButton}
           />
         )}
+
+        <div className={styles.heading}>{name}</div>
       </div>
 
-      {children}
-    </>
+      <div className={styles.content}>{children}</div>
+    </div>
   );
 };

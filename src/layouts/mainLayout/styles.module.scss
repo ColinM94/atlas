@@ -1,7 +1,21 @@
 .container {
-}
+  .header {
+    flex-direction: row;
+    align-items: center;
+    gap: vars.$spacing-primary;
+    // background-color: vars.$color-surface;
+    padding: vars.$spacing-primary;
+    padding-bottom: 0;
 
-.header {
-  .backButton {
+    .backButton {
+    }
+
+    .heading {
+      font-size: vars.$font-size-heading;
+    }
+
+    .content {
+      padding: vars.$spacing-primary;
+    }
   }
 }
