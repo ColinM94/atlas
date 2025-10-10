@@ -50,7 +50,7 @@ export const TasksPage = () => {
           {
             id: "dueDate",
             type: "text",
-            value: formatDate(task.dueDate || 0),
+            value: task.dueDate ? formatDate(task.dueDate) : "-",
             heading: "Due Date",
           },
           {
