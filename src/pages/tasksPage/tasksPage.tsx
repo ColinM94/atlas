@@ -1,14 +1,12 @@
 import * as React from "react";
 
-import { Table } from "components/table/table";
 import { subscribeToCollection } from "services/database/subscribeToCollection";
-import { deleteRecord } from "services/database/deleteRecord";
-import { formatDate } from "utils/formatDate";
 import { Task } from "types/task";
 import { MainLayout } from "layouts/mainLayout/mainLayout";
-import { Button } from "components/button/button";
 
 import { TasksCreator } from "./components/tasksCreator/tasksCreator";
+import { TaskItem } from "./components/taskItem/taskItem";
+import styles from "./styles.module.scss";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = React.useState<Task[]>([]);
@@ -25,51 +23,22 @@ export const TasksPage = () => {
     };
   }, []);
 
-  const handleDeleteRecord = async (taskId: string) => {
-    const response = await deleteRecord({
-      collection: "tasks",
-      id: taskId,
-    });
-
-    if (!response.success) {
-      alert("Failed to delete record");
-    }
-  };
-
   return (
-    <MainLayout>
-      <Table
-        data={tasks}
-        items={(task) => [
-          {
-            id: "text",
-            type: "text",
-            value: task.name,
-            heading: "Task",
-          },
-          {
-            id: "dueDate",
-            type: "text",
-            value: task.dueDate ? formatDate(task.dueDate) : "-",
-            heading: "Due Date",
-          },
-          {
-            id: "delete",
-            type: "button",
-            value: "Delete",
-            icon: "delete",
-            onClick: () => void handleDeleteRecord(task.id),
-          },
-        ]}
-        keyExtractor={(item) => item.id}
-      />
-
-      <Button
-        label="Add Task"
-        onClick={() => setShowCreator(true)}
-        type="secondary"
-        layer={1}
-      />
+    <MainLayout
+      buttons={[
+        {
+          icon: "add",
+          onClick: () => setShowCreator(true),
+          type: "secondary",
+          layer: 1,
+        },
+      ]}
+    >
+      <div className={styles.tasks}>
+        {tasks.map((task) => (
+          <TaskItem task={task} key={task.id} />
+        ))}
+      </div>
 
       <TasksCreator show={showCreator} setShow={setShowCreator} />
     </MainLayout>

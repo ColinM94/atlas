@@ -1,5 +1,7 @@
-.container {
-  flex-direction: column;
+.tasks {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: vars.$spacing-primary;
 }
 
 .addButton {

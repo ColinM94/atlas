@@ -1,0 +1,27 @@
+.container {
+  background-color: vars.$color-surface;
+  padding: vars.$spacing-primary;
+  border-radius: vars.$roundness;
+  flex: 1;
+  min-width: fit-content;
+
+  .header {
+    flex-direction: row;
+    align-items: center;
+
+    .name {
+      flex: 1;
+    }
+
+    .deleteButton {
+    }
+
+    .deleteButtonIcon {
+      font-size: vars.$icon-size-small;
+    }
+  }
+
+  .dueDate {
+    color: vars.$color-text-secondary;
+  }
+}
