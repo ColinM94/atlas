@@ -1,10 +1,10 @@
 import * as React from "react";
 
 import { Button } from "components/button/button";
-
-import styles from "./styles.module.scss";
 import { Children } from "types/general";
 import { classes } from "utils/classes";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   show: boolean;
@@ -18,10 +18,8 @@ export const Modal = (props: Props) => {
 
   const dialogRef = React.useRef<HTMLDialogElement>(null);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (!dialogRef.current) return;
-
-    console.log(dialogRef.current.open && show);
 
     if (dialogRef.current.open && !show) {
       dialogRef.current.close();
@@ -35,6 +33,7 @@ export const Modal = (props: Props) => {
   return (
     <dialog
       ref={dialogRef}
+      onClose={() => setShow(false)}
       className={classes(styles.container, !show && styles.hidden, className)}
     >
       <Button type="secondary" label="Close" onClick={() => setShow(false)} />
