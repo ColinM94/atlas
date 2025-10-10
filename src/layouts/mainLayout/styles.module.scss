@@ -13,9 +13,10 @@
     .heading {
       font-size: vars.$font-size-heading;
     }
+  }
 
-    .content {
-      padding: vars.$spacing-primary;
-    }
+  .content {
+    padding: vars.$spacing-primary;
+    gap: vars.$spacing-primary;
   }
 }
