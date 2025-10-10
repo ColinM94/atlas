@@ -1,0 +1,13 @@
+::backdrop {
+  background: vars.$color-background-translucent;
+  opacity: 0.75;
+}
+
+.container {
+  align-self: center;
+  justify-self: center;
+}
+
+.hidden {
+  display: none;
+}

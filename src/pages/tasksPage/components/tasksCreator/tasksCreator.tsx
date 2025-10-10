@@ -3,6 +3,7 @@ import * as React from "react";
 import { InputText } from "components/inputText/inputText";
 import { InputDate } from "components/inputDate/inputDate";
 import { Button } from "components/button/button";
+import { Modal } from "components/modal/modal";
 import { mergeReducer } from "utils/mergeReducer";
 import { DatabaseRecord } from "types/general";
 import { Task } from "types/task";
@@ -10,7 +11,14 @@ import { createRecord } from "services/database/createRecord";
 
 import styles from "./styles.module.scss";
 
-export const TasksCreator = () => {
+interface Props {
+  show: boolean;
+  setShow: (show: boolean) => void;
+}
+
+export const TasksCreator = (props: Props) => {
+  const { show, setShow } = props;
+
   const [newTask, updateNewTask] = React.useReducer(
     mergeReducer<Omit<Task, keyof DatabaseRecord>>,
     {
@@ -29,7 +37,7 @@ export const TasksCreator = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <Modal show={show} setShow={setShow} className={styles.container}>
       <InputText
         label="Task"
         value={newTask.name}
@@ -63,6 +71,6 @@ export const TasksCreator = () => {
         layer={2}
         className={styles.createButton}
       />
-    </div>
+    </Modal>
   );
 };

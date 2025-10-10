@@ -7,9 +7,11 @@ import { formatDate } from "utils/formatDate";
 import { Task } from "types/task";
 
 import { TasksCreator } from "./components/tasksCreator/tasksCreator";
+import { Button } from "components/button/button";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = React.useState<Task[]>([]);
+  const [showCreator, setShowCreator] = React.useState(false);
 
   React.useEffect(() => {
     const unsubcribe = subscribeToCollection<Task>({
@@ -21,6 +23,17 @@ export const TasksPage = () => {
       unsubcribe?.();
     };
   }, []);
+
+  const handleDeleteRecord = async (taskId: string) => {
+    const response = await deleteRecord({
+      collection: "tasks",
+      id: taskId,
+    });
+
+    if (!response.success) {
+      alert("Failed to delete record");
+    }
+  };
 
   return (
     <>
@@ -44,17 +57,20 @@ export const TasksPage = () => {
             type: "button",
             value: "Delete",
             icon: "delete",
-            onClick: () =>
-              void deleteRecord({
-                collection: "tasks",
-                id: task.id,
-              }),
+            onClick: () => void handleDeleteRecord(task.id),
           },
         ]}
         keyExtractor={(item) => item.id}
       />
 
-      <TasksCreator />
+      <Button
+        label="Add Task"
+        onClick={() => setShowCreator(true)}
+        type="secondary"
+        layer={1}
+      />
+
+      <TasksCreator show={showCreator} setShow={setShowCreator} />
     </>
   );
 };
