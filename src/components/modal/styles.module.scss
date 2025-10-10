@@ -6,6 +6,24 @@
 .container {
   align-self: center;
   justify-self: center;
+  background-color: vars.$color-surface;
+  border-radius: vars.$roundness;
+  color: vars.$color-text-primary;
+
+  .header {
+    flex-direction: row;
+    align-items: center;
+
+    .headerLabel {
+      padding-inline: vars.$spacing-primary;
+      padding-block: vars.$spacing-secondary;
+      font-size: vars.$font-size-heading;
+    }
+
+    .headerButton {
+      margin-left: auto;
+    }
+  }
 }
 
 .hidden {

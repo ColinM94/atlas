@@ -1,19 +1,29 @@
 .container {
-  flex-direction: row;
   background-color: vars.$color-surface;
   gap: vars.$spacing-primary;
   padding: vars.$spacing-primary;
+  min-width: min(100vw, 400px) !important;
 
   .nameInput {
     flex: 1;
   }
 
-  .dueDateInput {
-    min-width: 160px;
-    flex: 0.5;
+  .dateRow {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: vars.$spacing-primary;
+
+    .dueDateInput {
+      min-width: 160px;
+      flex: 1;
+    }
+
+    .dueDateButton {
+    }
   }
 
   .createButton {
+    margin-top: vars.$spacing-primary;
     align-self: flex-end;
   }
 }

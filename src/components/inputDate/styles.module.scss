@@ -1,69 +1,25 @@
 .container {
   cursor: pointer;
 
-  * {
-    user-select: none;
-  }
+  // * {
+  //   user-select: none;
+  // }
 
-  .input {
-    // background-color: vars.$color-surface;
-    border-radius: vars.$roundness;
-    flex-direction: row;
-    padding: vars.$spacing-secondary;
-    font-size: vars.$font-size-body;
-    color: vars.$color-text-primary;
-    text-align: center;
-    cursor: pointer !important;
-    pointer-events: none;
-    width: 100%;
-    background-color: transparent;
+  // .input {
+  //   user-select: none;
+  // }
 
-    // &::-webkit-datetime-edit {
-    //   background-color: red;
-    // }
-    // &::-webkit-datetime-edit-fields-wrapper {
-    //   background-color: red;
-    // }
-    // &::-webkit-datetime-edit-text {
-    //   background-color: red;
-    // }
-    // &::-webkit-datetime-edit-month-field {
-    //   background-color: red;
-    // }
-    // &::-webkit-datetime-edit-day-field {
-    //   background-color: red;
-    // }
-    // &::-webkit-datetime-edit-year-field {
-    //   background-color: red;
-    // }
-    // &::-webkit-inner-spin-button {
-    //   background-color: red;
-    // }
-    &::-webkit-calendar-picker-indicator {
-      filter: invert(1);
-    }
-
-    &:hover {
-      filter: brightness(vars.$active-brightness-filter);
-    }
+  .calendarButton {
+    position: absolute;
+    right: vars.$spacing-secondary;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .icon {
-    position: absolute;
-    right: vars.$spacing-primary;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: vars.$icon-size-medium;
   }
 
   ::-webkit-calendar-picker-indicator {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    color: transparent;
-    background: transparent;
+    display: none;
   }
 }

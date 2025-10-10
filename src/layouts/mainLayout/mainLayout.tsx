@@ -36,9 +36,11 @@ export const MainLayout = (props: Props) => {
 
         <div className={styles.heading}>{name}</div>
 
-        {buttons?.map((button) => (
-          <Button {...button} />
-        ))}
+        <div className={styles.buttons}>
+          {buttons?.map((button) => (
+            <Button {...button} />
+          ))}
+        </div>
       </div>
 
       <div className={styles.content}>{children}</div>

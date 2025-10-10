@@ -7,10 +7,12 @@ import { MainLayout } from "layouts/mainLayout/mainLayout";
 import { TasksCreator } from "./components/tasksCreator/tasksCreator";
 import { TaskItem } from "./components/taskItem/taskItem";
 import styles from "./styles.module.scss";
+import { classes } from "utils/classes";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = React.useState<Task[]>([]);
   const [showCreator, setShowCreator] = React.useState(false);
+  const [showGrid, setShowGrid] = React.useState(false);
 
   React.useEffect(() => {
     const unsubcribe = subscribeToCollection<Task>({
@@ -27,6 +29,12 @@ export const TasksPage = () => {
     <MainLayout
       buttons={[
         {
+          icon: showGrid ? "grid_view" : "list",
+          onClick: () => setShowGrid(!showGrid),
+          type: "secondary",
+          layer: 1,
+        },
+        {
           icon: "add",
           onClick: () => setShowCreator(true),
           type: "secondary",
@@ -34,9 +42,14 @@ export const TasksPage = () => {
         },
       ]}
     >
-      <div className={styles.tasks}>
+      <div
+        className={classes(
+          styles.tasks,
+          showGrid ? styles.tasksGrid : styles.tasksList
+        )}
+      >
         {tasks.map((task) => (
-          <TaskItem task={task} key={task.id} />
+          <TaskItem task={task} key={task.id} className={styles.task} />
         ))}
       </div>
 

@@ -9,12 +9,13 @@ import styles from "./styles.module.scss";
 interface Props {
   show: boolean;
   setShow: (show: boolean) => void;
+  label?: string;
   children: Children;
   className?: string;
 }
 
 export const Modal = (props: Props) => {
-  const { show, setShow, children, className } = props;
+  const { show, setShow, children, label, className } = props;
 
   const dialogRef = React.useRef<HTMLDialogElement>(null);
 
@@ -34,10 +35,21 @@ export const Modal = (props: Props) => {
     <dialog
       ref={dialogRef}
       onClose={() => setShow(false)}
-      className={classes(styles.container, !show && styles.hidden, className)}
+      className={classes(styles.container, !show && styles.hidden)}
     >
-      <Button type="secondary" label="Close" onClick={() => setShow(false)} />
-      {children}
+      <div className={styles.header}>
+        <div className={styles.headerLabel}>{label}</div>
+
+        <Button
+          type="secondary"
+          icon="close"
+          onClick={() => setShow(false)}
+          layer={1}
+          className={styles.headerButton}
+        />
+      </div>
+
+      <div className={classes(styles.content, className)}>{children}</div>
     </dialog>
   );
 };

@@ -1,12 +1,34 @@
 .container {
   cursor: pointer;
   color: vars.$color-text-primary;
-  border-radius: vars.$roundness;
-  padding: vars.$spacing-secondary;
+  align-items: center;
   user-select: none;
   flex-direction: row;
+  border-radius: vars.$roundness;
+  gap: vars.$spacing-secondary;
+  height: vars.$input-height;
 
   &:hover {
+  }
+
+  .icon {
+    font-size: calc(vars.$font-size-body + (vars.$spacing-primary / 2));
+  }
+
+  .primaryIcon {
+    color: vars.$color-primary;
+  }
+
+  .secondaryIcon {
+    color: vars.$color-text-primary;
+  }
+
+  .dangerIcon {
+    color: vars.$color-danger;
+  }
+
+  .label {
+    font-size: vars.$font-size-body;
   }
 }
 
@@ -27,4 +49,15 @@
   &:hover {
     background-color: vars.$color-danger-hover;
   }
+}
+
+.containerIconOnly {
+  padding: calc(vars.$spacing-primary / 1.2);
+  aspect-ratio: 1;
+  justify-content: center;
+}
+
+.containerNotIconOnly {
+  padding-inline: vars.$spacing-primary;
+  padding-block: vars.$spacing-secondary;
 }

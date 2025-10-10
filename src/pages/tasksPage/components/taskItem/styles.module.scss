@@ -4,13 +4,24 @@
   border-radius: vars.$roundness;
   flex: 1;
   min-width: fit-content;
+  gap: vars.$spacing-primary;
 
   .header {
     flex-direction: row;
     align-items: center;
 
-    .name {
+    .text {
       flex: 1;
+
+      .name {
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .description {
+        color: vars.$color-text-secondary;
+        font-size: vars.$font-size-body2;
+      }
     }
 
     .deleteButton {

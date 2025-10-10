@@ -1,10 +1,5 @@
-.cardContainer {
-  background-color: vars.$color-surface;
-  padding: vars.$spacing-primary;
-}
-
 .container {
-  gap: vars.$spacing-secondary;
+  gap: vars.$spacing-tertiary;
 
   .labelContainer {
     flex: 2;
@@ -12,10 +7,31 @@
   }
 
   .inputContainer {
-    // flex: 1 !important;
-    min-width: 50px;
+    min-width: 100px;
     flex: 1;
+    border-radius: vars.$roundness;
+
+    input {
+      justify-content: center;
+      background-color: transparent;
+      color: vars.$color-text-primary;
+      padding-inline: vars.$spacing-primary;
+      padding-block: vars.$spacing-secondary;
+      border-radius: vars.$roundness;
+      // overflow: hidden;
+      cursor: text;
+      font-size: vars.$font-size-body;
+      height: vars.$input-height;
+    }
+
+    &:hover {
+      filter: brightness(1.1);
+    }
   }
+}
+
+.disabled {
+  filter: brightness(0.8);
 }
 
 .horizontal {

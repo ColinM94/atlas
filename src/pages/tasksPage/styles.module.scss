@@ -1,7 +1,21 @@
 .tasks {
-  flex-direction: row;
   flex-wrap: wrap;
   gap: vars.$spacing-primary;
+}
+
+.tasksGrid {
+  flex-direction: row;
+
+  .task {
+    min-width: calc(100% / 3 - vars.$spacing-primary / 1.5);
+    max-width: calc(100% / 3 - vars.$spacing-primary / 1.5);
+  }
+}
+
+.tasksList {
+  .task {
+    width: 100%;
+  }
 }
 
 .addButton {

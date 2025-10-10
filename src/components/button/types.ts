@@ -5,6 +5,8 @@ import { Layer } from "types/general";
 interface ButtonPropsBase {
   label?: string | number;
   icon?: MaterialSymbol;
+  leftIcon?: MaterialSymbol;
+  iconColor?: "primary" | "secondary" | "danger";
   onClick:
     | ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
     | undefined;

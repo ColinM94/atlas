@@ -5,26 +5,58 @@ import { ButtonProps } from "./types";
 import styles from "./styles.module.scss";
 
 export const Button = (props: ButtonProps) => {
+  const {
+    onClick,
+    label,
+    style,
+    title,
+    type,
+    leftIcon,
+    icon,
+    iconColor,
+    className,
+    iconClassName,
+    labelClassName,
+  } = props;
   return (
     <button
-      onClick={props.onClick}
-      style={props.style}
-      // onMouseEnter={props.onMouseEnter}
-      title={props.title}
+      onClick={onClick}
+      style={style}
+      // onMouseEnter={onMouseEnter}
+      title={title}
       className={classes(
         styles.container,
-        styles[props.type],
-        props.className,
-        props.type === "secondary" &&
+        styles[type],
+        icon && !label ? styles.containerIconOnly : styles.containerNotIconOnly,
+        className,
+        type === "secondary" &&
           `layer${props.layer ?? 0} layer${props.layer ?? 0}Hover`
       )}
     >
-      <div className={classes(styles.label, props.labelClassName)}>
-        {props.label}
-      </div>
+      {leftIcon && (
+        <Icon
+          icon={leftIcon}
+          className={classes(
+            styles.icon,
+            iconClassName,
+            iconColor && styles[`${iconColor}Icon`]
+          )}
+        />
+      )}
 
-      {props.icon && (
-        <Icon icon={props.icon} className={classes(props.iconClassName)} />
+      {label && (
+        <div className={classes(styles.label, labelClassName)}>{label}</div>
+      )}
+
+      {icon && (
+        <Icon
+          icon={icon}
+          className={classes(
+            styles.icon,
+            iconClassName,
+            iconColor && styles[`${iconColor}Icon`]
+          )}
+        />
       )}
     </button>
   );

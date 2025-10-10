@@ -16,8 +16,8 @@ export interface FormFieldProps {
   horizontal?: boolean;
   required?: boolean;
   onClick?: () => void;
+  disabled: boolean | undefined;
   labelPosition?: "before" | "after";
   children?: Children;
   layer?: 1 | 2 | 3;
-  enableCardContainer?: boolean;
 }

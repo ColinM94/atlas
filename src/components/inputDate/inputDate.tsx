@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { FormField } from "components/formField/formField";
-import { Icon } from "components/icon/icon";
 import { classes } from "utils/classes";
 
 import styles from "./styles.module.scss";
@@ -15,10 +14,10 @@ export const InputDate = (props: InputDateProps) => {
     time = "startOfDay",
     mode = "local",
     className,
-    inputClassName,
     placeholder,
     disabled,
     min,
+    layer,
     ...rest
   } = props;
 
@@ -96,24 +95,35 @@ export const InputDate = (props: InputDateProps) => {
     if (type === "datetime") return "datetime-local";
   };
 
+  const handleClick = () => {
+    ref.current?.showPicker();
+  };
+
   return (
     <FormField
       className={classes(className, styles.container)}
+      disabled={disabled}
+      layer={layer}
       {...rest}
-      onClick={() => ref.current?.showPicker()}
+      onClick={handleClick}
     >
       <input
         type={inputType()}
         value={date()}
         onChange={handleChange}
-        className={classes(styles.input, inputClassName)}
         placeholder={placeholder}
         disabled={disabled}
         min={min}
         ref={ref}
       />
 
-      <Icon icon="calendar_month" className={styles.icon} />
+      {/* <Button
+        type="secondary"
+        onClick={handleClick}
+        icon="calendar_month"
+        layer={layer}
+        className={styles.calendarButton}
+      /> */}
     </FormField>
   );
 };

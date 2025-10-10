@@ -2,14 +2,6 @@
   // height: 100%;
 
   .input {
-    height: 100%;
-    width: 100%;
-    padding: vars.$spacing-primary;
-    background-color: vars.$color-surface2;
-    border-radius: vars.$roundness;
-    color: vars.$color-text-primary;
-    font-size: vars.$font-size-body;
-
     &:focus {
       outline: 1px solid vars.$color-primary;
     }

@@ -16,7 +16,7 @@ export const FormField = (props: Props) => {
     onClick,
     id,
     labelPosition = "before",
-    enableCardContainer,
+    disabled,
     layer,
     className,
   } = props;
@@ -28,8 +28,8 @@ export const FormField = (props: Props) => {
         styles.container,
         className,
         horizontal && styles.horizontal,
-        enableCardContainer && styles.cardContainer,
-        onClick && "clickable"
+        onClick && "clickable",
+        disabled && styles.disabled
       )}
       id={id}
       onClick={onClick}

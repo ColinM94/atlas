@@ -1,10 +1,16 @@
 .container {
+  max-width: vars.$breakpoint-large;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
   .header {
     flex-direction: row;
     align-items: center;
     gap: vars.$spacing-primary;
     // background-color: vars.$color-surface;
-    padding: vars.$spacing-primary;
+    padding-inline: vars.$spacing-primary;
+    padding-block: vars.$spacing-secondary;
     padding-bottom: 0;
 
     .backButton {
@@ -12,6 +18,13 @@
 
     .heading {
       font-size: vars.$font-size-heading;
+    }
+
+    .buttons {
+      flex-direction: row;
+      flex: 1;
+      justify-content: flex-end;
+      gap: vars.$spacing-primary;
     }
   }
 

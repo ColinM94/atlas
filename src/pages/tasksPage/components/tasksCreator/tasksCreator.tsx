@@ -27,17 +27,27 @@ export const TasksCreator = (props: Props) => {
     }
   );
 
-  const [showDueDate, setShowDueDate] = React.useState(false);
-
-  const handleAdd = () => {
-    void createRecord({
+  const handleAdd = async () => {
+    await createRecord({
       collection: "tasks",
       data: newTask,
     });
+
+    updateNewTask({
+      name: "",
+      dueDate: 0,
+    });
+
+    setShow(false);
   };
 
   return (
-    <Modal show={show} setShow={setShow} className={styles.container}>
+    <Modal
+      label="New Task"
+      show={show}
+      setShow={setShow}
+      className={styles.container}
+    >
       <InputText
         label="Task"
         value={newTask.name}
@@ -45,30 +55,33 @@ export const TasksCreator = (props: Props) => {
         className={styles.nameInput}
       />
 
-      {showDueDate && (
+      <div className={styles.dateRow}>
         <InputDate
           label="Due Date"
           type="date"
           value={newTask.dueDate}
           setValue={(dueDate) => updateNewTask({ dueDate })}
           layer={2}
+          disabled={newTask.dueDate === 0}
           className={styles.dueDateInput}
         />
-      )}
 
-      {!showDueDate && (
         <Button
-          label="Add Due Date"
-          onClick={() => setShowDueDate(true)}
           type="secondary"
+          layer={1}
+          icon={newTask.dueDate === 0 ? "add" : "close"}
+          iconColor={newTask.dueDate === 0 ? "secondary" : "danger"}
+          onClick={() =>
+            updateNewTask({ dueDate: newTask.dueDate === 0 ? Date.now() : 0 })
+          }
+          className={styles.dueDateButton}
         />
-      )}
+      </div>
 
       <Button
-        label="Create"
-        onClick={handleAdd}
-        type="secondary"
-        layer={2}
+        label="Add Task"
+        onClick={() => void handleAdd()}
+        type="primary"
         className={styles.createButton}
       />
     </Modal>
