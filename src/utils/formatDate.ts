@@ -7,7 +7,8 @@
  */
 export const formatDate = (
   date: Date | number | string,
-  mode: "local" | "utc" = "local"
+  mode: "local" | "utc" = "local",
+  separator: "." | "/" | "-" = "-"
 ) => {
   if (typeof date === "string") {
     date = new Date(date.replaceAll(".", "-"));
@@ -33,5 +34,5 @@ export const formatDate = (
   const monthString = month.toString().padStart(2, "0");
   const yearString = year.toString().padStart(2, "0");
 
-  return dayString + "-" + monthString + "-" + yearString;
+  return dayString + separator + monthString + separator + yearString;
 };

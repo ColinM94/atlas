@@ -12,7 +12,7 @@
   }
 
   .icon {
-    font-size: calc(vars.$font-size-body + (vars.$spacing-primary / 2));
+    font-size: vars.$icon-size-large;
   }
 
   .primaryIcon {

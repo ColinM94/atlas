@@ -5,6 +5,7 @@ import { Habit } from "types/habit";
 
 import { HabitsMonth } from "./habitsMonth/habitsMonth";
 import { MainLayout } from "layouts/mainLayout/mainLayout";
+import styles from "./styles.module.scss";
 
 export const HabitsPage = () => {
   const [habits, setHabits] = React.useState<Habit[]>([]);
@@ -33,7 +34,7 @@ export const HabitsPage = () => {
   const months = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
   return (
-    <MainLayout>
+    <MainLayout className={styles.container}>
       {years.map((year) => (
         <React.Fragment key={year}>
           {months.map((month) => {

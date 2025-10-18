@@ -3,11 +3,11 @@ import * as React from "react";
 import { subscribeToCollection } from "services/database/subscribeToCollection";
 import { Task } from "types/task";
 import { MainLayout } from "layouts/mainLayout/mainLayout";
+import { classes } from "utils/classes";
 
 import { TasksCreator } from "./components/tasksCreator/tasksCreator";
 import { TaskItem } from "./components/taskItem/taskItem";
 import styles from "./styles.module.scss";
-import { classes } from "utils/classes";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = React.useState<Task[]>([]);

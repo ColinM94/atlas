@@ -5,6 +5,7 @@ import { sections } from "constants/sections";
 import { Icon } from "components/icon/icon";
 
 import styles from "./styles.module.scss";
+import { MainLayout } from "layouts/mainLayout/mainLayout";
 
 export const HomePage = () => {
   const [, navigate] = useLocation();
@@ -25,8 +26,8 @@ export const HomePage = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <MainLayout className={styles.container}>
       {Object.values(sections).map((section) => renderSection(section))}
-    </div>
+    </MainLayout>
   );
 };

@@ -1,35 +1,34 @@
 .container {
-  max-width: vars.$breakpoint-large;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  height: 100%;
+  align-items: center;
 
-  .header {
-    flex-direction: row;
-    align-items: center;
-    gap: vars.$spacing-primary;
-    // background-color: vars.$color-surface;
-    padding-inline: vars.$spacing-primary;
-    padding-block: vars.$spacing-secondary;
-    padding-bottom: 0;
+  .innerContainer {
+    height: 100%;
+    width: 100%;
+    max-width: vars.$breakpoint-large;
 
-    .backButton {
-    }
-
-    .heading {
-      font-size: vars.$font-size-heading;
-    }
-
-    .buttons {
+    .header {
       flex-direction: row;
-      flex: 1;
-      justify-content: flex-end;
+      padding: vars.$spacing-primary;
       gap: vars.$spacing-primary;
-    }
-  }
+      align-items: center;
 
-  .content {
-    padding: vars.$spacing-primary;
-    gap: vars.$spacing-primary;
+      .heading {
+        font-size: vars.$font-size-heading;
+      }
+
+      .buttons {
+        flex-direction: row;
+        flex: 1;
+        justify-content: flex-end;
+        gap: vars.$spacing-primary;
+      }
+    }
+
+    .content {
+      flex: 1;
+      padding: vars.$spacing-primary;
+    }
   }
 }

@@ -5,6 +5,7 @@ import { deleteRecord } from "services/database/deleteRecord";
 
 import styles from "./styles.module.scss";
 import { classes } from "utils/classes";
+import { updateRecord } from "services/database/updateRecord";
 
 interface Props {
   task: Task;
@@ -25,15 +26,34 @@ export const TaskItem = (props: Props) => {
     }
   };
 
+  const handleDone = () => {
+    void updateRecord<Task>({
+      collection: "tasks",
+      id: task.id,
+      data: {
+        done: !task.done,
+      },
+    });
+  };
+
   return (
     <div className={classes(styles.container, className)}>
       <div className={styles.header}>
         <div className={styles.text}>
           <div className={styles.name}>{task.name}</div>
-          <div className={styles.description}>
-            {task.description || "I am a description"}
+          <div className={styles.dueDate}>
+            {task.dueDate ? formatDate(task.dueDate, "utc", ".") : ""}
           </div>
         </div>
+
+        <Button
+          type="secondary"
+          icon={task.done ? "check_box_outline_blank" : "check_box"}
+          onClick={() => handleDone()}
+          layer={1}
+          iconClassName={styles.deleteButtonIcon}
+          className={styles.deleteButton}
+        />
 
         <Button
           type="secondary"
@@ -45,9 +65,9 @@ export const TaskItem = (props: Props) => {
         />
       </div>
 
-      <div className={styles.dueDate}>
+      {/* <div className={styles.dueDate}>
         {task.dueDate ? formatDate(task.dueDate) : ""}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -14,8 +14,8 @@
       flex: 1;
 
       .name {
-        white-space: nowrap;
-        overflow: hidden;
+        // white-space: nowrap;
+        // overflow: hidden;
       }
 
       .description {
@@ -25,14 +25,21 @@
     }
 
     .deleteButton {
+      align-self: flex-start;
     }
 
     .deleteButtonIcon {
-      font-size: vars.$icon-size-small;
+      font-size: vars.$icon-size-medium;
     }
   }
 
   .dueDate {
     color: vars.$color-text-secondary;
+    // background-color: vars.$color-primary;
+    // background-color: vars.$color-surface2;
+    // border-radius: vars.$roundness;
+    // width: fit-content;
+    // padding-inline: vars.$spacing-secondary;
+    // padding-block: vars.$spacing-tertiary;
   }
 }
