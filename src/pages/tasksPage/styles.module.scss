@@ -1,26 +1,36 @@
-.tasks {
-  flex-wrap: wrap;
+.container {
   gap: vars.$spacing-primary;
-}
 
-.tasksGrid {
-  flex-direction: row;
-
-  .task {
-    min-width: calc(100% / 3 - vars.$spacing-primary / 1.5);
-    max-width: calc(100% / 3 - vars.$spacing-primary / 1.5);
+  .tasks {
+    flex-wrap: wrap;
+    gap: vars.$spacing-primary;
   }
-}
 
-.tasksList {
-  .task {
-    width: 100%;
+  .tasksGrid {
+    flex-direction: row;
+
+    .task {
+      min-width: calc(100% / 3 - vars.$spacing-primary / 1.5);
+      max-width: calc(100% / 3 - vars.$spacing-primary / 1.5);
+    }
   }
-}
 
-.addButton {
-  position: fixed;
-  bottom: vars.$spacing-primary;
-  right: vars.$spacing-primary;
-  z-index: 1;
+  .tasksList {
+    .task {
+      width: 100%;
+    }
+  }
+
+  .addButton {
+    position: fixed;
+    bottom: vars.$spacing-primary;
+    right: vars.$spacing-primary;
+    z-index: 1;
+  }
+
+  .newTaskButton {
+    position: fixed;
+    bottom: vars.$spacing-primary;
+    right: vars.$spacing-primary;
+  }
 }

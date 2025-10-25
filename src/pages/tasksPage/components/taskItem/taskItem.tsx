@@ -39,35 +39,35 @@ export const TaskItem = (props: Props) => {
   return (
     <div className={classes(styles.container, className)}>
       <div className={styles.header}>
-        <div className={styles.text}>
+        <div className={classes(styles.text, task.done && styles.textComplete)}>
           <div className={styles.name}>{task.name}</div>
           <div className={styles.dueDate}>
             {task.dueDate ? formatDate(task.dueDate, "utc", ".") : ""}
           </div>
         </div>
 
-        <Button
-          type="secondary"
-          icon={task.done ? "check_box_outline_blank" : "check_box"}
-          onClick={() => handleDone()}
-          layer={1}
-          iconClassName={styles.deleteButtonIcon}
-          className={styles.deleteButton}
-        />
-
-        <Button
+        {/* <Button
           type="secondary"
           icon="delete"
           onClick={() => void handleDeleteRecord()}
           layer={1}
-          iconClassName={styles.deleteButtonIcon}
+          iconClassName={styles.buttonIcon}
           className={styles.deleteButton}
-        />
+        /> */}
       </div>
 
       {/* <div className={styles.dueDate}>
         {task.dueDate ? formatDate(task.dueDate) : ""}
       </div> */}
+
+      <Button
+        type="secondary"
+        icon={task.done ? "check_box" : "check_box_outline_blank"}
+        onClick={() => handleDone()}
+        layer={1}
+        iconClassName={styles.buttonIcon}
+        className={styles.checkButton}
+      />
     </div>
   );
 };

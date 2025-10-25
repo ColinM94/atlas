@@ -12,8 +12,11 @@ export const ProgressBar = (props: Props) => {
 
   return (
     <div className={styles.container}>
-      <div style={{ width: `${width}%` }} className={styles.progress}>
-        {progress}
+      <div className={styles.percentCompleteLabel}>
+        {width.toFixed(0)}% Complete
+      </div>
+      <div className={styles.progressBar}>
+        <div style={{ width: `${width}%` }} className={styles.progress}></div>
       </div>
     </div>
   );

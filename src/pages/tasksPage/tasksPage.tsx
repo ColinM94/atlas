@@ -4,10 +4,12 @@ import { subscribeToCollection } from "services/database/subscribeToCollection";
 import { Task } from "types/task";
 import { MainLayout } from "layouts/mainLayout/mainLayout";
 import { classes } from "utils/classes";
+import { ProgressBar } from "components/progressBar/progressBar";
 
 import { TasksCreator } from "./components/tasksCreator/tasksCreator";
 import { TaskItem } from "./components/taskItem/taskItem";
 import styles from "./styles.module.scss";
+import { Button } from "components/button/button";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = React.useState<Task[]>([]);
@@ -41,17 +43,33 @@ export const TasksPage = () => {
           layer: 1,
         },
       ]}
+      className={styles.container}
     >
+      <ProgressBar
+        progress={tasks.filter((task) => task.done).length}
+        maxProgress={tasks.length}
+      />
+
       <div
         className={classes(
           styles.tasks,
           showGrid ? styles.tasksGrid : styles.tasksList
         )}
       >
-        {tasks.map((task) => (
-          <TaskItem task={task} key={task.id} className={styles.task} />
-        ))}
+        {tasks
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((task) => (
+            <TaskItem task={task} key={task.id} className={styles.task} />
+          ))}
       </div>
+
+      <Button
+        leftIcon="add"
+        label="New Task"
+        type="primary"
+        onClick={() => setShowCreator(true)}
+        className={styles.newTaskButton}
+      />
 
       <TasksCreator show={showCreator} setShow={setShowCreator} />
     </MainLayout>

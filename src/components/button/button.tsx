@@ -6,7 +6,6 @@ import styles from "./styles.module.scss";
 
 export const Button = (props: ButtonProps) => {
   const {
-    onClick,
     label,
     style,
     title,
@@ -17,7 +16,9 @@ export const Button = (props: ButtonProps) => {
     className,
     iconClassName,
     labelClassName,
+    onClick,
   } = props;
+
   return (
     <button
       onClick={onClick}

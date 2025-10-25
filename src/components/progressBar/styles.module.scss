@@ -1,13 +1,19 @@
 .container {
-  height: 20px;
-  background-color: vars.$color-surface;
-  border-radius: vars.$roundness;
-  overflow: hidden;
+  .percentCompleteLabel {
+    // color: vars.$color-text-secondary;
+  }
 
-  .progress {
-    position: absolute;
-    left: 0;
-    background-color: vars.$color-success;
-    height: 100%;
+  .progressBar {
+    height: 4px;
+    background-color: vars.$color-surface;
+    border-radius: vars.$roundness;
+    overflow: hidden;
+
+    .progress {
+      position: absolute;
+      left: 0;
+      background-color: vars.$color-text-primary;
+      height: 100%;
+    }
   }
 }
