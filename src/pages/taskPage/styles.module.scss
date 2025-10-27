@@ -1,0 +1,24 @@
+.container {
+  gap: vars.$spacing-primary;
+
+  .name {
+    font-size: vars.$font-size-heading;
+  }
+
+  .description {
+    color: vars.$color-text-secondary;
+  }
+
+  .dueDate {
+    background-color: vars.$color-surface;
+    padding: vars.$spacing-primary;
+    border-radius: vars.$roundness;
+
+    .dueDateLabel {
+      color: vars.$color-text-secondary;
+    }
+
+    .dueDateValue {
+    }
+  }
+}

@@ -4,55 +4,54 @@
   border-radius: vars.$roundness;
   flex: 1;
   min-width: fit-content;
-  gap: vars.$spacing-primary;
-  flex-direction: row;
-  align-items: center;
+  overflow: hidden;
 
-  .header {
+  .row {
     flex-direction: row;
+    width: 100%;
     align-items: center;
+  }
+
+  .name {
     flex: 1;
+    font-size: vars.$font-size-heading2;
+  }
 
-    .text {
-      flex: 1;
+  .checkButton {
+    padding: 0 !important;
+    height: 100%;
+  }
 
-      .name {
-        // white-space: nowrap;
-        // overflow: hidden;
-      }
+  .description {
+    color: vars.$color-text-secondary;
+    font-size: vars.$font-size-body2;
+  }
 
-      .description {
-        color: vars.$color-text-secondary;
-        font-size: vars.$font-size-body2;
-      }
-    }
+  .textComplete {
+    color: vars.$color-text-secondary;
+  }
 
-    .textComplete {
-      color: vars.$color-text-secondary;
-    }
-
-    .checkButton {
-    }
-
-    .deleteButton {
-      align-self: flex-start;
-      margin-left: auto;
-    }
-
-    .buttonIcon {
-      font-size: vars.$icon-size-large;
-    }
+  .buttonIcon {
+    font-size: vars.$icon-size-large;
   }
 
   .dueDate {
     color: vars.$color-text-secondary;
     font-size: vars.$font-size-body2;
-    line-height: 0.75;
-    // background-color: vars.$color-primary;
-    // background-color: vars.$color-surface2;
-    // border-radius: vars.$roundness;
-    // width: fit-content;
-    // padding-inline: vars.$spacing-secondary;
-    // padding-block: vars.$spacing-tertiary;
+    flex: 1;
+    margin-top: 2px;
+  }
+
+  .priority {
+    background-color: vars.$color-primary;
+    padding-inline: vars.$spacing-secondary;
+    padding-block: vars.$spacing-tertiary / 2;
+    border-radius: vars.$roundness;
+    color: text;
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    rotate: 45deg;
+    height: 20px;
   }
 }

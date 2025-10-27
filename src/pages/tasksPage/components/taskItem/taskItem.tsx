@@ -1,11 +1,11 @@
 import { Task } from "types/task";
-import { formatDate } from "utils/formatDate";
 import { Button } from "components/button/button";
 import { deleteRecord } from "services/database/deleteRecord";
+import { updateRecord } from "services/database/updateRecord";
+import { classes } from "utils/classes";
+import { formatDate } from "utils/formatDate";
 
 import styles from "./styles.module.scss";
-import { classes } from "utils/classes";
-import { updateRecord } from "services/database/updateRecord";
 
 interface Props {
   task: Task;
@@ -37,37 +37,44 @@ export const TaskItem = (props: Props) => {
   };
 
   return (
-    <div className={classes(styles.container, className)}>
-      <div className={styles.header}>
-        <div className={classes(styles.text, task.done && styles.textComplete)}>
-          <div className={styles.name}>{task.name}</div>
-          <div className={styles.dueDate}>
-            {task.dueDate ? formatDate(task.dueDate, "utc", ".") : ""}
-          </div>
-        </div>
+    <div
+      onClick={() => handleDone()}
+      className={classes(styles.container, className)}
+    >
+      <div className={styles.row}>
+        <div className={styles.name}>{task.name}</div>
 
-        {/* <Button
+        <Button
           type="secondary"
-          icon="delete"
-          onClick={() => void handleDeleteRecord()}
+          icon={task.done ? "check_box" : "check_box_outline_blank"}
+          onClick={() => handleDone()}
           layer={1}
           iconClassName={styles.buttonIcon}
-          className={styles.deleteButton}
-        /> */}
+          className={styles.checkButton}
+        />
       </div>
 
-      {/* <div className={styles.dueDate}>
-        {task.dueDate ? formatDate(task.dueDate) : ""}
-      </div> */}
+      <div className={styles.row}>
+        <div className={styles.description}>I am a description</div>
+      </div>
 
-      <Button
-        type="secondary"
-        icon={task.done ? "check_box" : "check_box_outline_blank"}
-        onClick={() => handleDone()}
-        layer={1}
-        iconClassName={styles.buttonIcon}
-        className={styles.checkButton}
-      />
+      <div className={styles.row}>
+        <div className={styles.dueDate}>
+          {task.dueDate ? formatDate(task.dueDate, "utc", ".") : ""}
+        </div>
+      </div>
+      <div className={styles.priority}></div>
     </div>
   );
 };
+
+{
+  /* <Button
+      type="secondary"
+      icon="delete"
+      onClick={() => void handleDeleteRecord()}
+      layer={1}
+      iconClassName={styles.buttonIcon}
+      className={styles.deleteButton}
+      /> */
+}

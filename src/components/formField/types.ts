@@ -19,5 +19,5 @@ export interface FormFieldProps {
   disabled: boolean | undefined;
   labelPosition?: "before" | "after";
   children?: Children;
-  layer?: 1 | 2 | 3;
+  layer?: 0 | 1 | 2 | 3;
 }
