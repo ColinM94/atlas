@@ -24,6 +24,7 @@ export const TasksCreator = (props: Props) => {
     {
       dueDate: Date.now(),
       name: "",
+      done: false,
     }
   );
 

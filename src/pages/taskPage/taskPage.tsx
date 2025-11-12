@@ -17,7 +17,7 @@ export const TaskPage = () => {
   });
 
   return (
-    <MainLayout label="Task" className={styles.container}>
+    <MainLayout className={styles.container}>
       <div className={styles.basicInfo}>
         <div className={styles.name}>Sort your shit out</div>
 

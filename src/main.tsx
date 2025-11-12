@@ -8,6 +8,7 @@ import { HabitsPage } from "pages/habitsPage/habitsPage";
 import { TasksPage } from "pages/tasksPage/tasksPage";
 import { NotFoundPage } from "pages/notFoundPage/notFoundPage";
 import { TaskPage } from "pages/taskPage/taskPage";
+import { BooksPage } from "pages/booksPage/booksPage";
 
 import "./styles/global.scss";
 import "./styles/theme.scss";
@@ -30,6 +31,10 @@ export const App = () => {
 
         <Route path="/tasks/:taskId">
           <TaskPage />
+        </Route>
+
+        <Route path="/books">
+          <BooksPage />
         </Route>
 
         <Route path="*">

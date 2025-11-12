@@ -52,29 +52,28 @@ export const TaskItem = (props: Props) => {
           iconClassName={styles.buttonIcon}
           className={styles.checkButton}
         />
+
+        <Button
+          type="secondary"
+          icon="delete"
+          onClick={() => void handleDeleteRecord()}
+          layer={1}
+          iconClassName={styles.buttonIcon}
+          className={styles.deleteButton}
+        />
       </div>
 
-      <div className={styles.row}>
+      {/* <div className={styles.row}>
         <div className={styles.description}>I am a description</div>
-      </div>
+      </div> */}
 
       <div className={styles.row}>
         <div className={styles.dueDate}>
           {task.dueDate ? formatDate(task.dueDate, "utc", ".") : ""}
         </div>
       </div>
-      <div className={styles.priority}></div>
+
+      {/* <div className={styles.priority} /> */}
     </div>
   );
 };
-
-{
-  /* <Button
-      type="secondary"
-      icon="delete"
-      onClick={() => void handleDeleteRecord()}
-      layer={1}
-      iconClassName={styles.buttonIcon}
-      className={styles.deleteButton}
-      /> */
-}

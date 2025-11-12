@@ -8,14 +8,13 @@ import { classes } from "utils/classes";
 import styles from "./styles.module.scss";
 
 interface Props {
-  label: string;
   buttons?: ButtonProps[];
   children: Children;
   className?: string;
 }
 
 export const MainLayout = (props: Props) => {
-  const [location, navigate] = useLocation();
+  const [location] = useLocation();
 
   const { children, buttons, className } = props;
 
@@ -34,9 +33,12 @@ export const MainLayout = (props: Props) => {
           )}
 
           <div className={styles.buttons}>
-            {buttons?.map((button) => (
-              <Button {...button} layer={0} />
-            ))}
+            {buttons?.map((button) => {
+              if (button.type === "secondary")
+                return <Button {...button} layer={0} />;
+
+              return <Button {...button} />;
+            })}
           </div>
         </div>
 

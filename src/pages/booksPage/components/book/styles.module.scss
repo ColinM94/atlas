@@ -1,0 +1,21 @@
+.container {
+  background-color: vars.$color-surface;
+  padding: vars.$spacing-primary;
+  flex-direction: row;
+  gap: vars.$spacing-primary;
+
+  .image {
+    background-color: grey;
+    aspect-ratio: 1.5;
+    height: 150px;
+    width: 100px;
+  }
+
+  .infoName {
+    font-size: vars.$font-size-heading;
+  }
+
+  .infoGenre {
+    color: vars.$color-text-secondary;
+  }
+}
