@@ -8,31 +8,57 @@ import { mergeReducer } from "utils/mergeReducer";
 import { DatabaseRecord } from "types/general";
 import { Task } from "types/task";
 import { createRecord } from "services/database/createRecord";
+import { deleteRecord } from "services/database/deleteRecord";
+import { updateRecord } from "services/database/updateRecord";
 
 import styles from "./styles.module.scss";
 
 interface Props {
   show: boolean;
   setShow: (show: boolean) => void;
+  task?: Task;
 }
 
-export const TasksCreator = (props: Props) => {
-  const { show, setShow } = props;
+const defaultTask = () => ({ dueDate: Date.now(), name: "", done: false });
+
+export const TaskEditor = (props: Props) => {
+  const { show, setShow, task } = props;
 
   const [newTask, updateNewTask] = React.useReducer(
     mergeReducer<Omit<Task, keyof DatabaseRecord>>,
-    {
-      dueDate: Date.now(),
-      name: "",
-      done: false,
-    }
+    defaultTask()
   );
 
-  const handleAdd = async () => {
-    await createRecord({
+  React.useEffect(() => {
+    updateNewTask(task || defaultTask());
+  }, [show]);
+
+  const handleDelete = async () => {
+    if (!task) return;
+
+    const response = await deleteRecord({
       collection: "tasks",
-      data: newTask,
+      id: task.id,
     });
+
+    if (!response.success) {
+      alert("Failed to delete record");
+    }
+  };
+
+  const handleUpdate = async () => {
+    if (task) {
+      await updateRecord({
+        id: task?.id,
+        collection: "tasks",
+        data: newTask,
+      });
+    } else {
+      await createRecord({
+        collection: "tasks",
+        data: newTask,
+      });
+    }
 
     updateNewTask({
       name: "",
@@ -44,14 +70,14 @@ export const TasksCreator = (props: Props) => {
 
   return (
     <Modal
-      label="New Task"
+      label={task?.name || "New Task"}
       show={show}
       setShow={setShow}
       contentClassName={styles.content}
       className={styles.container}
     >
       <InputText
-        label="Task"
+        label="Name"
         value={newTask.name}
         setValue={(name) => updateNewTask({ name })}
         className={styles.nameInput}
@@ -80,12 +106,24 @@ export const TasksCreator = (props: Props) => {
         />
       </div>
 
-      <Button
-        label="Add Task"
-        onClick={() => void handleAdd()}
-        type="primary"
-        className={styles.createButton}
-      />
+      <div className={styles.buttons}>
+        {task && (
+          <Button
+            label="Delete"
+            onClick={() => void handleDelete()}
+            type="secondary"
+            layer={1}
+            className={styles.deleteButton}
+          />
+        )}
+
+        <Button
+          label={task ? "Update" : "Add"}
+          onClick={handleUpdate}
+          type="primary"
+          className={styles.createButton}
+        />
+      </div>
     </Modal>
   );
 };

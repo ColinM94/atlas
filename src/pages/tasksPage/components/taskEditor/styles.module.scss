@@ -22,8 +22,18 @@
       }
     }
 
-    .createButton {
+    .buttons {
+      flex-direction: row;
       margin-top: calc(vars.$spacing-primary * 3);
+      gap: vars.$spacing-primary;
+
+      .deleteButton {
+        flex: 0.5;
+      }
+
+      .createButton {
+        flex: 1;
+      }
     }
   }
 }
