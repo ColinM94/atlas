@@ -33,7 +33,9 @@ export const TaskItem = (props: Props) => {
     <>
       <div className={classes(styles.container, className)}>
         <div className={styles.row}>
-          <div className={styles.name}>{task.name}</div>
+          <div className={classes(styles.name, task.done && styles.nameDone)}>
+            {task.name}
+          </div>
 
           <Button
             type="secondary"

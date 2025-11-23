@@ -17,6 +17,11 @@
     font-size: vars.$font-size-heading2;
   }
 
+  .nameDone {
+    text-decoration: line-through;
+    color: vars.$color-text-secondary;
+  }
+
   .checkButton {
     padding: 0 !important;
     height: 100%;
