@@ -47,6 +47,7 @@ export const TasksCreator = (props: Props) => {
       label="New Task"
       show={show}
       setShow={setShow}
+      contentClassName={styles.content}
       className={styles.container}
     >
       <InputText

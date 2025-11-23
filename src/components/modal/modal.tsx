@@ -12,10 +12,11 @@ interface Props {
   label?: string;
   children: Children;
   className?: string;
+  contentClassName?: string;
 }
 
 export const Modal = (props: Props) => {
-  const { show, setShow, children, label, className } = props;
+  const { show, setShow, children, label, contentClassName, className } = props;
 
   const dialogRef = React.useRef<HTMLDialogElement>(null);
 
@@ -32,24 +33,33 @@ export const Modal = (props: Props) => {
   }, [show]);
 
   return (
-    <dialog
-      ref={dialogRef}
-      onClose={() => setShow(false)}
-      className={classes(styles.container, !show && styles.hidden)}
-    >
-      <div className={styles.header}>
-        <div className={styles.headerLabel}>{label}</div>
+    <>
+      <div
+        onClick={() => setShow(false)}
+        className={classes(styles.background, show && styles.backgroundShow)}
+      />
 
-        <Button
-          type="secondary"
-          icon="close"
-          onClick={() => setShow(false)}
-          layer={1}
-          className={styles.headerButton}
-        />
-      </div>
+      <dialog
+        ref={dialogRef}
+        onClose={() => setShow(false)}
+        className={classes(styles.container, !show && styles.hidden, className)}
+      >
+        <div className={styles.header}>
+          <div className={styles.headerLabel}>{label}</div>
 
-      <div className={classes(styles.content, className)}>{children}</div>
-    </dialog>
+          <Button
+            type="secondary"
+            icon="close"
+            onClick={() => setShow(false)}
+            layer={1}
+            className={styles.headerButton}
+          />
+        </div>
+
+        <div className={classes(styles.content, contentClassName)}>
+          {children}
+        </div>
+      </dialog>
+    </>
   );
 };

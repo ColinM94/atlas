@@ -1,6 +1,20 @@
-::backdrop {
+.background {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background: vars.$color-background-translucent;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.backgroundShow {
   opacity: 0.75;
+  pointer-events: all;
 }
 
 .container {
@@ -9,15 +23,18 @@
   background-color: vars.$color-surface;
   border-radius: vars.$roundness;
   color: vars.$color-text-primary;
+  padding: vars.$spacing-primary;
+  width: calc(100% - vars.$spacing-primary * 2);
+  max-width: 400px;
 
   .header {
     flex-direction: row;
     align-items: center;
+    margin-bottom: vars.$spacing-primary;
 
     .headerLabel {
-      padding-inline: vars.$spacing-primary;
       padding-block: vars.$spacing-secondary;
-      font-size: vars.$font-size-heading;
+      font-size: vars.$font-size-body;
     }
 
     .headerButton {

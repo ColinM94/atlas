@@ -29,6 +29,15 @@
 
   .label {
     font-size: vars.$font-size-body;
+    flex: 1;
+  }
+
+  .centerLabel {
+    text-align: center;
+  }
+
+  .invisible {
+    visibility: hidden;
   }
 }
 
@@ -53,8 +62,9 @@
 
 .containerIconOnly {
   padding: calc(vars.$spacing-primary / 1.2);
-  aspect-ratio: 1;
   justify-content: center;
+  height: vars.$input-height;
+  width: vars.$input-height;
 }
 
 .containerNotIconOnly {

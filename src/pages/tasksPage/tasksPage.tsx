@@ -9,7 +9,6 @@ import { ProgressBar } from "components/progressBar/progressBar";
 import { TasksCreator } from "./components/tasksCreator/tasksCreator";
 import { TaskItem } from "./components/taskItem/taskItem";
 import styles from "./styles.module.scss";
-import { Button } from "components/button/button";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = React.useState<Task[]>([]);
@@ -30,12 +29,12 @@ export const TasksPage = () => {
   return (
     <MainLayout
       buttons={[
-        {
-          icon: showGrid ? "grid_view" : "list",
-          onClick: () => setShowGrid(!showGrid),
-          type: "secondary",
-          layer: 1,
-        },
+        // {
+        //   icon: showGrid ? "grid_view" : "list",
+        //   onClick: () => setShowGrid(!showGrid),
+        //   type: "secondary",
+        //   layer: 1,
+        // },
         {
           icon: "add",
           onClick: () => setShowCreator(true),
@@ -62,14 +61,6 @@ export const TasksPage = () => {
             <TaskItem task={task} key={task.id} className={styles.task} />
           ))}
       </div>
-
-      <Button
-        leftIcon="add"
-        label="New Task"
-        type="primary"
-        onClick={() => setShowCreator(true)}
-        className={styles.newTaskButton}
-      />
 
       <TasksCreator show={showCreator} setShow={setShowCreator} />
     </MainLayout>

@@ -3,12 +3,18 @@
   padding: vars.$spacing-primary;
   flex-direction: row;
   gap: vars.$spacing-primary;
+  border-radius: vars.$roundness;
 
-  .image {
+  .imageContainer {
     background-color: grey;
-    aspect-ratio: 1.5;
-    height: 150px;
-    width: 100px;
+    min-height: 150px;
+    min-width: 100px;
+    overflow: hidden;
+    border: 1px solid vars.$color-surface2;
+
+    .image {
+      position: absolute;
+    }
   }
 
   .infoName {

@@ -1,0 +1,22 @@
+.container {
+  padding: vars.$spacing-primary;
+  gap: vars.$spacing-primary;
+  width: 800px;
+  max-width: 100%;
+
+  .row {
+    flex-direction: row;
+    gap: vars.$spacing-primary;
+    align-items: flex-end;
+    justify-content: stretch;
+    margin-bottom: vars.$spacing-primary * 2;
+
+    .inputText {
+      flex: 1;
+    }
+  }
+
+  .saveButton {
+    margin-top: vars.$spacing-primary * 2;
+  }
+}

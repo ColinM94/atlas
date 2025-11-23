@@ -5,11 +5,12 @@ import { Layer } from "types/general";
 interface ButtonPropsBase {
   label?: string | number;
   icon?: MaterialSymbol;
-  leftIcon?: MaterialSymbol;
+  rightIcon?: MaterialSymbol;
   iconColor?: "primary" | "secondary" | "danger";
   onClick:
     | ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
     | undefined;
+  centerLabel?: boolean;
   labelClassName?: string;
   title?: string;
   // onMouseEnter: HTMLButtonElement["onmouseenter"];

@@ -10,9 +10,10 @@ export const Button = (props: ButtonProps) => {
     style,
     title,
     type,
-    leftIcon,
     icon,
+    rightIcon,
     iconColor,
+    centerLabel,
     className,
     iconClassName,
     labelClassName,
@@ -34,9 +35,9 @@ export const Button = (props: ButtonProps) => {
           `layer${props.layer ?? 0} layer${props.layer ?? 0}Hover`
       )}
     >
-      {leftIcon && (
+      {icon && (
         <Icon
-          icon={leftIcon}
+          icon={icon}
           className={classes(
             styles.icon,
             iconClassName,
@@ -46,15 +47,24 @@ export const Button = (props: ButtonProps) => {
       )}
 
       {label && (
-        <div className={classes(styles.label, labelClassName)}>{label}</div>
+        <div
+          className={classes(
+            styles.label,
+            centerLabel && styles.centerLabel,
+            labelClassName
+          )}
+        >
+          {label}
+        </div>
       )}
 
-      {icon && (
+      {(rightIcon || (icon && centerLabel)) && (
         <Icon
-          icon={icon}
+          icon={rightIcon || "10k"}
           className={classes(
             styles.icon,
             iconClassName,
+            icon && !rightIcon && styles.invisible,
             iconColor && styles[`${iconColor}Icon`]
           )}
         />

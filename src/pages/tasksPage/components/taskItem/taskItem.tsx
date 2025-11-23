@@ -1,5 +1,5 @@
-import { Task } from "types/task";
 import { Button } from "components/button/button";
+import { Task } from "types/task";
 import { deleteRecord } from "services/database/deleteRecord";
 import { updateRecord } from "services/database/updateRecord";
 import { classes } from "utils/classes";
