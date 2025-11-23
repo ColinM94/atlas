@@ -29,6 +29,10 @@ export const BookItem = (props: Props) => {
           <div className={styles.info}>
             <div className={styles.infoTitle}>{book.title}</div>
             <div className={styles.infoSub}>{book.author}</div>
+
+            {Boolean(book.rating) && (
+              <div className={styles.infoRating}>{book.rating} / 5</div>
+            )}
           </div>
 
           <Button
@@ -36,7 +40,7 @@ export const BookItem = (props: Props) => {
             onClick={handleEditClick}
             type="secondary"
             layer={1}
-            className={styles.titleEditButton}
+            className={styles.editButton}
           />
         </div>
       </div>

@@ -10,7 +10,8 @@
     min-height: 150px;
     min-width: 100px;
     overflow: hidden;
-    border: 1px solid vars.$color-surface2;
+    outline: 1px solid vars.$color-surface2;
+    border-radius: vars.$roundness;
 
     .image {
       position: absolute;
@@ -30,6 +31,16 @@
 
       .infoSub {
         color: vars.$color-text-secondary;
+      }
+
+      .infoRating {
+        font-size: vars.$font-size-heading2;
+        border: 2px solid vars.$color-surface2;
+        width: fit-content;
+        padding-inline: vars.$spacing-primary;
+        border-radius: vars.$roundness;
+        margin-top: auto;
+        margin-bottom: vars.$spacing-tertiary;
       }
     }
   }

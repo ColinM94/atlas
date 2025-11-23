@@ -6,4 +6,5 @@ export interface Book extends DatabaseRecord {
   title: string;
   author: string;
   coverImageUrl: string;
+  rating: number;
 }

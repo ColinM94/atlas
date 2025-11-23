@@ -8,23 +8,6 @@ import { BookItem } from "./components/bookItem/bookItem";
 import { BookEditor } from "./components/bookEditor/bookEditor";
 import styles from "./styles.module.scss";
 
-// const books: Book[] = [
-//   {
-//     id: "1",
-//     isbn: "0547928211",
-//     author: "",
-//     coverImageUrl: "",
-//     title: "",
-//   },
-//   {
-//     id: "2",
-//     isbn: "9780575089914",
-//     author: "",
-//     coverImageUrl: "",
-//     title: "",
-//   },
-// ];
-
 export const BooksPage = () => {
   const [showBookEditor, setShowBookEditor] = React.useState(false);
 
@@ -33,7 +16,9 @@ export const BooksPage = () => {
   React.useEffect(() => {
     const unsubcribe = subscribeToCollection<Book>({
       collection: "books",
-      onData: setBooks,
+      onData: (data) => {
+        setBooks(data.sort((a, b) => a.title.localeCompare(b.title)));
+      },
     });
 
     return () => {

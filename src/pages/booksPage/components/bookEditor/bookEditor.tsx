@@ -24,6 +24,7 @@ const defaultBook = (): Book => ({
   title: "",
   author: "",
   coverImageUrl: "",
+  rating: 0,
 });
 
 export const BookEditor = (props: Props) => {
@@ -76,20 +77,25 @@ export const BookEditor = (props: Props) => {
     if (!response.ok) throw "Open Library API error";
 
     const result = await response.json();
+    const authorPath = result?.authors?.[0]?.key;
 
-    const authorPath = result.authors?.[0]?.key;
+    console.log(result);
 
-    const authorResponse = await fetch(
-      `https://openlibrary.org${authorPath}.json`
-    );
-    const authorResult = await authorResponse.json();
+    let author = "";
 
-    const coverImageUrl = `https://covers.openlibrary.org/b/isbn/${state.isbn}-L.jpg`;
+    if (authorPath) {
+      const authorResponse = await fetch(
+        `https://openlibrary.org${authorPath}.json`
+      );
+
+      const authorResult = await authorResponse?.json();
+      author = authorResult.personal_name;
+    }
 
     updateState({
-      coverImageUrl,
+      coverImageUrl: `https://covers.openlibrary.org/b/isbn/${state.isbn}-L.jpg`,
       title: result.title,
-      author: authorResult.personal_name,
+      author: author,
     });
   };
 
@@ -140,6 +146,14 @@ export const BookEditor = (props: Props) => {
         label="Cover URL"
         value={state.coverImageUrl}
         setValue={(coverImageUrl) => updateState({ coverImageUrl })}
+        layer={1}
+        className={styles.inputText}
+      />
+
+      <InputText
+        label="Rating (1 to 5)"
+        value={String(state.rating)}
+        setValue={(rating) => updateState({ rating: Number(rating) })}
         layer={1}
         className={styles.inputText}
       />
