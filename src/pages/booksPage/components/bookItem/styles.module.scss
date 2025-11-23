@@ -17,11 +17,20 @@
     }
   }
 
-  .infoName {
-    font-size: vars.$font-size-heading;
-  }
+  .content {
+    flex: 1;
+    flex-direction: row;
 
-  .infoGenre {
-    color: vars.$color-text-secondary;
+    .info {
+      flex: 1;
+
+      .infoTitle {
+        font-size: vars.$font-size-heading;
+      }
+
+      .infoSub {
+        color: vars.$color-text-secondary;
+      }
+    }
   }
 }

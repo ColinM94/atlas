@@ -3,34 +3,69 @@ import * as React from "react";
 import { InputText } from "components/inputText/inputText";
 import { Modal } from "components/modal/modal";
 import { Button } from "components/button/button";
-import { createRecord } from "services/database/createRecord";
+import { Divider } from "components/divider/divider";
 import { Book } from "types/books";
+import { createRecord } from "services/database/createRecord";
 import { mergeReducer } from "utils/mergeReducer";
+import { updateRecord } from "services/database/updateRecord";
+import { deleteRecord } from "services/database/deleteRecord";
 
 import styles from "./styles.module.scss";
-import { Divider } from "components/divider/divider";
 
 interface Props {
+  book?: Book;
   show: boolean;
   setShow: (show: boolean) => void;
 }
 
+const defaultBook = (): Book => ({
+  id: "",
+  isbn: "",
+  title: "",
+  author: "",
+  coverImageUrl: "",
+});
+
 export const BookEditor = (props: Props) => {
-  const { show, setShow } = props;
+  const { book, show, setShow } = props;
 
-  const [state, updateState] = React.useReducer(mergeReducer<Book>, {
-    id: "",
-    author: "",
-    isbn: "",
-    title: "",
-    coverImageUrl: "",
-  });
+  const [state, updateState] = React.useReducer(
+    mergeReducer<Book>,
+    book || defaultBook()
+  );
 
-  const handleSave = async () => {
-    createRecord<Book>({
+  React.useEffect(() => {
+    updateState(book || defaultBook());
+  }, [show]);
+
+  const handleDelete = async () => {
+    if (!book) return;
+
+    const response = await deleteRecord({
       collection: "books",
-      data: state,
+      id: book.id,
     });
+
+    if (!response.success) {
+      alert("Failed to delete record");
+    }
+  };
+
+  const handleUpdate = async () => {
+    if (book) {
+      await updateRecord({
+        id: book?.id,
+        collection: "books",
+        data: state,
+      });
+    } else {
+      await createRecord({
+        collection: "books",
+        data: state,
+      });
+    }
+
+    setShow(false);
   };
 
   const retrieveInfo = async () => {
@@ -42,11 +77,19 @@ export const BookEditor = (props: Props) => {
 
     const result = await response.json();
 
+    const authorPath = result.authors?.[0]?.key;
+
+    const authorResponse = await fetch(
+      `https://openlibrary.org${authorPath}.json`
+    );
+    const authorResult = await authorResponse.json();
+
     const coverImageUrl = `https://covers.openlibrary.org/b/isbn/${state.isbn}-L.jpg`;
 
     updateState({
       coverImageUrl,
       title: result.title,
+      author: authorResult.personal_name,
     });
   };
 
@@ -55,6 +98,7 @@ export const BookEditor = (props: Props) => {
       show={show}
       setShow={setShow}
       label="New Book"
+      contentClassName={styles.content}
       className={styles.container}
     >
       <div className={styles.row}>
@@ -74,7 +118,7 @@ export const BookEditor = (props: Props) => {
         />
       </div>
 
-      {/* <Divider layer={2} /> */}
+      <Divider layer={2} />
 
       <InputText
         label="Title"
@@ -100,14 +144,24 @@ export const BookEditor = (props: Props) => {
         className={styles.inputText}
       />
 
-      <Button
-        icon="save"
-        label="Save"
-        onClick={handleSave}
-        type="primary"
-        centerLabel
-        className={styles.saveButton}
-      />
+      <div className={styles.buttons}>
+        {book && (
+          <Button
+            label="Delete"
+            onClick={() => void handleDelete()}
+            type="secondary"
+            layer={1}
+            className={styles.deleteButton}
+          />
+        )}
+
+        <Button
+          label={book ? "Update" : "Add"}
+          onClick={handleUpdate}
+          type="primary"
+          className={styles.createButton}
+        />
+      </div>
     </Modal>
   );
 };

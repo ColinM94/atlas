@@ -1,52 +1,47 @@
 import * as React from "react";
-import { Book } from "types/entertainment";
+
+import { Book } from "types/books";
+import { Button } from "components/button/button";
+
 import styles from "./styles.module.scss";
+import { BookEditor } from "../bookEditor/bookEditor";
 
 interface Props {
   book: Book;
 }
 
-type BookInfo = {
-  title: string;
-  coverUrl: string;
-};
-
 export const BookItem = (props: Props) => {
   const { book } = props;
 
-  const [info, setInfo] = React.useState<BookInfo>({
-    coverUrl: "",
-    title: "",
-  });
+  const [showEditor, setShowEditor] = React.useState(false);
 
-  React.useEffect(() => {
-    (async () => {
-      const response = await fetch(
-        `https://openlibrary.org/isbn/${book.isbn}.json`
-      );
-
-      if (!response.ok) throw "Open Library API error";
-
-      const result = await response.json();
-
-      const coverUrl = `https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`;
-
-      setInfo({
-        title: result.title,
-        coverUrl,
-      });
-    })();
-  }, []);
+  const handleEditClick = () => {
+    setShowEditor(true);
+  };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.imageContainer}>
-        <img src={info.coverUrl} className={styles.image} />
+    <>
+      <div className={styles.container}>
+        <div className={styles.imageContainer}>
+          <img src={book.coverImageUrl} className={styles.image} />
+        </div>
+        <div className={styles.content}>
+          <div className={styles.info}>
+            <div className={styles.infoTitle}>{book.title}</div>
+            <div className={styles.infoSub}>{book.author}</div>
+          </div>
+
+          <Button
+            icon="edit"
+            onClick={handleEditClick}
+            type="secondary"
+            layer={1}
+            className={styles.titleEditButton}
+          />
+        </div>
       </div>
-      <div className={styles.info}>
-        <div className={styles.infoName}>{info.title}</div>
-        {/* <div className={styles.infoGenre}>Adventure</div> */}
-      </div>
-    </div>
+
+      <BookEditor book={book} show={showEditor} setShow={setShowEditor} />
+    </>
   );
 };

@@ -6,9 +6,9 @@ import { MainLayout } from "layouts/mainLayout/mainLayout";
 import { classes } from "utils/classes";
 import { ProgressBar } from "components/progressBar/progressBar";
 
+import { TaskEditor } from "./components/taskEditor/taskEditor";
 import { TaskItem } from "./components/taskItem/taskItem";
 import styles from "./styles.module.scss";
-import { TaskEditor } from "./components/taskEditor/taskEditor";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = React.useState<Task[]>([]);
