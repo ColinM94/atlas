@@ -1,3 +1,5 @@
 node_modules
 pocketbase
 dist
+tsconfig.tsbuild.info
+.firebase/*
