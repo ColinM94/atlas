@@ -50,6 +50,7 @@ export const TasksPage = () => {
       >
         {tasks
           .sort((a, b) => a.name.localeCompare(b.name))
+          .sort((a, b) => Number(a.done) - Number(b.done))
           .map((task) => (
             <TaskItem task={task} key={task.id} className={styles.task} />
           ))}
