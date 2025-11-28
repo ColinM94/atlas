@@ -1,26 +1,26 @@
 import * as React from "react";
 
 import { MainLayout } from "layouts/mainLayout/mainLayout";
-import { Book } from "types/books";
 import { subscribeToCollection } from "services/database/subscribeToCollection";
 import { EntertainmentList } from "components/entertainmentList/entertainmentList";
 import { EntertainmentItem } from "components/entertainmentList/types";
+import { Film } from "types/films";
 
-import { BookEditor } from "./components/bookEditor/bookEditor";
+import { FilmEditor } from "./components/filmEditor/filmEditor";
 import styles from "./styles.module.scss";
 
-export const BooksPage = () => {
-  const [books, setBooks] = React.useState<Book[]>([]);
+export const FilmsPage = () => {
+  const [films, setFilms] = React.useState<Film[]>([]);
   const [showBookEditor, setShowBookEditor] = React.useState(false);
-  const [selectedBook, setSelectedBook] = React.useState<Book | undefined>(
+  const [selectedFilm, setSelectedFilm] = React.useState<Film | undefined>(
     undefined
   );
 
   React.useEffect(() => {
-    const unsubcribe = subscribeToCollection<Book>({
-      collection: "books",
+    const unsubcribe = subscribeToCollection<Film>({
+      collection: "films",
       onData: (data) => {
-        setBooks(data.sort((a, b) => a.title.localeCompare(b.title)));
+        setFilms(data.sort((a, b) => a.name.localeCompare(b.name)));
       },
     });
 
@@ -34,16 +34,17 @@ export const BooksPage = () => {
   };
 
   const handleEditClick = (item: EntertainmentItem) => {
-    setSelectedBook(books.find((item) => item.id === item.id));
+    setSelectedFilm(films.find((film) => film.id === item.id));
     setShowBookEditor(true);
   };
 
-  const items: EntertainmentItem[] = books.map((book) => ({
-    id: book.id,
-    name: book.title,
-    subtitle: book.author,
-    imageUrl: book.coverImageUrl,
-    rating: book.rating,
+  const items: EntertainmentItem[] = films.map((film) => ({
+    id: film.id,
+    name: film.name,
+    subtitle: film.director,
+    imageUrl: film.coverImageUrl,
+    backgroundImageUrl: film.backgroundImageUrl,
+    rating: film.rating,
   }));
 
   return (
@@ -59,10 +60,13 @@ export const BooksPage = () => {
     >
       <EntertainmentList items={items} onEditClick={handleEditClick} />
 
-      <BookEditor
+      <FilmEditor
         show={showBookEditor}
         setShow={setShowBookEditor}
-        book={selectedBook}
+        film={selectedFilm}
+        onClose={() => {
+          setSelectedFilm(undefined);
+        }}
       />
     </MainLayout>
   );

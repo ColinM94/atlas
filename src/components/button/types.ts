@@ -20,7 +20,7 @@ interface ButtonPropsBase {
 }
 
 interface ButtonPropsGeneral extends ButtonPropsBase {
-  type: "primary" | "danger";
+  type: "primary" | "danger" | "transparent";
 }
 
 export interface ButtonPropsSecondary extends ButtonPropsBase {

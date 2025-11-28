@@ -16,4 +16,14 @@ export const sections: Record<string, Section> = {
     icon: "book_2",
     name: "Books",
   },
+  films: {
+    id: "films",
+    icon: "movie",
+    name: "Films",
+  },
+  tvSeries: {
+    id: "tvSeries",
+    icon: "tv",
+    name: "TV Series",
+  },
 } as const;

@@ -60,6 +60,10 @@
   }
 }
 
+.transparent {
+  background-color: transparent;
+}
+
 .containerIconOnly {
   padding: calc(vars.$spacing-primary / 1.2);
   justify-content: center;

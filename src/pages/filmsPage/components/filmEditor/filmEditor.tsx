@@ -4,64 +4,68 @@ import { InputText } from "components/inputText/inputText";
 import { Modal } from "components/modal/modal";
 import { Button } from "components/button/button";
 import { Divider } from "components/divider/divider";
-import { Book } from "types/books";
 import { createRecord } from "services/database/createRecord";
 import { mergeReducer } from "utils/mergeReducer";
 import { updateRecord } from "services/database/updateRecord";
 import { deleteRecord } from "services/database/deleteRecord";
 
 import styles from "./styles.module.scss";
+import { Film } from "types/films";
 
 interface Props {
-  book?: Book | undefined;
+  film?: Film | undefined;
   show: boolean;
   setShow: (show: boolean) => void;
+  onClose: () => void;
 }
 
-const defaultBook = (): Book => ({
+const defaultfilm = (): Film => ({
   id: "",
-  isbn: "",
-  title: "",
-  author: "",
+  name: "",
+  director: "",
   coverImageUrl: "",
   rating: 0,
 });
 
-export const BookEditor = (props: Props) => {
-  const { book, show, setShow } = props;
+export const FilmEditor = (props: Props) => {
+  const { film, show, setShow, onClose } = props;
+
+  const [search, setSearch] = React.useState("");
 
   const [state, updateState] = React.useReducer(
-    mergeReducer<Book>,
-    book || defaultBook()
+    mergeReducer<Film>,
+    film || defaultfilm()
   );
 
   React.useEffect(() => {
-    updateState(book || defaultBook());
+    updateState(film || defaultfilm());
   }, [show]);
 
   const handleDelete = async () => {
-    if (!book) return;
+    if (!film) return;
 
     const response = await deleteRecord({
-      collection: "books",
-      id: book.id,
+      collection: "films",
+      id: film.id,
     });
 
     if (!response.success) {
       alert("Failed to delete record");
     }
+
+    setShow(false);
   };
 
   const handleUpdate = async () => {
-    if (book) {
+    if (film) {
       await updateRecord({
-        id: book?.id,
-        collection: "books",
+        id: film?.id,
+        collection: "films",
         data: state,
       });
     } else {
       await createRecord({
-        collection: "books",
+        collection: "films",
         data: state,
       });
     }
@@ -69,33 +73,36 @@ export const BookEditor = (props: Props) => {
     setShow(false);
   };
 
-  const retrieveInfo = async () => {
-    const response = await fetch(
-      `https://openlibrary.org/isbn/${state.isbn}.json`
-    );
+  const searchMovie = async () => {
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${
+      import.meta.env.THE_MOVIE_DB_API_KEY
+    }&query=${encodeURIComponent(search)}`;
 
-    if (!response.ok) throw "Open Library API error";
+    const result = await fetch(url, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MGVhNGFjMDBlMTkxNDU5M2EzZTIwM2MwODI0NDIzZSIsIm5iZiI6MTc2Mzk4MTIyMi45Njg5OTk5LCJzdWIiOiI2OTI0MzdhNjZjMmJhY2YxMWQwYmFjOTciLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.lBUqeOkaaQHIo1TLTCcO_DPUaDz6qeNijRnBFM5PXFI`,
+      },
+    });
 
-    const result = await response.json();
-    const authorPath = result?.authors?.[0]?.key;
-
-    console.log(result);
-
-    let author = "";
-
-    if (authorPath) {
-      const authorResponse = await fetch(
-        `https://openlibrary.org${authorPath}.json`
-      );
-
-      const authorResult = await authorResponse?.json();
-      author = authorResult.personal_name;
+    if (!result.ok) {
+      throw new Error("Failed to fetch from TMDB");
     }
 
+    const data = await result.json();
+
+    const filmData = data.results.find(
+      (item) => item.original_language === "en"
+    );
+
+    console.log(filmData);
+
     updateState({
-      coverImageUrl: `https://covers.openlibrary.org/b/isbn/${state.isbn}-L.jpg`,
-      title: result.title,
-      author: author,
+      name: filmData.title,
+      coverImageUrl: `https://image.tmdb.org/t/p/original${filmData.poster_path}`,
+      backgroundImageUrl: `https://image.tmdb.org/t/p/original${filmData.backdrop_path}`,
+      rating: 0,
+      director: "",
     });
   };
 
@@ -103,15 +110,21 @@ export const BookEditor = (props: Props) => {
     <Modal
       show={show}
       setShow={setShow}
-      label="New Book"
+      label={film?.name || "New Film"}
+      onClose={() => {
+        setSearch("");
+        onClose();
+      }}
       contentClassName={styles.content}
       className={styles.container}
     >
+      {/* {!film && (
+        <> */}
       <div className={styles.row}>
         <InputText
-          value={state.isbn}
-          setValue={(isbn) => updateState({ isbn })}
-          label="ISBN"
+          value={search}
+          setValue={setSearch}
+          label="Search"
           layer={1}
           className={styles.inputText}
         />
@@ -120,24 +133,26 @@ export const BookEditor = (props: Props) => {
           type="secondary"
           icon="search"
           layer={2}
-          onClick={retrieveInfo}
+          onClick={searchMovie}
         />
       </div>
 
       <Divider layer={2} />
+      {/* </>
+      )} */}
 
       <InputText
-        label="Title"
-        value={state.title}
-        setValue={(title) => updateState({ title })}
+        label="Name"
+        value={state.name}
+        setValue={(name) => updateState({ name })}
         layer={1}
         className={styles.inputText}
       />
 
       <InputText
-        label="Author"
-        value={state.author}
-        setValue={(author) => updateState({ author })}
+        label="Director"
+        value={state.director}
+        setValue={(director) => updateState({ director })}
         layer={1}
         className={styles.inputText}
       />
@@ -151,6 +166,14 @@ export const BookEditor = (props: Props) => {
       />
 
       <InputText
+        label="Background URL"
+        value={state.backgroundImageUrl}
+        setValue={(backgroundImageUrl) => updateState({ backgroundImageUrl })}
+        layer={1}
+        className={styles.inputText}
+      />
+
+      <InputText
         label="Rating (1 to 5)"
         value={String(state.rating)}
         setValue={(rating) => updateState({ rating: Number(rating) })}
@@ -159,7 +182,7 @@ export const BookEditor = (props: Props) => {
       />
 
       <div className={styles.buttons}>
-        {book && (
+        {film && (
           <Button
             label="Delete"
             onClick={() => void handleDelete()}
@@ -170,7 +193,7 @@ export const BookEditor = (props: Props) => {
         )}
 
         <Button
-          label={book ? "Update" : "Add"}
+          label={film ? "Update" : "Add"}
           onClick={handleUpdate}
           type="primary"
           className={styles.createButton}

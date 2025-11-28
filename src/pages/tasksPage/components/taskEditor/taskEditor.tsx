@@ -19,7 +19,7 @@ interface Props {
   task?: Task;
 }
 
-const defaultTask = () => ({ dueDate: Date.now(), name: "", done: false });
+const defaultTask = () => ({ dueDate: 0, name: "", done: false });
 
 export const TaskEditor = (props: Props) => {
   const { show, setShow, task } = props;

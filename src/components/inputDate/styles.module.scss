@@ -1,14 +1,6 @@
 .container {
   cursor: pointer;
 
-  // * {
-  //   user-select: none;
-  // }
-
-  // .input {
-  //   user-select: none;
-  // }
-
   .calendarButton {
     position: absolute;
     right: vars.$spacing-secondary;
@@ -21,5 +13,11 @@
 
   ::-webkit-calendar-picker-indicator {
     display: none;
+  }
+
+  input {
+    &:disabled {
+      color: rgba(0, 0, 0, 0) !important;
+    }
   }
 }

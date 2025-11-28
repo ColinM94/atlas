@@ -3,3 +3,4 @@ pocketbase
 dist
 .firebase
 tsconfig.tsbuildinfo
+.env

@@ -11,12 +11,21 @@ interface Props {
   setShow: (show: boolean) => void;
   label?: string;
   children: Children;
+  onClose?: () => void;
   className?: string;
   contentClassName?: string;
 }
 
 export const Modal = (props: Props) => {
-  const { show, setShow, children, label, contentClassName, className } = props;
+  const {
+    show,
+    setShow,
+    children,
+    label,
+    onClose,
+    contentClassName,
+    className,
+  } = props;
 
   const dialogRef = React.useRef<HTMLDialogElement>(null);
 
@@ -41,7 +50,10 @@ export const Modal = (props: Props) => {
 
       <dialog
         ref={dialogRef}
-        onClose={() => setShow(false)}
+        onClose={() => {
+          onClose?.();
+          setShow(false);
+        }}
         className={classes(styles.container, !show && styles.hidden, className)}
       >
         <div className={styles.header}>
