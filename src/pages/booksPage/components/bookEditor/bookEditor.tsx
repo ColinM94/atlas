@@ -79,8 +79,6 @@ export const BookEditor = (props: Props) => {
     const result = await response.json();
     const authorPath = result?.authors?.[0]?.key;
 
-    console.log(result);
-
     let author = "";
 
     if (authorPath) {

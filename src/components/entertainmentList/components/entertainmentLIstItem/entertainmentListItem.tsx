@@ -1,19 +1,35 @@
 import { Button } from "components/button/button";
 import { EntertainmentItem } from "components/entertainmentList/types";
+import { classes } from "utils/classes";
 
 import styles from "./styles.module.scss";
 
 interface Props<T> {
+  size: "compact" | "full";
   item: EntertainmentItem;
   onEditClick: (item: EntertainmentItem) => void;
+  className?: string;
 }
 
 export const EntertainmentListItem = <T,>(props: Props<T>) => {
-  const { item, onEditClick } = props;
+  const { item, size, onEditClick, className } = props;
+
+  if (size === "compact") {
+    return (
+      <div
+        title={item.name}
+        className={classes(styles.containerCompact, className)}
+      >
+        <div className={styles.imageContainer}>
+          <img src={item.imageUrl} className={styles.image} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
-      <div className={styles.container}>
+      <div className={classes(styles.containerFull, className)}>
         {item.backgroundImageUrl && (
           <div
             style={{ backgroundImage: `url(${item.backgroundImageUrl})` }}

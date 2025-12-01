@@ -1,3 +1,16 @@
 .container {
   gap: vars.$spacing-primary;
 }
+
+.containerFull {
+  width: 100%;
+}
+
+.containerCompact {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  @media (min-width: vars.$breakpoint-medium) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}

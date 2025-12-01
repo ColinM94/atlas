@@ -95,8 +95,6 @@ export const FilmEditor = (props: Props) => {
       (item) => item.original_language === "en"
     );
 
-    console.log(filmData);
-
     updateState({
       name: filmData.title,
       coverImageUrl: `https://image.tmdb.org/t/p/original${filmData.poster_path}`,

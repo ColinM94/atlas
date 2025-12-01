@@ -4,6 +4,7 @@ import { MainLayout } from "layouts/mainLayout/mainLayout";
 import { subscribeToCollection } from "services/database/subscribeToCollection";
 import { EntertainmentList } from "components/entertainmentList/entertainmentList";
 import { EntertainmentItem } from "components/entertainmentList/types";
+import { useAppStore, useAppStoreSlice } from "stores/useAppStore/useAppStore";
 import { Film } from "types/films";
 
 import { FilmEditor } from "./components/filmEditor/filmEditor";
@@ -15,6 +16,8 @@ export const FilmsPage = () => {
   const [selectedFilm, setSelectedFilm] = React.useState<Film | undefined>(
     undefined
   );
+
+  const { filmsLayout } = useAppStoreSlice("filmsLayout");
 
   React.useEffect(() => {
     const unsubcribe = subscribeToCollection<Film>({
@@ -50,6 +53,14 @@ export const FilmsPage = () => {
   return (
     <MainLayout
       buttons={[
+        {
+          type: "secondary",
+          icon: filmsLayout === "compact" ? "dashboard" : "list",
+          onClick: () =>
+            useAppStore.setState({
+              filmsLayout: filmsLayout === "compact" ? "full" : "compact",
+            }),
+        },
         {
           type: "secondary",
           icon: "add",
