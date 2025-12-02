@@ -4,11 +4,11 @@ import { InputText } from "components/inputText/inputText";
 import { Modal } from "components/modal/modal";
 import { Button } from "components/button/button";
 import { Divider } from "components/divider/divider";
-import { Book } from "types/books";
 import { createRecord } from "services/database/createRecord";
 import { mergeReducer } from "utils/mergeReducer";
 import { updateRecord } from "services/database/updateRecord";
 import { deleteRecord } from "services/database/deleteRecord";
+import { Book } from "types/entertainment";
 
 import styles from "./styles.module.scss";
 

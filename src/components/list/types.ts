@@ -1,10 +1,10 @@
 export type ListItemData = {
   id: string;
-  imageUrl: string;
+  imageUrl?: string;
   backgroundImageUrl?: string;
   name: string;
-  subtitle: string;
-  rating: number;
+  subtitle?: string;
+  rating?: number;
   layout?: "compact" | "full";
 };
 

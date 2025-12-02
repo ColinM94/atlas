@@ -8,9 +8,9 @@ import { createRecord } from "services/database/createRecord";
 import { mergeReducer } from "utils/mergeReducer";
 import { updateRecord } from "services/database/updateRecord";
 import { deleteRecord } from "services/database/deleteRecord";
+import { Film } from "types/entertainment";
 
 import styles from "./styles.module.scss";
-import { Film } from "types/films";
 
 interface Props {
   film?: Film | undefined;
@@ -24,6 +24,7 @@ const defaultfilm = (): Film => ({
   name: "",
   director: "",
   coverImageUrl: "",
+  backgroundImageUrl: "",
   rating: 0,
 });
 
@@ -89,11 +90,20 @@ export const FilmEditor = (props: Props) => {
       throw new Error("Failed to fetch from TMDB");
     }
 
-    const data = await result.json();
+    type FilmData = {
+      title: string;
+      poster_path: string;
+      backdrop_path: string;
+      original_language: string;
+    };
+
+    const data: { results: FilmData[] } = await result.json();
 
     const filmData = data.results.find(
       (item) => item.original_language === "en"
     );
+
+    if (!filmData) return;
 
     updateState({
       name: filmData.title,
