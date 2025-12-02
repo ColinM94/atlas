@@ -41,6 +41,12 @@ export const BooksPage = () => {
     setShowBookEditor(true);
   };
 
+  const handleLayoutClick = () => {
+    useAppStore.setState({
+      booksLayout: booksLayout === "compact" ? "full" : "compact",
+    });
+  };
+
   const items: ListItemData[] = books.map((book) => ({
     id: book.id,
     name: book.title,
@@ -51,21 +57,9 @@ export const BooksPage = () => {
 
   return (
     <MainLayout
-      buttons={[
-        {
-          type: "secondary",
-          icon: booksLayout === "compact" ? "dashboard" : "list",
-          onClick: () =>
-            useAppStore.setState({
-              booksLayout: booksLayout === "compact" ? "full" : "compact",
-            }),
-        },
-        {
-          type: "secondary",
-          icon: "add",
-          onClick: handleAdd,
-        },
-      ]}
+      layout={booksLayout}
+      onLayoutClick={handleLayoutClick}
+      onAddClick={handleAdd}
       className={styles.container}
     >
       <List

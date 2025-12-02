@@ -41,6 +41,12 @@ export const FilmsPage = () => {
     setShowBookEditor(true);
   };
 
+  const handleLayoutClick = () => {
+    useAppStore.setState({
+      filmsLayout: filmsLayout === "compact" ? "full" : "compact",
+    });
+  };
+
   const items: ListItemData[] = films.map((film) => ({
     id: film.id,
     name: film.name,
@@ -52,21 +58,9 @@ export const FilmsPage = () => {
 
   return (
     <MainLayout
-      buttons={[
-        {
-          type: "secondary",
-          icon: filmsLayout === "compact" ? "dashboard" : "list",
-          onClick: () =>
-            useAppStore.setState({
-              filmsLayout: filmsLayout === "compact" ? "full" : "compact",
-            }),
-        },
-        {
-          type: "secondary",
-          icon: "add",
-          onClick: handleAdd,
-        },
-      ]}
+      layout={filmsLayout}
+      onLayoutClick={handleLayoutClick}
+      onAddClick={handleAdd}
       className={styles.container}
     >
       <List items={items} onEditClick={handleEditClick} layout={filmsLayout} />

@@ -1,27 +1,25 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { MainLayout } from "layouts/mainLayout/mainLayout";
-import { useAppStore, useAppStoreSlice } from "stores/useAppStore/useAppStore";
-import { List } from "components/list/list";
-import { ListItemData } from "components/list/types";
-import { Person } from "types/person";
+import { MainLayout } from 'layouts/mainLayout/mainLayout';
+import { useAppStore, useAppStoreSlice } from 'stores/useAppStore/useAppStore';
+import { List } from 'components/list/list';
+import { ListItemData } from 'components/list/types';
+import { Person } from 'types/person';
+import { subscribeToCollection } from 'services/database/subscribeToCollection';
 
-import styles from "./styles.module.scss";
-import { subscribeToCollection } from "services/database/subscribeToCollection";
-import { PersonEditor } from "./components/filmEditor/personEditor";
+import styles from './styles.module.scss';
+import { PersonEditor } from './components/filmEditor/personEditor';
 
 export const PeoplePage = () => {
-  const { peopleLayout } = useAppStoreSlice("peopleLayout");
+  const { peopleLayout } = useAppStoreSlice('peopleLayout');
 
   const [people, setPeople] = React.useState<Person[]>([]);
   const [showEditor, setShowEditor] = React.useState(false);
-  const [selectedPerson, setSelectedPerson] = React.useState<
-    Person | undefined
-  >(undefined);
+  const [selectedPerson, setSelectedPerson] = React.useState<Person | undefined>(undefined);
 
   React.useEffect(() => {
     const unsubcribe = subscribeToCollection<Person>({
-      collection: "people",
+      collection: 'people',
       onData: (data) => {
         setPeople(data.sort((a, b) => a.name.localeCompare(b.name)));
       },
@@ -41,6 +39,12 @@ export const PeoplePage = () => {
     setShowEditor(true);
   };
 
+  const handleLayoutClick = () => {
+    useAppStore.setState({
+      peopleLayout: peopleLayout === 'compact' ? 'full' : 'compact',
+    });
+  };
+
   const items: ListItemData[] = people.map((person) => ({
     id: person.id,
     name: person.name,
@@ -48,21 +52,9 @@ export const PeoplePage = () => {
 
   return (
     <MainLayout
-      buttons={[
-        {
-          type: "secondary",
-          icon: peopleLayout === "compact" ? "dashboard" : "list",
-          onClick: () =>
-            useAppStore.setState({
-              peopleLayout: peopleLayout === "compact" ? "full" : "compact",
-            }),
-        },
-        {
-          type: "secondary",
-          icon: "add",
-          onClick: handleAdd,
-        },
-      ]}
+      onLayoutClick={handleLayoutClick}
+      onAddClick={handleAdd}
+      layout={peopleLayout}
       className={styles.container}
     >
       <List items={items} layout={peopleLayout} onEditClick={handleEditClick} />

@@ -37,3 +37,5 @@ export type DatabaseRecord = {
 };
 
 export type Layer = 0 | 1 | 2 | 3;
+
+export type Layout = "compact" | "full";
