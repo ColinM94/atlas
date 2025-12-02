@@ -77,4 +77,14 @@
       background-color: grey;
     }
   }
+
+  .infoRating {
+    position: absolute;
+    top: vars.$spacing-tertiary;
+    right: vars.$spacing-tertiary;
+    background-color: vars.$color-background-translucent;
+    padding-block: vars.$spacing-tertiary / 2;
+    padding-inline: vars.$spacing-secondary;
+    border-radius: vars.$roundness;
+  }
 }

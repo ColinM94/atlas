@@ -27,6 +27,10 @@ export const EntertainmentListItem = <T,>(props: Props<T>) => {
         <div className={styles.imageContainer}>
           <img src={item.imageUrl} className={styles.image} />
         </div>
+
+        {Boolean(item.rating) && (
+          <div className={styles.infoRating}>{item.rating} / 5</div>
+        )}
       </div>
     );
   }
