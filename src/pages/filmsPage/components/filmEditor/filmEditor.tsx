@@ -9,6 +9,7 @@ import { mergeReducer } from "utils/mergeReducer";
 import { updateRecord } from "services/database/updateRecord";
 import { deleteRecord } from "services/database/deleteRecord";
 import { Film } from "types/entertainment";
+import { defaultfilm } from "constants/defaults";
 
 import styles from "./styles.module.scss";
 
@@ -18,15 +19,6 @@ interface Props {
   setShow: (show: boolean) => void;
   onClose: () => void;
 }
-
-const defaultfilm = (): Film => ({
-  id: "",
-  name: "",
-  director: "",
-  coverImageUrl: "",
-  backgroundImageUrl: "",
-  rating: 0,
-});
 
 export const FilmEditor = (props: Props) => {
   const { film, show, setShow, onClose } = props;

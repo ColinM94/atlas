@@ -10,6 +10,7 @@ import { Task } from "types/task";
 import { createRecord } from "services/database/createRecord";
 import { deleteRecord } from "services/database/deleteRecord";
 import { updateRecord } from "services/database/updateRecord";
+import { defaultTask } from "constants/defaults";
 
 import styles from "./styles.module.scss";
 
@@ -18,8 +19,6 @@ interface Props {
   setShow: (show: boolean) => void;
   task?: Task;
 }
-
-const defaultTask = () => ({ dueDate: 0, name: "", done: false });
 
 export const TaskEditor = (props: Props) => {
   const { show, setShow, task } = props;

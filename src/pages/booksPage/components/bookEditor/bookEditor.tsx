@@ -9,6 +9,7 @@ import { mergeReducer } from "utils/mergeReducer";
 import { updateRecord } from "services/database/updateRecord";
 import { deleteRecord } from "services/database/deleteRecord";
 import { Book } from "types/entertainment";
+import { defaultBook } from "constants/defaults";
 
 import styles from "./styles.module.scss";
 
@@ -17,15 +18,6 @@ interface Props {
   show: boolean;
   setShow: (show: boolean) => void;
 }
-
-const defaultBook = (): Book => ({
-  id: "",
-  isbn: "",
-  title: "",
-  author: "",
-  coverImageUrl: "",
-  rating: 0,
-});
 
 export const BookEditor = (props: Props) => {
   const { book, show, setShow } = props;
