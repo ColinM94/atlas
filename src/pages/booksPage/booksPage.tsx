@@ -5,6 +5,7 @@ import { Book } from "types/books";
 import { subscribeToCollection } from "services/database/subscribeToCollection";
 import { EntertainmentList } from "components/entertainmentList/entertainmentList";
 import { EntertainmentItem } from "components/entertainmentList/types";
+import { useAppStore, useAppStoreSlice } from "stores/useAppStore/useAppStore";
 
 import { BookEditor } from "./components/bookEditor/bookEditor";
 import styles from "./styles.module.scss";
@@ -15,6 +16,8 @@ export const BooksPage = () => {
   const [selectedBook, setSelectedBook] = React.useState<Book | undefined>(
     undefined
   );
+
+  const { booksLayout } = useAppStoreSlice("booksLayout");
 
   React.useEffect(() => {
     const unsubcribe = subscribeToCollection<Book>({
@@ -51,13 +54,26 @@ export const BooksPage = () => {
       buttons={[
         {
           type: "secondary",
+          icon: booksLayout === "compact" ? "dashboard" : "list",
+          onClick: () =>
+            useAppStore.setState({
+              booksLayout: booksLayout === "compact" ? "full" : "compact",
+            }),
+        },
+        {
+          type: "secondary",
           icon: "add",
           onClick: handleAdd,
         },
       ]}
       className={styles.container}
     >
-      <EntertainmentList items={items} onEditClick={handleEditClick} />
+      <EntertainmentList
+        items={items}
+        onEditClick={handleEditClick}
+        layout={booksLayout}
+        aspectRatio={0.7}
+      />
 
       <BookEditor
         show={showBookEditor}

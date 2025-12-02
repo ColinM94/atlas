@@ -69,7 +69,11 @@ export const FilmsPage = () => {
       ]}
       className={styles.container}
     >
-      <EntertainmentList items={items} onEditClick={handleEditClick} />
+      <EntertainmentList
+        items={items}
+        onEditClick={handleEditClick}
+        layout={filmsLayout}
+      />
 
       <FilmEditor
         show={showBookEditor}
