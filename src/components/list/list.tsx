@@ -1,6 +1,6 @@
 import { classes } from "utils/classes";
 
-import { ListItem } from "./components/entertainmentLIstItem/listItem";
+import { ListItem } from "./components/listItem/listItem";
 import styles from "./styles.module.scss";
 import { Props } from "./types";
 

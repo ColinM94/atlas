@@ -1,26 +1,30 @@
 .container {
-  flex-direction: column;
-  gap: vars.$spacing-primary;
-  padding: vars.$spacing-primary;
+  .sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: vars.$spacing-primary;
 
-  .section {
-    flex-direction: row;
-    background-color: vars.$color-surface;
-    padding: vars.$spacing-primary;
-    gap: vars.$spacing-secondary;
-    border-radius: vars.$roundness;
-    cursor: pointer;
-    align-items: center;
-
-    &:hover {
-      background-color: vars.$color-surface2;
-    }
-
-    .sectionIcon {
+    .section {
+      background-color: vars.$color-surface;
+      padding-block: vars.$spacing-primary * 2;
+      justify-content: center;
+      align-items: center;
+      gap: vars.$spacing-primary;
       color: vars.$color-text-secondary;
-    }
+      border-radius: vars.$roundness;
+      cursor: pointer;
 
-    .sectionName {
+      &:hover {
+        background-color: vars.$color-surface2;
+      }
+
+      .sectionIcon {
+        color: vars.$color-text-secondary;
+        font-size: 42px;
+      }
+
+      .sectionName {
+      }
     }
   }
 }

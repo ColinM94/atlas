@@ -21,8 +21,8 @@ export const MainLayout = (props: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <div className={styles.header}>
-          {location !== "/" && (
+        {location !== "/" && (
+          <div className={styles.header}>
             <Button
               icon="arrow_back"
               type="secondary"
@@ -30,17 +30,17 @@ export const MainLayout = (props: Props) => {
               layer={0}
               className={styles.backButton}
             />
-          )}
 
-          <div className={styles.buttons}>
-            {buttons?.map((button) => {
-              if (button.type === "secondary")
-                return <Button {...button} layer={0} />;
+            <div className={styles.buttons}>
+              {buttons?.map((button) => {
+                if (button.type === "secondary")
+                  return <Button {...button} layer={0} />;
 
-              return <Button {...button} />;
-            })}
+                return <Button {...button} />;
+              })}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className={classes(styles.content, className)}>{children}</div>
       </div>

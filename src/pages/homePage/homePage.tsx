@@ -27,7 +27,9 @@ export const HomePage = () => {
 
   return (
     <MainLayout className={styles.container}>
-      {Object.values(sections).map((section) => renderSection(section))}
+      <div className={styles.sections}>
+        {Object.values(sections).map((section) => renderSection(section))}
+      </div>
     </MainLayout>
   );
 };

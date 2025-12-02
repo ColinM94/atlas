@@ -11,6 +11,11 @@ export const sections: Record<string, Section> = {
     icon: "autorenew",
     name: "Habit Tracker",
   },
+  people: {
+    id: "people",
+    icon: "group",
+    name: "People",
+  },
   books: {
     id: "books",
     icon: "book_2",
@@ -25,10 +30,5 @@ export const sections: Record<string, Section> = {
     id: "tvSeries",
     icon: "tv",
     name: "TV Series",
-  },
-  people: {
-    id: "people",
-    icon: "group",
-    name: "People",
   },
 } as const;
