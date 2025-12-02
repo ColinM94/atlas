@@ -19,7 +19,9 @@ export const HomePage = () => {
         key={section.id}
         className={styles.section}
       >
-        <Icon icon={section.icon} className={styles.sectionIcon} />
+        <div className={styles.iconContainer}>
+          <Icon icon={section.icon} className={styles.sectionIcon} />
+        </div>
         <div className={styles.sectionName}>{section.name}</div>
       </div>
     );
