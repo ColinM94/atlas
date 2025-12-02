@@ -3,36 +3,5 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: vars.$spacing-primary;
-
-    .section {
-      background-color: vars.$color-surface;
-      padding-block: vars.$spacing-primary * 2;
-      justify-content: center;
-      align-items: center;
-      gap: vars.$spacing-primary;
-      color: vars.$color-text-secondary;
-      border-radius: vars.$roundness;
-      cursor: pointer;
-
-      &:hover {
-        background-color: vars.$color-surface2;
-      }
-
-      .iconContainer {
-        aspect-ratio: 1;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        height: 50px;
-
-        .sectionIcon {
-          color: vars.$color-text-secondary;
-          font-size: 42px;
-        }
-      }
-
-      .sectionName {
-      }
-    }
   }
 }
