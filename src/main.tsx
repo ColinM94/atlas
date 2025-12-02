@@ -13,6 +13,7 @@ import { BooksPage } from "pages/booksPage/booksPage";
 import "./styles/global.scss";
 import "./styles/theme.scss";
 import { FilmsPage } from "pages/filmsPage/filmsPage";
+import { PeoplePage } from "pages/peoplePage/peoplePage";
 
 export const App = () => {
   return (
@@ -40,6 +41,10 @@ export const App = () => {
 
         <Route path="/films">
           <FilmsPage />
+        </Route>
+
+        <Route path="/people">
+          <PeoplePage />
         </Route>
 
         <Route path="*">

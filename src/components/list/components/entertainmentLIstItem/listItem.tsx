@@ -1,20 +1,20 @@
 import { CSSProperties } from "react";
 
 import { Button } from "components/button/button";
-import { EntertainmentItem } from "components/entertainmentList/types";
+import { ListItemData } from "components/list/types";
 import { classes } from "utils/classes";
 
 import styles from "./styles.module.scss";
 
 interface Props<T> {
   size: "compact" | "full";
-  item: EntertainmentItem;
+  item: ListItemData;
   style?: CSSProperties;
-  onEditClick: (item: EntertainmentItem) => void;
+  onEditClick: (item: ListItemData) => void;
   className?: string;
 }
 
-export const EntertainmentListItem = <T,>(props: Props<T>) => {
+export const ListItem = <T,>(props: Props<T>) => {
   const { item, size, onEditClick, style, className } = props;
 
   if (size === "compact") {

@@ -1,11 +1,11 @@
 import * as React from "react";
 
 import { MainLayout } from "layouts/mainLayout/mainLayout";
-import { Book } from "types/books";
 import { subscribeToCollection } from "services/database/subscribeToCollection";
-import { EntertainmentList } from "components/entertainmentList/entertainmentList";
-import { EntertainmentItem } from "components/entertainmentList/types";
+import { List } from "components/list/list";
 import { useAppStore, useAppStoreSlice } from "stores/useAppStore/useAppStore";
+import { Book } from "types/entertainment";
+import { ListItemData } from "components/list/types";
 
 import { BookEditor } from "./components/bookEditor/bookEditor";
 import styles from "./styles.module.scss";
@@ -36,12 +36,12 @@ export const BooksPage = () => {
     setShowBookEditor(true);
   };
 
-  const handleEditClick = (item: EntertainmentItem) => {
-    setSelectedBook(books.find((item) => item.id === item.id));
+  const handleEditClick = (item: ListItemData) => {
+    setSelectedBook(books.find((book) => book.id === item.id));
     setShowBookEditor(true);
   };
 
-  const items: EntertainmentItem[] = books.map((book) => ({
+  const items: ListItemData[] = books.map((book) => ({
     id: book.id,
     name: book.title,
     subtitle: book.author,
@@ -68,7 +68,7 @@ export const BooksPage = () => {
       ]}
       className={styles.container}
     >
-      <EntertainmentList
+      <List
         items={items}
         onEditClick={handleEditClick}
         layout={booksLayout}

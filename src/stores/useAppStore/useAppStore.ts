@@ -8,6 +8,7 @@ type AppStoreState = {
   darkMode: boolean;
   filmsLayout: "full" | "compact";
   booksLayout: "full" | "compact";
+  peopleLayout: "full" | "compact";
 };
 
 export const useAppStoreSlice = <K extends keyof AppStoreState>(
@@ -30,6 +31,7 @@ export const useAppStore = create<AppStoreState>()(
       darkMode: false,
       filmsLayout: "full",
       booksLayout: "full",
+      peopleLayout: "full",
     }),
     {
       name: "app",

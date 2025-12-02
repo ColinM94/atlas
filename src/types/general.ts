@@ -27,7 +27,8 @@ export type Collection =
   | "habits"
   | "habitsData"
   | "books"
-  | "films";
+  | "films"
+  | "people";
 
 export type FormSubmitEvent = React.FormEvent<HTMLFormElement>;
 

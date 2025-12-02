@@ -1,4 +1,4 @@
-export type EntertainmentItem = {
+export type ListItemData = {
   id: string;
   imageUrl: string;
   backgroundImageUrl?: string;
@@ -9,8 +9,8 @@ export type EntertainmentItem = {
 };
 
 export interface Props {
-  items: EntertainmentItem[];
-  onEditClick: (item: EntertainmentItem) => void;
+  items: ListItemData[];
+  onEditClick: (item: ListItemData) => void;
   layout?: "compact" | "full";
   aspectRatio?: number;
 }

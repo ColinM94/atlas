@@ -2,10 +2,10 @@ import * as React from "react";
 
 import { MainLayout } from "layouts/mainLayout/mainLayout";
 import { subscribeToCollection } from "services/database/subscribeToCollection";
-import { EntertainmentList } from "components/entertainmentList/entertainmentList";
-import { EntertainmentItem } from "components/entertainmentList/types";
 import { useAppStore, useAppStoreSlice } from "stores/useAppStore/useAppStore";
-import { Film } from "types/films";
+import { Film } from "types/entertainment";
+import { ListItemData } from "components/list/types";
+import { List } from "components/list/list";
 
 import { FilmEditor } from "./components/filmEditor/filmEditor";
 import styles from "./styles.module.scss";
@@ -36,12 +36,12 @@ export const FilmsPage = () => {
     setShowBookEditor(true);
   };
 
-  const handleEditClick = (item: EntertainmentItem) => {
+  const handleEditClick = (item: ListItemData) => {
     setSelectedFilm(films.find((film) => film.id === item.id));
     setShowBookEditor(true);
   };
 
-  const items: EntertainmentItem[] = films.map((film) => ({
+  const items: ListItemData[] = films.map((film) => ({
     id: film.id,
     name: film.name,
     subtitle: film.director,
@@ -69,11 +69,7 @@ export const FilmsPage = () => {
       ]}
       className={styles.container}
     >
-      <EntertainmentList
-        items={items}
-        onEditClick={handleEditClick}
-        layout={filmsLayout}
-      />
+      <List items={items} onEditClick={handleEditClick} layout={filmsLayout} />
 
       <FilmEditor
         show={showBookEditor}

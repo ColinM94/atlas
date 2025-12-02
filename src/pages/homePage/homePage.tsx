@@ -3,9 +3,9 @@ import { useLocation } from "wouter";
 import { Section } from "types/section";
 import { sections } from "constants/sections";
 import { Icon } from "components/icon/icon";
+import { MainLayout } from "layouts/mainLayout/mainLayout";
 
 import styles from "./styles.module.scss";
-import { MainLayout } from "layouts/mainLayout/mainLayout";
 
 export const HomePage = () => {
   const [, navigate] = useLocation();

@@ -26,4 +26,9 @@ export const sections: Record<string, Section> = {
     icon: "tv",
     name: "TV Series",
   },
+  people: {
+    id: "people",
+    icon: "group",
+    name: "People",
+  },
 } as const;

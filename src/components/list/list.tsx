@@ -1,10 +1,10 @@
 import { classes } from "utils/classes";
 
-import { EntertainmentListItem } from "./components/entertainmentLIstItem/entertainmentListItem";
+import { ListItem } from "./components/entertainmentLIstItem/listItem";
 import styles from "./styles.module.scss";
 import { Props } from "./types";
 
-export const EntertainmentList = (props: Props) => {
+export const List = (props: Props) => {
   const { items, layout = "full", aspectRatio, onEditClick } = props;
 
   return (
@@ -16,7 +16,7 @@ export const EntertainmentList = (props: Props) => {
       )}
     >
       {items.map((item) => (
-        <EntertainmentListItem
+        <ListItem
           item={item}
           onEditClick={onEditClick}
           size={layout}
