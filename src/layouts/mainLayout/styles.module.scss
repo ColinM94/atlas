@@ -2,6 +2,10 @@
   width: 100%;
   height: 100%;
   align-items: center;
+  overflow: auto;
+  scrollbar-width: thin !important;
+  scrollbar-color: vars.$color-outline vars.$color-surface2 !important;
+  scrollbar-arrow-color: vars.$color-background !important;
 
   .innerContainer {
     height: 100%;

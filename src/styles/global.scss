@@ -1,24 +1,10 @@
 @font-face {
-  font-family: "Fredoka";
-  src: url("assets/fonts/Fredoka-Variable.woff2");
+  font-family: 'Fredoka';
+  src: url('assets/fonts/Fredoka-Variable.woff2');
   font-display: swap;
 }
 
-*
-  :not(
-    head,
-    script,
-    video,
-    table,
-    tr,
-    th,
-    td,
-    thead,
-    tbody,
-    tfoot,
-    footer,
-    footer *
-  ) {
+* :not(head, script, video, table, tr, th, td, thead, tbody, tfoot, footer, footer *) {
   padding: 0;
   margin: 0;
   display: flex;
@@ -51,25 +37,25 @@ body {
   font-size: 62.5%;
   scroll-behavior: smooth !important;
 
-  ::-webkit-scrollbar {
-    border-radius: vars.$roundness;
-    width: 12px;
-    height: 12px;
-  }
+  // ::-webkit-scrollbar {
+  //   border-radius: vars.$roundness;
+  //   width: 12px;
+  //   height: 12px;
+  // }
 
-  ::-webkit-scrollbar-track {
-    border-radius: vars.$roundness;
-  }
+  // ::-webkit-scrollbar-track {
+  //   border-radius: vars.$roundness;
+  // }
 
-  ::-webkit-scrollbar-thumb {
-    background: vars.$color-surface;
-    border-radius: vars.$roundness;
-    border: 1px solid vars.$color-surface3;
-  }
+  // ::-webkit-scrollbar-thumb {
+  //   background: vars.$color-surface;
+  //   border-radius: vars.$roundness;
+  //   border: 1px solid vars.$color-surface3;
+  // }
 
-  ::-webkit-scrollbar-corner {
-    background: transparent;
-  }
+  // ::-webkit-scrollbar-corner {
+  //   background: transparent;
+  // }
 }
 
 img,
@@ -80,7 +66,7 @@ svg {
 }
 
 body {
-  font-family: "Fredoka", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Fredoka', Calibri, 'Trebuchet MS', sans-serif;
   color: vars.$color-text-primary;
   background-color: vars.$color-background;
   line-height: vars.$line-height;

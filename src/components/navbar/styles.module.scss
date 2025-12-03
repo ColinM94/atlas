@@ -1,0 +1,31 @@
+.container {
+  flex-direction: row;
+  background-color: vars.$color-surface;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  // position: fixed;
+  // bottom: 0;
+
+  .button {
+    cursor: pointer;
+    padding: vars.$spacing-primary;
+    justify-content: center;
+    align-items: center;
+    color: vars.$color-text-secondary;
+    flex: 1;
+    max-width: 100px;
+
+    &:hover {
+      background-color: vars.$color-surface2;
+    }
+
+    .buttonIcon {
+      font-size: vars.$icon-size-large;
+    }
+  }
+
+  .buttonActive {
+    background-color: vars.$color-surface3;
+  }
+}

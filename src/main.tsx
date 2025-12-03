@@ -1,51 +1,25 @@
-import * as React from "react";
-import ReactDOM from "react-dom/client";
-import { Route, Switch } from "wouter";
-import "material-symbols/rounded.css";
+import * as React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Route, Switch } from 'wouter';
+import 'material-symbols/rounded.css';
 
-import { HomePage } from "pages/homePage/homePage";
-import { HabitsPage } from "pages/habitsPage/habitsPage";
-import { TasksPage } from "pages/tasksPage/tasksPage";
-import { NotFoundPage } from "pages/notFoundPage/notFoundPage";
-import { TaskPage } from "pages/taskPage/taskPage";
-import { BooksPage } from "pages/booksPage/booksPage";
+import { NotFoundPage } from 'pages/notFoundPage/notFoundPage';
+import { sections } from 'constants/sections';
 
-import "./styles/global.scss";
-import "./styles/theme.scss";
-import { FilmsPage } from "pages/filmsPage/filmsPage";
-import { PeoplePage } from "pages/peoplePage/peoplePage";
+import './styles/global.scss';
 
 export const App = () => {
   return (
     <>
       <Switch>
-        <Route path="/">
-          <HomePage />
-        </Route>
-
-        <Route path="/habits">
-          <HabitsPage />
-        </Route>
-
-        <Route path="/tasks">
-          <TasksPage />
-        </Route>
-
-        <Route path="/tasks/:taskId">
-          <TaskPage />
-        </Route>
-
-        <Route path="/books">
-          <BooksPage />
-        </Route>
-
-        <Route path="/films">
-          <FilmsPage />
-        </Route>
-
-        <Route path="/people">
-          <PeoplePage />
-        </Route>
+        {Object.values(sections).map((section) => {
+          const Component = section.component;
+          return (
+            <Route path={`/${section.id}`}>
+              <Component />
+            </Route>
+          );
+        })}
 
         <Route path="*">
           <NotFoundPage />
@@ -55,7 +29,7 @@ export const App = () => {
   );
 };
 
-const rootElement = document.getElementById("root")!;
+const rootElement = document.getElementById('root')!;
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(

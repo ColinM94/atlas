@@ -6,9 +6,9 @@ import { List } from 'components/list/list';
 import { ListItemData } from 'components/list/types';
 import { Person } from 'types/person';
 import { subscribeToCollection } from 'services/database/subscribeToCollection';
+import { PersonEditor } from './components/filmEditor/personEditor';
 
 import styles from './styles.module.scss';
-import { PersonEditor } from './components/filmEditor/personEditor';
 
 export const PeoplePage = () => {
   const { peopleLayout } = useAppStoreSlice('peopleLayout');
