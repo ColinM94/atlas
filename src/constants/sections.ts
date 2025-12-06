@@ -40,5 +40,6 @@ export const sections: Record<string, Section> = {
     id: 'tvSeries',
     icon: 'tv',
     name: 'TV Series',
+    component: FilmsPage,
   },
 } as const;

@@ -14,6 +14,7 @@ export const App = () => {
       <Switch>
         {Object.values(sections).map((section) => {
           const Component = section.component;
+
           return (
             <Route path={`/${section.id}`}>
               <Component />

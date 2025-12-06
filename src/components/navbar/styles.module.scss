@@ -4,8 +4,7 @@
   width: 100%;
   justify-content: center;
   align-items: center;
-  // position: fixed;
-  // bottom: 0;
+  border-top: 1px solid vars.$color-surface2;
 
   .button {
     cursor: pointer;

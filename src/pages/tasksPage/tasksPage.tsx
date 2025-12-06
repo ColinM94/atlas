@@ -1,14 +1,14 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { subscribeToCollection } from "services/database/subscribeToCollection";
-import { Task } from "types/task";
-import { MainLayout } from "layouts/mainLayout/mainLayout";
-import { classes } from "utils/classes";
-import { ProgressBar } from "components/progressBar/progressBar";
+import { subscribeToCollection } from 'services/database/subscribeToCollection';
+import { Task } from 'types/task';
+import { MainLayout } from 'layouts/mainLayout/mainLayout';
+import { classes } from 'utils/classes';
+import { ProgressBar } from 'components/progressBar/progressBar';
 
-import { TaskEditor } from "./components/taskEditor/taskEditor";
-import { TaskItem } from "./components/taskItem/taskItem";
-import styles from "./styles.module.scss";
+import { TaskEditor } from './components/taskEditor/taskEditor';
+import { TaskItem } from './components/taskItem/taskItem';
+import styles from './styles.module.scss';
 
 export const TasksPage = () => {
   const [tasks, setTasks] = React.useState<Task[]>([]);
@@ -16,7 +16,7 @@ export const TasksPage = () => {
 
   React.useEffect(() => {
     const unsubcribe = subscribeToCollection<Task>({
-      collection: "tasks",
+      collection: 'tasks',
       onData: setTasks,
     });
 
@@ -29,18 +29,15 @@ export const TasksPage = () => {
     <MainLayout
       buttons={[
         {
-          icon: "add",
+          icon: 'add',
           onClick: () => setShowCreator(true),
-          type: "secondary",
+          type: 'secondary',
           layer: 1,
         },
       ]}
       className={styles.container}
     >
-      <ProgressBar
-        progress={tasks.filter((task) => task.done).length}
-        maxProgress={tasks.length}
-      />
+      <ProgressBar progress={tasks.filter((task) => task.done).length} maxProgress={tasks.length} />
 
       <div
         className={classes(

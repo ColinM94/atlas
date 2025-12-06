@@ -1,7 +1,0 @@
-.container {
-  .sections {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: vars.$spacing-primary;
-  }
-}
