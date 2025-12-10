@@ -1,29 +1,29 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { MainLayout } from "layouts/mainLayout/mainLayout";
-import { subscribeToCollection } from "services/database/subscribeToCollection";
-import { List } from "components/list/list";
-import { useAppStore, useAppStoreSlice } from "stores/useAppStore/useAppStore";
-import { Book } from "types/entertainment";
-import { ListItemData } from "components/list/types";
+import { MainLayout } from 'layouts/mainLayout/mainLayout';
+import { subscribeToCollection } from 'services/database/subscribeToCollection';
+import { List } from 'components/list/list';
+import { useAppStore, useAppStoreSlice } from 'stores/useAppStore/useAppStore';
+import { Book } from 'types/entertainment';
+import { ListItemData } from 'components/list/types';
 
-import { BookEditor } from "./components/bookEditor/bookEditor";
-import styles from "./styles.module.scss";
+import { BookEditor } from './components/bookEditor/bookEditor';
+import styles from './styles.module.scss';
 
 export const BooksPage = () => {
   const [books, setBooks] = React.useState<Book[]>([]);
   const [showBookEditor, setShowBookEditor] = React.useState(false);
-  const [selectedBook, setSelectedBook] = React.useState<Book | undefined>(
-    undefined
-  );
+  const [selectedBook, setSelectedBook] = React.useState<Book | undefined>(undefined);
 
-  const { booksLayout } = useAppStoreSlice("booksLayout");
+  const { booksLayout } = useAppStoreSlice('booksLayout');
 
   React.useEffect(() => {
     const unsubcribe = subscribeToCollection<Book>({
-      collection: "books",
+      collection: 'books',
       onData: (data) => {
-        setBooks(data.sort((a, b) => a.title.localeCompare(b.title)));
+        setBooks(
+          data.sort((a, b) => a.title.localeCompare(b.title)).sort((a, b) => b.rating - a.rating)
+        );
       },
     });
 
@@ -43,7 +43,7 @@ export const BooksPage = () => {
 
   const handleLayoutClick = () => {
     useAppStore.setState({
-      booksLayout: booksLayout === "compact" ? "full" : "compact",
+      booksLayout: booksLayout === 'compact' ? 'full' : 'compact',
     });
   };
 
@@ -62,18 +62,9 @@ export const BooksPage = () => {
       onAddClick={handleAdd}
       className={styles.container}
     >
-      <List
-        items={items}
-        onEditClick={handleEditClick}
-        layout={booksLayout}
-        aspectRatio={0.7}
-      />
+      <List items={items} onEditClick={handleEditClick} layout={booksLayout} aspectRatio={0.65} />
 
-      <BookEditor
-        show={showBookEditor}
-        setShow={setShowBookEditor}
-        book={selectedBook}
-      />
+      <BookEditor show={showBookEditor} setShow={setShowBookEditor} book={selectedBook} />
     </MainLayout>
   );
 };

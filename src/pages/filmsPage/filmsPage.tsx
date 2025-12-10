@@ -1,27 +1,25 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { MainLayout } from "layouts/mainLayout/mainLayout";
-import { subscribeToCollection } from "services/database/subscribeToCollection";
-import { useAppStore, useAppStoreSlice } from "stores/useAppStore/useAppStore";
-import { Film } from "types/entertainment";
-import { ListItemData } from "components/list/types";
-import { List } from "components/list/list";
+import { MainLayout } from 'layouts/mainLayout/mainLayout';
+import { subscribeToCollection } from 'services/database/subscribeToCollection';
+import { useAppStore, useAppStoreSlice } from 'stores/useAppStore/useAppStore';
+import { Film } from 'types/entertainment';
+import { ListItemData } from 'components/list/types';
+import { List } from 'components/list/list';
 
-import { FilmEditor } from "./components/filmEditor/filmEditor";
-import styles from "./styles.module.scss";
+import { FilmEditor } from './components/filmEditor/filmEditor';
+import styles from './styles.module.scss';
 
 export const FilmsPage = () => {
   const [films, setFilms] = React.useState<Film[]>([]);
   const [showBookEditor, setShowBookEditor] = React.useState(false);
-  const [selectedFilm, setSelectedFilm] = React.useState<Film | undefined>(
-    undefined
-  );
+  const [selectedFilm, setSelectedFilm] = React.useState<Film | undefined>(undefined);
 
-  const { filmsLayout } = useAppStoreSlice("filmsLayout");
+  const { filmsLayout } = useAppStoreSlice('filmsLayout');
 
   React.useEffect(() => {
     const unsubcribe = subscribeToCollection<Film>({
-      collection: "films",
+      collection: 'films',
       onData: (data) => {
         setFilms(data.sort((a, b) => a.name.localeCompare(b.name)));
       },
@@ -43,7 +41,7 @@ export const FilmsPage = () => {
 
   const handleLayoutClick = () => {
     useAppStore.setState({
-      filmsLayout: filmsLayout === "compact" ? "full" : "compact",
+      filmsLayout: filmsLayout === 'compact' ? 'full' : 'compact',
     });
   };
 
@@ -63,7 +61,7 @@ export const FilmsPage = () => {
       onAddClick={handleAdd}
       className={styles.container}
     >
-      <List items={items} onEditClick={handleEditClick} layout={filmsLayout} />
+      <List items={items} onEditClick={handleEditClick} layout={filmsLayout} aspectRatio={0.65} />
 
       <FilmEditor
         show={showBookEditor}

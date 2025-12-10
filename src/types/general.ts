@@ -7,11 +7,9 @@ export type RequestResponseFail = {
   success: false;
 };
 
-export type RequestResponse<T> = Promise<
-  RequestResponseSuccess<T> | RequestResponseFail
->;
+export type RequestResponse<T> = Promise<RequestResponseSuccess<T> | RequestResponseFail>;
 
-export type DatabaseCollection = "notes";
+export type DatabaseCollection = 'notes';
 
 export type DocumentMetadata = {
   id: string;
@@ -21,14 +19,15 @@ export type DocumentMetadata = {
 export type Children = React.ReactNode | React.ReactNode[];
 
 export type Collection =
-  | "notes"
-  | "users"
-  | "tasks"
-  | "habits"
-  | "habitsData"
-  | "books"
-  | "films"
-  | "people";
+  | 'notes'
+  | 'users'
+  | 'tasks'
+  | 'habits'
+  | 'habitsData'
+  | 'books'
+  | 'films'
+  | 'people'
+  | 'shopping';
 
 export type FormSubmitEvent = React.FormEvent<HTMLFormElement>;
 
@@ -38,4 +37,4 @@ export type DatabaseRecord = {
 
 export type Layer = 0 | 1 | 2 | 3;
 
-export type Layout = "compact" | "full";
+export type Layout = 'compact' | 'full';

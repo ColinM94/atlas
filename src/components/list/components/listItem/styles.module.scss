@@ -53,6 +53,8 @@
 
 .containerFull {
   @extend .container;
+
+  cursor: pointer;
 }
 
 .containerCompact {
@@ -67,14 +69,12 @@
   }
 
   .imageContainer {
-    height: 100%;
-    width: 100%;
-
     .image {
+      background-color: grey;
+      object-fit: fill;
       height: 100%;
       width: 100%;
-      object-fit: cover;
-      background-color: grey;
+      position: absolute;
     }
   }
 
@@ -86,5 +86,12 @@
     padding-block: calc(vars.$spacing-tertiary / 2);
     padding-inline: vars.$spacing-secondary;
     border-radius: vars.$roundness;
+  }
+
+  .name {
+    background-color: vars.$color-background-translucent;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
   }
 }

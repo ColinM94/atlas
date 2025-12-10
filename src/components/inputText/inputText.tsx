@@ -1,11 +1,11 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Icon } from "components/icon/icon";
-import { FormField } from "components/formField/formField";
-import { classes } from "utils/classes";
+import { Icon } from 'components/icon/icon';
+import { FormField } from 'components/formField/formField';
+import { classes } from 'utils/classes';
 
-import styles from "./styles.module.scss";
-import { InputTextProps } from "./types";
+import styles from './styles.module.scss';
+import { InputTextProps } from './types';
 
 export const InputText = <T extends string>(props: InputTextProps<T>) => {
   const {
@@ -25,10 +25,11 @@ export const InputText = <T extends string>(props: InputTextProps<T>) => {
     characterLimit,
     showDisabledStyle = true,
     layer = 1,
+    ref,
     ...rest
   } = props;
 
-  const inputField = React.useRef<HTMLInputElement | null>(null);
+  const inputField = ref || React.useRef<HTMLInputElement | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let temp = e.target.value;
@@ -41,7 +42,7 @@ export const InputText = <T extends string>(props: InputTextProps<T>) => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "ArrowDown" || e.key === "ArrowUp") e.preventDefault();
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') e.preventDefault();
     else onKeyDown?.(e);
   };
 
@@ -59,7 +60,7 @@ export const InputText = <T extends string>(props: InputTextProps<T>) => {
   return (
     <FormField className={classes(className, styles.container)} {...rest}>
       <input
-        type={type || "text"}
+        type={type || 'text'}
         value={value}
         onChange={handleChange}
         className={classes(
@@ -72,7 +73,7 @@ export const InputText = <T extends string>(props: InputTextProps<T>) => {
         disabled={disabled}
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
-        ref={inputField}
+        ref={ref || inputField}
       />
 
       {rightText && <div className={styles.rightText}>{rightText}</div>}
@@ -80,10 +81,7 @@ export const InputText = <T extends string>(props: InputTextProps<T>) => {
       {actionIcon && (
         <div
           onClick={onActionClick}
-          className={classes(
-            styles.actionContainer,
-            onActionClick && styles.clickable
-          )}
+          className={classes(styles.actionContainer, onActionClick && styles.clickable)}
         >
           <Icon icon={actionIcon} className={styles.actionIcon} />
         </div>

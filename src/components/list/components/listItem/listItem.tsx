@@ -1,13 +1,12 @@
-import { CSSProperties } from "react";
+import { CSSProperties } from 'react';
 
-import { Button } from "components/button/button";
-import { ListItemData } from "components/list/types";
-import { classes } from "utils/classes";
+import { ListItemData } from 'components/list/types';
+import { classes } from 'utils/classes';
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 interface Props<T> {
-  size: "compact" | "full";
+  size: 'compact' | 'full';
   item: ListItemData;
   style?: CSSProperties;
   onEditClick: (item: ListItemData) => void;
@@ -17,9 +16,10 @@ interface Props<T> {
 export const ListItem = <T,>(props: Props<T>) => {
   const { item, size, onEditClick, style, className } = props;
 
-  if (size === "compact") {
+  if (size === 'compact') {
     return (
       <div
+        onClick={() => onEditClick(item)}
         title={item.name}
         style={style}
         className={classes(styles.containerCompact, className)}
@@ -28,16 +28,14 @@ export const ListItem = <T,>(props: Props<T>) => {
           <img src={item.imageUrl} className={styles.image} />
         </div>
 
-        {Boolean(item.rating) && (
-          <div className={styles.infoRating}>{item.rating} / 5</div>
-        )}
+        {Boolean(item.rating) && <div className={styles.infoRating}>{item.rating} / 5</div>}
       </div>
     );
   }
 
   return (
     <>
-      <div className={classes(styles.containerFull, className)}>
+      <div onClick={() => onEditClick(item)} className={classes(styles.containerFull, className)}>
         {item.backgroundImageUrl && (
           <div
             style={{ backgroundImage: `url(${item.backgroundImageUrl})` }}
@@ -55,17 +53,8 @@ export const ListItem = <T,>(props: Props<T>) => {
               <div className={styles.infoTitle}>{item.name}</div>
               <div className={styles.infoSub}>{item.subtitle}</div>
 
-              {Boolean(item.rating) && (
-                <div className={styles.infoRating}>{item.rating} / 5</div>
-              )}
+              {Boolean(item.rating) && <div className={styles.infoRating}>{item.rating} / 5</div>}
             </div>
-
-            <Button
-              icon="edit"
-              onClick={() => onEditClick(item)}
-              type="transparent"
-              className={styles.editButton}
-            />
           </div>
         </div>
       </div>

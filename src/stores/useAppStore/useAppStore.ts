@@ -1,19 +1,17 @@
-import { useStoreWithEqualityFn } from "zustand/traditional";
-import { shallow } from "zustand/shallow";
-import { persist } from "zustand/middleware";
-import { create } from "zustand";
+import { useStoreWithEqualityFn } from 'zustand/traditional';
+import { shallow } from 'zustand/shallow';
+import { persist } from 'zustand/middleware';
+import { create } from 'zustand';
 
 type AppStoreState = {
   showNavbar: boolean;
   darkMode: boolean;
-  filmsLayout: "full" | "compact";
-  booksLayout: "full" | "compact";
-  peopleLayout: "full" | "compact";
+  filmsLayout: 'full' | 'compact';
+  booksLayout: 'full' | 'compact';
+  peopleLayout: 'full' | 'compact';
 };
 
-export const useAppStoreSlice = <K extends keyof AppStoreState>(
-  ...keys: [K, ...K[]]
-) =>
+export const useAppStoreSlice = <K extends keyof AppStoreState>(...keys: [K, ...K[]]) =>
   useStoreWithEqualityFn(
     useAppStore,
     (s) =>
@@ -29,12 +27,12 @@ export const useAppStore = create<AppStoreState>()(
     (set, get) => ({
       showNavbar: false,
       darkMode: false,
-      filmsLayout: "full",
-      booksLayout: "full",
-      peopleLayout: "full",
+      filmsLayout: 'compact',
+      booksLayout: 'compact',
+      peopleLayout: 'compact',
     }),
     {
-      name: "app",
+      name: 'app',
     }
   )
 );

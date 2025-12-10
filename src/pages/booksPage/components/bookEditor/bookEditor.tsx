@@ -1,17 +1,17 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { InputText } from "components/inputText/inputText";
-import { Modal } from "components/modal/modal";
-import { Button } from "components/button/button";
-import { Divider } from "components/divider/divider";
-import { createRecord } from "services/database/createRecord";
-import { mergeReducer } from "utils/mergeReducer";
-import { updateRecord } from "services/database/updateRecord";
-import { deleteRecord } from "services/database/deleteRecord";
-import { Book } from "types/entertainment";
-import { defaultBook } from "constants/defaults";
+import { InputText } from 'components/inputText/inputText';
+import { Modal } from 'components/modal/modal';
+import { Button } from 'components/button/button';
+import { Divider } from 'components/divider/divider';
+import { createRecord } from 'services/database/createRecord';
+import { mergeReducer } from 'utils/mergeReducer';
+import { updateRecord } from 'services/database/updateRecord';
+import { deleteRecord } from 'services/database/deleteRecord';
+import { Book } from 'types/entertainment';
+import { defaultBook } from 'constants/defaults';
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 interface Props {
   book?: Book | undefined;
@@ -22,10 +22,9 @@ interface Props {
 export const BookEditor = (props: Props) => {
   const { book, show, setShow } = props;
 
-  const [state, updateState] = React.useReducer(
-    mergeReducer<Book>,
-    book || defaultBook()
-  );
+  const [state, updateState] = React.useReducer(mergeReducer<Book>, book || defaultBook());
+
+  // const [search, setSearch] = React.useState('');
 
   React.useEffect(() => {
     updateState(book || defaultBook());
@@ -35,12 +34,12 @@ export const BookEditor = (props: Props) => {
     if (!book) return;
 
     const response = await deleteRecord({
-      collection: "books",
+      collection: 'books',
       id: book.id,
     });
 
     if (!response.success) {
-      alert("Failed to delete record");
+      alert('Failed to delete record');
     }
   };
 
@@ -48,12 +47,12 @@ export const BookEditor = (props: Props) => {
     if (book) {
       await updateRecord({
         id: book?.id,
-        collection: "books",
+        collection: 'books',
         data: state,
       });
     } else {
       await createRecord({
-        collection: "books",
+        collection: 'books',
         data: state,
       });
     }
@@ -62,21 +61,33 @@ export const BookEditor = (props: Props) => {
   };
 
   const retrieveInfo = async () => {
-    const response = await fetch(
-      `https://openlibrary.org/isbn/${state.isbn}.json`
-    );
+    // const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(state.isbn)}&limit=1`;
 
-    if (!response.ok) throw "Open Library API error";
+    // const res = await fetch(url);
+
+    // const { docs } = await res.json();
+
+    // const result = docs[0];
+
+    // updateState({
+    //   coverImageUrl: `https://covers.openlibrary.org/b/isbn/${state.isbn}-L.jpg`,
+    //   title: result.title,
+    //   author: result.author_name,
+    // });
+
+    // return;
+
+    const response = await fetch(`https://openlibrary.org/isbn/${state.isbn}.json`);
+
+    if (!response.ok) throw 'Open Library API error';
 
     const result = await response.json();
     const authorPath = result?.authors?.[0]?.key;
 
-    let author = "";
+    let author = '';
 
     if (authorPath) {
-      const authorResponse = await fetch(
-        `https://openlibrary.org${authorPath}.json`
-      );
+      const authorResponse = await fetch(`https://openlibrary.org${authorPath}.json`);
 
       const authorResult = await authorResponse?.json();
       author = authorResult.personal_name;
@@ -97,21 +108,30 @@ export const BookEditor = (props: Props) => {
       contentClassName={styles.content}
       className={styles.container}
     >
-      <div className={styles.row}>
-        <InputText
-          value={state.isbn}
-          setValue={(isbn) => updateState({ isbn })}
-          label="ISBN"
-          layer={1}
-          className={styles.inputText}
-        />
+      <div className={styles.searchContainer}>
+        <div className={styles.row}>
+          <InputText
+            value={state.isbn}
+            setValue={(isbn) => updateState({ isbn })}
+            label="Search by ISBN"
+            layer={1}
+            className={styles.inputText}
+          />
 
-        <Button
-          type="secondary"
-          icon="search"
-          layer={2}
-          onClick={retrieveInfo}
-        />
+          <Button type="secondary" icon="search" layer={2} onClick={retrieveInfo} />
+        </div>
+
+        {/* <div className={styles.row}>
+          <InputText
+            value={search}
+            setValue={setSearch}
+            label="Search by Name"
+            layer={1}
+            className={styles.inputText}
+          />
+
+          <Button type="secondary" icon="search" layer={2} onClick={retrieveInfo} />
+        </div> */}
       </div>
 
       <Divider layer={2} />
@@ -160,7 +180,7 @@ export const BookEditor = (props: Props) => {
         )}
 
         <Button
-          label={book ? "Update" : "Add"}
+          label={book ? 'Update' : 'Add'}
           onClick={handleUpdate}
           type="primary"
           className={styles.createButton}

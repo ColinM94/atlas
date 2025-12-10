@@ -2,6 +2,7 @@ import { BooksPage } from 'pages/booksPage/booksPage';
 import { FilmsPage } from 'pages/filmsPage/filmsPage';
 import { HabitsPage } from 'pages/habitsPage/habitsPage';
 import { PeoplePage } from 'pages/peoplePage/peoplePage';
+import { ShoppingPage } from 'pages/shoppingPage/shoppingPage';
 import { TasksPage } from 'pages/tasksPage/tasksPage';
 import { Section } from 'types/section';
 
@@ -11,6 +12,12 @@ export const sections: Record<string, Section> = {
     icon: 'check_box',
     name: 'Tasks',
     component: TasksPage,
+  },
+  shopping: {
+    id: 'shopping',
+    icon: 'shopping_bag',
+    name: 'Shopping',
+    component: ShoppingPage,
   },
   habits: {
     id: 'habits',
