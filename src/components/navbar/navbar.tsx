@@ -17,6 +17,7 @@ export const Navbar = () => {
       {Object.values(sections).map((section) => (
         <Link
           to={`/${section.id}`}
+          key={section.id}
           className={classes(styles.button, pageId === section.id && styles.buttonActive)}
         >
           <Icon icon={section.icon} className={styles.buttonIcon} />
