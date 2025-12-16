@@ -1,15 +1,15 @@
-import { CSSProperties } from "react";
-import { MaterialSymbol } from "material-symbols";
-import { Layer } from "types/general";
+import { CSSProperties } from 'react';
+import { MaterialSymbol } from 'material-symbols';
+import { Layer } from 'types/general';
 
 interface ButtonPropsBase {
+  to?: string;
   label?: string | number;
   icon?: MaterialSymbol;
   rightIcon?: MaterialSymbol;
-  iconColor?: "primary" | "secondary" | "danger";
-  onClick:
-    | ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
-    | undefined;
+  iconColor?: 'primary' | 'secondary' | 'danger';
+  isFormSubmit?: boolean;
+  onClick?: ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
   centerLabel?: boolean;
   labelClassName?: string;
   title?: string;
@@ -20,11 +20,11 @@ interface ButtonPropsBase {
 }
 
 interface ButtonPropsGeneral extends ButtonPropsBase {
-  type: "primary" | "danger" | "transparent";
+  type: 'primary' | 'danger' | 'transparent';
 }
 
 export interface ButtonPropsSecondary extends ButtonPropsBase {
-  type: "secondary";
+  type: 'secondary';
   layer?: Layer;
 }
 

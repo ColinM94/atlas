@@ -1,19 +1,24 @@
 .container {
-  justify-content: center;
-  align-items: center;
   flex: 1;
 
-  .code {
-    font-size: 50px;
-    color: vars.$color-text-secondary;
+  .header {
+    background-color: vars.$color-surface;
+    width: 100%;
+    padding: vars.$spacing-primary;
+
+    .loginButton {
+      justify-self: flex-end;
+      margin-left: auto;
+    }
   }
 
-  .message {
-    font-size: 40px;
-  }
+  .content {
+    flex: 1;
+    align-items: center;
 
-  .homeButton {
-    margin-top: vars.$spacing-primary * 2;
-    font-size: 25px;
+    .label {
+      font-size: 50px;
+      margin-top: 45%;
+    }
   }
 }

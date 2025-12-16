@@ -1,0 +1,16 @@
+.container {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+
+  .label {
+    font-size: 50px;
+  }
+
+  .loginForm {
+    background-color: vars.$color-surface;
+    gap: vars.$spacing-primary;
+    padding: vars.$spacing-primary;
+    width: min(100% - vars.$spacing-primary, 300px);
+  }
+}

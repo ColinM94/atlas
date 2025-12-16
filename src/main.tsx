@@ -8,6 +8,7 @@ import { HomePage } from 'pages/homePage/homePage';
 import { sections } from 'constants/sections';
 
 import './styles/global.scss';
+import { LoginPage } from 'pages/loginPage/loginPage';
 
 export const App = () => {
   return (
@@ -25,6 +26,10 @@ export const App = () => {
 
         <Route path="/">
           <HomePage />
+        </Route>
+
+        <Route path="/login">
+          <LoginPage />
         </Route>
 
         <Route path="*">
