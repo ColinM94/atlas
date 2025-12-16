@@ -4,6 +4,7 @@ import { Route, Switch } from 'wouter';
 import 'material-symbols/rounded.css';
 
 import { NotFoundPage } from 'pages/notFoundPage/notFoundPage';
+import { HomePage } from 'pages/homePage/homePage';
 import { sections } from 'constants/sections';
 
 import './styles/global.scss';
@@ -21,6 +22,10 @@ export const App = () => {
             </Route>
           );
         })}
+
+        <Route path="/">
+          <HomePage />
+        </Route>
 
         <Route path="*">
           <NotFoundPage />

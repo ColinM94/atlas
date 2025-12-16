@@ -7,11 +7,11 @@ import { classes } from 'utils/classes';
 import { mergeReducer } from 'utils/mergeReducer';
 import { updateRecord } from 'services/database/updateRecord';
 import { createRecord } from 'services/database/createRecord';
+import { deleteRecord } from 'services/database/deleteRecord';
 import { DatabaseRecord } from 'types/general';
 import { ShoppingItemData } from 'types/shopping';
 
 import styles from './styles.module.scss';
-import { deleteRecord } from 'services/database/deleteRecord';
 
 interface Props {
   shoppingItem?: ShoppingItemData;
