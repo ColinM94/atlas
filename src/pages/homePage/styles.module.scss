@@ -2,7 +2,7 @@
   flex: 1;
 
   .header {
-    background-color: vars.$color-surface;
+    // background-color: vars.$color-surface;
     width: 100%;
     padding: vars.$spacing-primary;
 
@@ -18,7 +18,7 @@
     gap: vars.$spacing-primary;
 
     .labelContainer {
-      margin-top: 20%;
+      margin-top: 12.5%;
       margin-bottom: 10%;
 
       .label {
@@ -32,32 +32,43 @@
       }
     }
 
-    .section {
-      gap: vars.$spacing-secondary;
+    .sections {
+      gap: calc(vars.$spacing-primary * 4);
 
-      .sectionLabel {
-        text-align: center;
-        font-size: vars.$font-size-heading;
-      }
+      .section {
+        gap: vars.$spacing-secondary;
+        justify-content: center;
+        align-items: center;
 
-      .icons {
-        flex-direction: row;
-        gap: vars.$spacing-primary;
-
-        .icon {
-          height: 70px;
-          width: 70px;
-          // background-color: white;
-          // border: 0.5px solid white;
-          border-radius: 8px;
+        .sectionLabel {
+          text-align: center;
+          font-size: vars.$font-size-heading;
         }
 
-        .sassIcon {
-        }
+        .icons {
+          flex-direction: row;
+          gap: vars.$spacing-primary;
 
-        .githubIcon {
-          background-color: white;
-          border: 1px solid white;
+          .icon {
+            height: 70px;
+            width: 70px;
+            border-radius: 8px;
+          }
+
+          .sassIcon {
+            background-color: vars.$color-surface;
+            padding: 8px;
+          }
+
+          .githubIcon {
+            background-color: white;
+            border: 1px solid white;
+          }
+
+          .nodeIcon {
+            background-color: vars.$color-surface;
+            padding: 6px;
+          }
         }
       }
     }

@@ -18,4 +18,8 @@
     justify-content: flex-end;
     gap: vars.$spacing-primary;
   }
+
+  .backButton {
+    visibility: hidden;
+  }
 }

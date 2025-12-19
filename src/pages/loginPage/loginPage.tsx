@@ -1,20 +1,22 @@
 import * as React from 'react';
+import { useLocation } from 'wouter';
 
 import { InputText } from 'components/inputText/inputText';
-
-import styles from './styles.module.scss';
 import { Button } from 'components/button/button';
 
+import styles from './styles.module.scss';
+
 export const LoginPage = () => {
+  const [, navigate] = useLocation();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  const handleLogin = () => {};
+  const handleLogin = () => {
+    navigate('tasks');
+  };
 
   return (
     <div className={styles.container}>
-      <div className={styles.label}>Login Page</div>
-
       <form onSubmit={handleLogin} className={styles.loginForm}>
         <InputText value={email} setValue={setEmail} type="email" className={styles.input} />
         <InputText
@@ -24,7 +26,7 @@ export const LoginPage = () => {
           className={styles.input}
         />
 
-        <Button type="secondary" label="Login" isFormSubmit layer={1} />
+        <Button type="secondary" label="Login" isFormSubmit layer={2} />
       </form>
     </div>
   );
