@@ -15,10 +15,51 @@
   .content {
     flex: 1;
     align-items: center;
+    gap: vars.$spacing-primary;
 
-    .label {
-      font-size: 50px;
-      margin-top: 45%;
+    .labelContainer {
+      margin-top: 20%;
+      margin-bottom: 10%;
+
+      .label {
+        font-size: 50px;
+      }
+
+      .subLabel {
+        color: vars.$color-text-secondary;
+        font-size: vars.$font-size-heading;
+        text-align: center;
+      }
+    }
+
+    .section {
+      gap: vars.$spacing-secondary;
+
+      .sectionLabel {
+        text-align: center;
+        font-size: vars.$font-size-heading;
+      }
+
+      .icons {
+        flex-direction: row;
+        gap: vars.$spacing-primary;
+
+        .icon {
+          height: 70px;
+          width: 70px;
+          // background-color: white;
+          // border: 0.5px solid white;
+          border-radius: 8px;
+        }
+
+        .sassIcon {
+        }
+
+        .githubIcon {
+          background-color: white;
+          border: 1px solid white;
+        }
+      }
     }
   }
 }
