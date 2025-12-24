@@ -1,41 +1,14 @@
-import * as React from 'react';
-
 import { MainLayout } from 'layouts/mainLayout/mainLayout';
 import { useAppStore, useAppStoreSlice } from 'stores/useAppStore/useAppStore';
 import { List } from 'components/list/list';
-import { ListItemData } from 'components/list/types';
-import { Person } from 'types/person';
-import { subscribeToCollection } from 'services/database/subscribeToCollection';
-import { PersonEditor } from './components/filmEditor/personEditor';
 
 import styles from './styles.module.scss';
+import { defaultPerson } from 'constants/defaults';
 
 export const PeoplePage = () => {
   const { peopleLayout } = useAppStoreSlice('peopleLayout');
 
-  const [people, setPeople] = React.useState<Person[]>([]);
-  const [showEditor, setShowEditor] = React.useState(false);
-  const [selectedPerson, setSelectedPerson] = React.useState<Person | undefined>(undefined);
-
-  React.useEffect(() => {
-    const unsubcribe = subscribeToCollection<Person>({
-      collection: 'people',
-      onData: (data) => {
-        setPeople(data.sort((a, b) => a.name.localeCompare(b.name)));
-      },
-    });
-
-    return () => {
-      unsubcribe?.();
-    };
-  }, []);
-
   const handleAdd = () => {
-    setShowEditor(true);
-  };
-
-  const handleEditClick = (item: ListItemData) => {
-    setSelectedPerson(people.find((person) => person.id === item.id));
     setShowEditor(true);
   };
 
@@ -45,11 +18,6 @@ export const PeoplePage = () => {
     });
   };
 
-  const items: ListItemData[] = people.map((person) => ({
-    id: person.id,
-    name: person.name,
-  }));
-
   return (
     <MainLayout
       onLayoutClick={handleLayoutClick}
@@ -57,13 +25,22 @@ export const PeoplePage = () => {
       layout={peopleLayout}
       className={styles.container}
     >
-      <List items={items} layout={peopleLayout} onEditClick={handleEditClick} />
-
-      <PersonEditor
-        show={showEditor}
-        setShow={setShowEditor}
-        person={selectedPerson}
-        onClose={() => setSelectedPerson(undefined)}
+      <List
+        collection="people"
+        layout={peopleLayout}
+        defaultData={defaultPerson}
+        inputs={[
+          {
+            inputType: 'text',
+            propertyKey: 'name',
+          },
+        ]}
+        items={(dataItem) => ({
+          id: dataItem.id,
+          name: dataItem.name,
+          data: dataItem,
+        })}
+        mainPropertyKey="name"
       />
     </MainLayout>
   );

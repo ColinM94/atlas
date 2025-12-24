@@ -53,7 +53,8 @@
 
 .containerFull {
   @extend .container;
-
+  flex-direction: row;
+  align-items: center;
   cursor: pointer;
 }
 

@@ -1,58 +1,30 @@
-import * as React from 'react';
-
 import { Button } from 'components/button/button';
 import { Modal } from 'components/modal/modal';
-import { mergeReducer } from 'utils/mergeReducer';
-import { DatabaseRecord } from 'types/general';
-import { deleteRecord } from 'services/database/deleteRecord';
-import { updateRecord } from 'services/database/updateRecord';
-import { createRecord } from 'services/database/createRecord';
 import { InputText } from 'components/inputText/inputText';
 import { InputDate } from 'components/inputDate/inputDate';
+import { deleteRecord } from 'services/database/deleteRecord';
 
-import styles from './styles.module.scss';
 import { ListEditorProps } from './types';
+import styles from './styles.module.scss';
 
 export const ListEditor = <T,>(props: ListEditorProps<T>) => {
-  const { show, setShow, collection, defaultData, data, inputs, id } = props;
-
-  const [newData, updateNewData] = React.useReducer(
-    mergeReducer<Omit<T, keyof DatabaseRecord>>,
-    data || defaultData()
-  );
+  const { state, updateState, show, setShow, onUpdate, collection, inputs } = props;
 
   // React.useEffect(() => {
   //   updateNewTask(task || defaultTask());
   // }, [show]);
 
   const handleDelete = async () => {
-    if (!id) return;
+    if (!state.id) return;
 
     const response = await deleteRecord({
       collection,
-      id,
+      id: state.id,
     });
 
     if (!response.success) {
       alert('Failed to delete record');
     }
-  };
-
-  const handleUpdate = async () => {
-    if (id) {
-      await updateRecord<Omit<T, 'id'>>({
-        id,
-        collection,
-        data: newData,
-      });
-    } else {
-      await createRecord<Omit<T, 'id'>>({
-        collection: 'tasks',
-        data: newData,
-      });
-    }
-
-    setShow(false);
   };
 
   return (
@@ -67,8 +39,8 @@ export const ListEditor = <T,>(props: ListEditorProps<T>) => {
         if (input.inputType === 'text') {
           return (
             <InputText
-              value={newData[input.propertyKey]}
-              setValue={(value) => updateNewData({ [input.propertyKey]: value })}
+              value={String(state[input.propertyKey])}
+              setValue={(value) => updateState({ [input.propertyKey]: String(value) })}
               key={String(input.propertyKey)}
             />
           );
@@ -77,8 +49,8 @@ export const ListEditor = <T,>(props: ListEditorProps<T>) => {
         if (input.inputType === 'date') {
           return (
             <InputDate
-              value={newData[input.propertyKey]}
-              setValue={(value) => updateNewData({ [input.propertyKey]: value })}
+              value={state[input.propertyKey]}
+              setValue={(value) => updateState({ [input.propertyKey]: value })}
               key={String(input.propertyKey)}
             />
           );
@@ -86,7 +58,7 @@ export const ListEditor = <T,>(props: ListEditorProps<T>) => {
       })}
 
       <div className={styles.buttons}>
-        {id && (
+        {state.id && (
           <Button
             label="Delete"
             onClick={() => void handleDelete()}
@@ -97,8 +69,8 @@ export const ListEditor = <T,>(props: ListEditorProps<T>) => {
         )}
 
         <Button
-          label={id ? 'Update' : 'Add'}
-          onClick={handleUpdate}
+          label={state.id ? 'Update' : 'Add'}
+          onClick={onUpdate}
           type="primary"
           className={styles.createButton}
         />

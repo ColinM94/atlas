@@ -1,38 +1,27 @@
-import * as React from 'react';
-
-import { subscribeToCollection } from 'services/database/subscribeToCollection';
 import { MainLayout } from 'layouts/mainLayout/mainLayout';
-import { ShoppingItemData } from 'types/shopping';
+import { List } from 'components/list/list';
+import { defaultShoppingItem } from 'constants/defaults';
 
-import { ShoppingItem } from './components/shoppingItem/shoppingItem';
 import styles from './styles.module.scss';
-import { List } from 'components/list2/list';
 
 export const ShoppingPage = () => {
-  const [shoppingItems, setShoppingItems] = React.useState<ShoppingItemData[]>([]);
-
-  React.useEffect(() => {
-    const unsubscribe = subscribeToCollection<ShoppingItemData>({
-      collection: 'shopping',
-      onData: setShoppingItems,
-    });
-
-    return () => {
-      unsubscribe?.();
-    };
-  }, []);
-
   return (
     <MainLayout className={styles.container}>
       <List
-        data={shoppingItems}
+        collection="shopping"
+        defaultData={defaultShoppingItem}
+        inputs={[
+          {
+            inputType: 'text',
+            propertyKey: 'name',
+          },
+        ]}
         items={(dataItem) => ({
           id: dataItem.id,
           data: dataItem,
           name: dataItem.name,
         })}
-        onEditClick={() => {}}
-        onDeleteClick={() => {}}
+        mainPropertyKey="name"
       />
 
       {/* {shoppingItems
@@ -42,7 +31,7 @@ export const ShoppingPage = () => {
           <ShoppingItem shoppingItem={item} key={item.id} className={styles.item} />
         ))} */}
 
-      <ShoppingItem className={styles.item} />
+      {/* <ShoppingItem className={styles.item} /> */}
     </MainLayout>
   );
 };

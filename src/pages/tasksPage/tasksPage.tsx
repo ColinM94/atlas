@@ -1,29 +1,14 @@
 import * as React from 'react';
 
-import { subscribeToCollection } from 'services/database/subscribeToCollection';
-import { Task } from 'types/task';
 import { MainLayout } from 'layouts/mainLayout/mainLayout';
-import { ProgressBar } from 'components/progressBar/progressBar';
-import { List } from 'components/list2/list';
+import { List } from 'components/list/list';
 import { defaultTask } from 'constants/defaults';
 
 import { TaskEditor } from './components/taskEditor/taskEditor';
 import styles from './styles.module.scss';
 
 export const TasksPage = () => {
-  const [tasks, setTasks] = React.useState<Task[]>([]);
   const [showCreator, setShowCreator] = React.useState(false);
-
-  React.useEffect(() => {
-    const unsubcribe = subscribeToCollection<Task>({
-      collection: 'tasks',
-      onData: setTasks,
-    });
-
-    return () => {
-      unsubcribe?.();
-    };
-  }, []);
 
   return (
     <MainLayout
@@ -37,10 +22,9 @@ export const TasksPage = () => {
       ]}
       className={styles.container}
     >
-      <ProgressBar progress={tasks.filter((task) => task.done).length} maxProgress={tasks.length} />
+      {/* <ProgressBar progress={tasks.filter((task) => task.done).length} maxProgress={tasks.length} /> */}
 
       <List
-        data={tasks}
         items={(item) => ({
           id: item.id,
           name: item.name,
@@ -48,6 +32,7 @@ export const TasksPage = () => {
         })}
         defaultData={defaultTask}
         collection="tasks"
+        mainPropertyKey="name"
         inputs={[
           {
             inputType: 'text',

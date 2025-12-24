@@ -1,11 +1,11 @@
-import { Collection } from 'types/general';
+import { Collection, DatabaseRecord } from 'types/general';
 
 export interface ListEditorProps<T> {
-  id: string | undefined;
-  data: T | undefined;
+  state: T & DatabaseRecord;
+  updateState: (update: T & DatabaseRecord) => void;
   show: boolean;
   setShow: (show: boolean) => void;
   collection: Collection;
-  defaultData: () => T;
   inputs: { inputType: 'text' | 'date'; propertyKey: keyof T }[];
+  onUpdate: () => void;
 }
