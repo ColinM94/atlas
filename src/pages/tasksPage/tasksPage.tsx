@@ -3,11 +3,11 @@ import * as React from 'react';
 import { subscribeToCollection } from 'services/database/subscribeToCollection';
 import { Task } from 'types/task';
 import { MainLayout } from 'layouts/mainLayout/mainLayout';
-import { classes } from 'utils/classes';
 import { ProgressBar } from 'components/progressBar/progressBar';
+import { List } from 'components/list2/list';
+import { defaultTask } from 'constants/defaults';
 
 import { TaskEditor } from './components/taskEditor/taskEditor';
-import { TaskItem } from './components/taskItem/taskItem';
 import styles from './styles.module.scss';
 
 export const TasksPage = () => {
@@ -39,19 +39,26 @@ export const TasksPage = () => {
     >
       <ProgressBar progress={tasks.filter((task) => task.done).length} maxProgress={tasks.length} />
 
-      <div
-        className={classes(
-          styles.tasks
-          // showGrid ? styles.tasksGrid : styles.tasksList
-        )}
-      >
-        {tasks
-          .sort((a, b) => a.name.localeCompare(b.name))
-          .sort((a, b) => Number(a.done) - Number(b.done))
-          .map((task) => (
-            <TaskItem task={task} key={task.id} className={styles.task} />
-          ))}
-      </div>
+      <List
+        data={tasks}
+        items={(item) => ({
+          id: item.id,
+          name: item.name,
+          data: item,
+        })}
+        defaultData={defaultTask}
+        collection="tasks"
+        inputs={[
+          {
+            inputType: 'text',
+            propertyKey: 'name',
+          },
+          {
+            inputType: 'date',
+            propertyKey: 'dueDate',
+          },
+        ]}
+      />
 
       <TaskEditor show={showCreator} setShow={setShowCreator} />
     </MainLayout>

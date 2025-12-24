@@ -6,6 +6,7 @@ import { ShoppingItemData } from 'types/shopping';
 
 import { ShoppingItem } from './components/shoppingItem/shoppingItem';
 import styles from './styles.module.scss';
+import { List } from 'components/list2/list';
 
 export const ShoppingPage = () => {
   const [shoppingItems, setShoppingItems] = React.useState<ShoppingItemData[]>([]);
@@ -23,12 +24,23 @@ export const ShoppingPage = () => {
 
   return (
     <MainLayout className={styles.container}>
-      {shoppingItems
+      <List
+        data={shoppingItems}
+        items={(dataItem) => ({
+          id: dataItem.id,
+          data: dataItem,
+          name: dataItem.name,
+        })}
+        onEditClick={() => {}}
+        onDeleteClick={() => {}}
+      />
+
+      {/* {shoppingItems
         .sort((a, b) => a.name.localeCompare(b.name))
         .sort((a, b) => Number(a.done) - Number(b.done))
         .map((item) => (
           <ShoppingItem shoppingItem={item} key={item.id} className={styles.item} />
-        ))}
+        ))} */}
 
       <ShoppingItem className={styles.item} />
     </MainLayout>

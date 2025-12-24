@@ -1,0 +1,39 @@
+.container {
+  background-color: vars.$color-surface;
+
+  .content {
+    gap: vars.$spacing-primary;
+
+    .nameInput {
+      flex: 1;
+    }
+
+    .dateRow {
+      flex-direction: row;
+      align-items: flex-end;
+      gap: vars.$spacing-primary;
+
+      .dueDateInput {
+        min-width: 160px;
+        flex: 1;
+      }
+
+      .dueDateButton {
+      }
+    }
+
+    .buttons {
+      flex-direction: row;
+      margin-top: calc(vars.$spacing-primary * 3);
+      gap: vars.$spacing-primary;
+
+      .deleteButton {
+        flex: 0.5;
+      }
+
+      .createButton {
+        flex: 1;
+      }
+    }
+  }
+}

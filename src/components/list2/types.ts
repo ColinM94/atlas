@@ -1,3 +1,6 @@
+import { Collection } from 'types/general';
+import { ListEditorProps } from './components/listEditor/types';
+
 export type ListItemData<T> = {
   id: string;
   data: T;
@@ -10,8 +13,11 @@ export type ListItemData<T> = {
 };
 
 export interface Props<T> {
-  items: ListItemData<T>[];
-  onEditClick: (item: ListItemData<T>) => void;
+  data: T[];
+  items: (data: T) => ListItemData<T>;
+  defaultData: () => T;
+  collection: Collection;
   layout?: 'compact' | 'full';
   aspectRatio?: number;
+  inputs: ListEditorProps<T>['inputs'];
 }

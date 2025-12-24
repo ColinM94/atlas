@@ -1,10 +1,10 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Button } from "components/button/button";
-import { Children } from "types/general";
-import { classes } from "utils/classes";
+import { Button } from 'components/button/button';
+import { Children } from 'types/general';
+import { classes } from 'utils/classes';
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 interface Props {
   show: boolean;
@@ -17,15 +17,7 @@ interface Props {
 }
 
 export const Modal = (props: Props) => {
-  const {
-    show,
-    setShow,
-    children,
-    label,
-    onClose,
-    contentClassName,
-    className,
-  } = props;
+  const { show, setShow, children, label, onClose, contentClassName, className } = props;
 
   const dialogRef = React.useRef<HTMLDialogElement>(null);
 
@@ -68,9 +60,7 @@ export const Modal = (props: Props) => {
           />
         </div>
 
-        <div className={classes(styles.content, contentClassName)}>
-          {children}
-        </div>
+        <div className={classes(styles.content, contentClassName)}>{children}</div>
       </dialog>
     </>
   );

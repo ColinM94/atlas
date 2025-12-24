@@ -2,9 +2,9 @@ import { MaterialSymbol } from 'material-symbols';
 import { Children } from 'types/general';
 import { FormFieldProps } from '../formField/types';
 
-export interface InputTextProps<T extends string> extends FormFieldProps {
-  value?: T;
-  setValue?: (value: T, e: React.ChangeEvent<HTMLInputElement>) => void;
+export interface InputTextProps extends FormFieldProps {
+  value?: string;
+  setValue?: (value: string, e: React.ChangeEvent<HTMLInputElement>) => void;
   inputClassName?: string;
   placeholder?: string;
   type?: 'password' | 'text' | 'email' | 'url';

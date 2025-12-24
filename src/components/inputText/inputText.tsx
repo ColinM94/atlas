@@ -7,7 +7,7 @@ import { classes } from 'utils/classes';
 import styles from './styles.module.scss';
 import { InputTextProps } from './types';
 
-export const InputText = <T extends string>(props: InputTextProps<T>) => {
+export const InputText = (props: InputTextProps) => {
   const {
     value,
     setValue,
@@ -38,7 +38,7 @@ export const InputText = <T extends string>(props: InputTextProps<T>) => {
       temp = temp.slice(0, characterLimit);
     }
 
-    setValue?.(temp as T, e);
+    setValue?.(temp, e);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
