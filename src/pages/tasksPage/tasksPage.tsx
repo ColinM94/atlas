@@ -1,5 +1,6 @@
 import { List } from 'components/list/list';
 import { defaultTask } from 'constants/defaults';
+import { formatDate } from 'utils/formatDate';
 
 export const TasksPage = () => {
   return (
@@ -10,6 +11,7 @@ export const TasksPage = () => {
         items={(item) => ({
           id: item.id,
           name: item.name,
+          subtitle: item.dueDate ? formatDate(item.dueDate) : '',
           data: item,
         })}
         defaultData={defaultTask}
