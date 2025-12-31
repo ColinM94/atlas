@@ -7,18 +7,6 @@
     }
   }
 
-  .layer1 {
-    background-color: vars.$color-surface2 !important;
-  }
-
-  .layer2 {
-    background-color: vars.$color-surface3 !important;
-  }
-
-  .layer3 {
-    background-color: vars.$color-surface4 !important;
-  }
-
   .rightText {
     position: absolute;
     right: vars.$spacing-primary;
@@ -30,7 +18,6 @@
 
   .disabled {
     filter: brightness(vars.$disabled-brightness-filter) !important;
-    // background-color: vars.$color-surface;
     outline: 3px solid vars.$color-surface;
     color: vars.$color-text-secondary;
   }

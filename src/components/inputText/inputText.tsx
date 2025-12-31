@@ -24,7 +24,6 @@ export const InputText = (props: InputTextProps) => {
     focusOnLoad,
     characterLimit,
     showDisabledStyle = true,
-    layer = 1,
     ref,
     ...rest
   } = props;
@@ -63,17 +62,16 @@ export const InputText = (props: InputTextProps) => {
         type={type || 'text'}
         value={value}
         onChange={handleChange}
-        className={classes(
-          styles.input,
-          inputClassName,
-          styles[`layer${layer}`],
-          disabled && showDisabledStyle && styles.disabled
-        )}
         placeholder={placeholder}
         disabled={disabled}
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
         ref={ref || inputField}
+        className={classes(
+          styles.input,
+          inputClassName,
+          disabled && showDisabledStyle && styles.disabled
+        )}
       />
 
       {rightText && <div className={styles.rightText}>{rightText}</div>}

@@ -67,6 +67,7 @@ export const ListItem = <T,>(props: Props<T>) => {
             handleUpdate();
           }
         }}
+        layer={1}
         className={classes(styles.name)}
       />
     );

@@ -9,7 +9,7 @@ import { Header } from './components/header/header';
 import styles from './styles.module.scss';
 
 interface Props {
-  buttons?: ButtonProps[];
+  buttons?: (ButtonProps & { hidden: boolean })[];
   layout?: Layout;
   onLayoutClick?: () => void;
   onAddClick?: () => void;

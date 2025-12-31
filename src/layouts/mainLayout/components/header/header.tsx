@@ -5,7 +5,7 @@ import { Layout } from 'types/general';
 import styles from './styles.module.scss';
 
 interface Props {
-  buttons: ButtonProps[] | undefined;
+  buttons: (ButtonProps & { hidden: boolean })[] | undefined;
   layout: Layout | undefined;
   onLayoutClick: (() => void) | undefined;
   onAddClick: (() => void) | undefined;
@@ -15,12 +15,13 @@ export const Header = (props: Props) => {
   const { buttons, layout, onAddClick, onLayoutClick } = props;
 
   const renderButtons = () => {
-    const temp: ButtonProps[] = [];
+    const temp: Props['buttons'] = [];
 
     if (layout) {
       temp.push({
         type: 'secondary',
         icon: layout === 'compact' ? 'dashboard' : 'list',
+        hidden: false,
         onClick: onLayoutClick,
       });
     }
@@ -30,6 +31,7 @@ export const Header = (props: Props) => {
         type: 'secondary',
         icon: 'add',
         onClick: onAddClick,
+        hidden: false,
       });
     }
 
@@ -49,7 +51,8 @@ export const Header = (props: Props) => {
 
       <div className={styles.buttons}>
         {renderButtons().map((button) => {
-          if (button.type === 'secondary') return <Button {...button} layer={0} />;
+          if (button.hidden) return;
+          if (button) if (button.type === 'secondary') return <Button {...button} layer={0} />;
 
           return <Button {...button} />;
         })}

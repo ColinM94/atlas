@@ -1,27 +1,9 @@
-import * as React from 'react';
-
-import { MainLayout } from 'layouts/mainLayout/mainLayout';
 import { List } from 'components/list/list';
 import { defaultTask } from 'constants/defaults';
 
-import { TaskEditor } from './components/taskEditor/taskEditor';
-import styles from './styles.module.scss';
-
 export const TasksPage = () => {
-  const [showCreator, setShowCreator] = React.useState(false);
-
   return (
-    <MainLayout
-      buttons={[
-        {
-          icon: 'add',
-          onClick: () => setShowCreator(true),
-          type: 'secondary',
-          layer: 1,
-        },
-      ]}
-      className={styles.container}
-    >
+    <>
       {/* <ProgressBar progress={tasks.filter((task) => task.done).length} maxProgress={tasks.length} /> */}
 
       <List
@@ -44,8 +26,6 @@ export const TasksPage = () => {
           },
         ]}
       />
-
-      <TaskEditor show={showCreator} setShow={setShowCreator} />
-    </MainLayout>
+    </>
   );
 };

@@ -1,21 +1,16 @@
 import * as React from 'react';
+
 import { classes } from 'utils/classes';
 import { subscribeToCollection } from 'services/database/subscribeToCollection';
+import { MainLayout } from 'layouts/mainLayout/mainLayout';
+import { useAppStore } from 'stores/useAppStore/useAppStore';
 
 import { ListItemData, Props } from './types';
 import { ListItem } from './components/listItem/listItem';
 import styles from './styles.module.scss';
 
 export const List = <T,>(props: Props<T>) => {
-  const {
-    items,
-    layout = 'full',
-    aspectRatio,
-    inputs,
-    collection,
-    mainPropertyKey,
-    defaultData,
-  } = props;
+  const { items, layout, aspectRatio, inputs, collection, mainPropertyKey, defaultData } = props;
 
   const [data, setData] = React.useState<T[]>([]);
 
@@ -37,8 +32,22 @@ export const List = <T,>(props: Props<T>) => {
     });
   };
 
+  const handleLayoutClick = () => {
+    useAppStore.setState({
+      [`${collection}Layout`]: `${collection}Layout` === 'compact' ? 'full' : 'compact',
+    });
+  };
+
   return (
-    <div
+    <MainLayout
+      buttons={[
+        {
+          type: 'secondary',
+          icon: layout === 'compact' ? 'dashboard' : 'list',
+          onClick: handleLayoutClick,
+          hidden: layout === undefined,
+        },
+      ]}
       className={classes(
         styles.container,
         layout === 'full' && styles.containerFull,
@@ -66,6 +75,6 @@ export const List = <T,>(props: Props<T>) => {
         mainPropertyKey={mainPropertyKey}
         inputs={[{ inputType: 'text', propertyKey: mainPropertyKey }]}
       />
-    </div>
+    </MainLayout>
   );
 };
