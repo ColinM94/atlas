@@ -39,15 +39,17 @@ export const Header = (props: Props) => {
     return temp;
   };
 
+  if (renderButtons().length === 0 || renderButtons().every((button) => button.hidden)) return null;
+
   return (
     <div className={styles.container}>
-      <Button
+      {/* <Button
         icon="arrow_back"
         type="secondary"
         onClick={() => history.back()}
         layer={0}
         className={styles.backButton}
-      />
+      /> */}
 
       <div className={styles.buttons}>
         {renderButtons().map((button) => {
