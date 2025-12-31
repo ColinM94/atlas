@@ -68,6 +68,8 @@ export const ListItem = <T,>(props: Props<T>) => {
           }
         }}
         layer={1}
+        actionIcon="add"
+        onActionClick={handleUpdate}
         className={classes(styles.name)}
       />
     );

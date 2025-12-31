@@ -4,6 +4,7 @@ import { classes } from 'utils/classes';
 import { subscribeToCollection } from 'services/database/subscribeToCollection';
 import { MainLayout } from 'layouts/mainLayout/mainLayout';
 import { useAppStore } from 'stores/useAppStore/useAppStore';
+import { Divider } from 'components/divider/divider';
 
 import { ListItemData, Props } from './types';
 import { ListItem } from './components/listItem/listItem';
@@ -54,6 +55,16 @@ export const List = <T,>(props: Props<T>) => {
         layout === 'compact' && styles.containerCompact
       )}
     >
+      <ListItem<T>
+        size="compact"
+        collection={collection}
+        defaultData={defaultData}
+        mainPropertyKey={mainPropertyKey}
+        inputs={[{ inputType: 'text', propertyKey: mainPropertyKey }]}
+      />
+
+      <Divider layer={1} />
+
       {renderItems().map((item) => (
         <ListItem
           item={item}
@@ -67,14 +78,6 @@ export const List = <T,>(props: Props<T>) => {
           className={classes(styles.item)}
         />
       ))}
-
-      <ListItem<T>
-        size="compact"
-        collection={collection}
-        defaultData={defaultData}
-        mainPropertyKey={mainPropertyKey}
-        inputs={[{ inputType: 'text', propertyKey: mainPropertyKey }]}
-      />
     </MainLayout>
   );
 };
