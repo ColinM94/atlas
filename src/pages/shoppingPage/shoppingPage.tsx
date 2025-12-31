@@ -16,6 +16,7 @@ export const ShoppingPage = () => {
         id: dataItem.id,
         data: dataItem,
         name: dataItem.name,
+        checked: dataItem.checked,
       })}
       mainPropertyKey="name"
     />

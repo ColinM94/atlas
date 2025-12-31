@@ -42,6 +42,7 @@ export const ListEditor = <T,>(props: ListEditorProps<T>) => {
               value={String(state[input.propertyKey])}
               setValue={(value) => updateState({ [input.propertyKey]: String(value) })}
               key={String(input.propertyKey)}
+              layer={2}
             />
           );
         }
@@ -52,6 +53,7 @@ export const ListEditor = <T,>(props: ListEditorProps<T>) => {
               value={state[input.propertyKey]}
               setValue={(value) => updateState({ [input.propertyKey]: value })}
               key={String(input.propertyKey)}
+              layer={2}
             />
           );
         }

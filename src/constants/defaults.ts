@@ -26,10 +26,10 @@ export const defaultBook = (): Book => ({
   rating: 0,
 });
 
-export const defaultTask = (): Task => ({ id: '', dueDate: 0, name: '', done: false });
+export const defaultTask = (): Task => ({ id: '', dueDate: 0, name: '', checked: false });
 
 export const defaultShoppingItem = (): ShoppingItemData => ({
   id: '',
   name: '',
-  done: false,
+  checked: false,
 });

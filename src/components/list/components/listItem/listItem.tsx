@@ -6,9 +6,11 @@ import { InputText } from 'components/inputText/inputText';
 import { classes } from 'utils/classes';
 import { Collection, DatabaseRecord } from 'types/general';
 import { mergeReducer } from 'utils/mergeReducer';
-
+import { Button } from 'components/button/button';
 import { updateRecord } from 'services/database/updateRecord';
 import { createRecord } from 'services/database/createRecord';
+import { formatDate } from 'utils/formatDate';
+
 import { ListEditorProps } from '../listEditor/types';
 import { ListEditor } from '../listEditor/listEditor';
 import styles from './styles.module.scss';
@@ -70,7 +72,7 @@ export const ListItem = <T,>(props: Props<T>) => {
         layer={1}
         actionIcon="add"
         onActionClick={handleUpdate}
-        className={classes(styles.name)}
+        inputClassName={styles.input}
       />
     );
   }
@@ -95,7 +97,14 @@ export const ListItem = <T,>(props: Props<T>) => {
 
   return (
     <>
-      <div onClick={handleEdit} className={classes(styles.containerFull, className)}>
+      <div
+        onClick={handleEdit}
+        className={classes(
+          styles.containerFull,
+          item.checked && styles.containerChecked,
+          className
+        )}
+      >
         {item.backgroundImageUrl && (
           <div
             style={{ backgroundImage: `url(${item.backgroundImageUrl})` }}
@@ -118,7 +127,23 @@ export const ListItem = <T,>(props: Props<T>) => {
               {Boolean(item.rating) && <div className={styles.infoRating}>{item.rating} / 5</div>}
             </div>
 
-            {item.date !== undefined && <div className={styles.date}>{item.date}</div>}
+            {item.date ? <div className={styles.date}>{formatDate(item.date)}</div> : ''}
+
+            <Button
+              icon={item.checked ? 'check_box' : 'check_box_outline_blank'}
+              type="secondary"
+              onClick={(e) => {
+                e.stopPropagation();
+
+                updateRecord({
+                  id: item.id,
+                  collection,
+                  data: {
+                    checked: !item.checked,
+                  },
+                });
+              }}
+            />
           </div>
         </div>
 

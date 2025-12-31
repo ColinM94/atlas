@@ -1,5 +1,4 @@
 import { Collection, DatabaseRecord } from 'types/general';
-import { ListEditorProps } from './components/listEditor/types';
 
 export type ListItemData<T> = {
   id: string;
@@ -9,8 +8,9 @@ export type ListItemData<T> = {
   name: string;
   subtitle?: string;
   rating?: number;
-  date?: string;
+  date?: number;
   layout?: 'compact' | 'full';
+  checked?: boolean;
 };
 
 export interface Props<T> {

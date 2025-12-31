@@ -1,3 +1,11 @@
+.containerChecked {
+  filter: brightness(0.75);
+
+  .infoTitle {
+    text-decoration: line-through;
+  }
+}
+
 .container {
   background-color: vars.$color-surface;
   border-radius: vars.$roundness;
@@ -26,6 +34,7 @@
       flex-direction: row;
       padding-block: vars.$spacing-secondary;
       padding-inline: vars.$spacing-primary;
+      align-items: center;
 
       .info {
         flex: 1;
@@ -52,8 +61,6 @@
       .date {
         // background-color: rgb(12, 90, 167);
         border-radius: vars.$roundness;
-        justify-self: flex-end;
-        align-self: flex-end;
         margin-left: auto;
         padding-inline: vars.$spacing-secondary;
       }
@@ -98,10 +105,8 @@
     padding-inline: vars.$spacing-secondary;
     border-radius: vars.$roundness;
   }
+}
 
-  .name {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
+.input {
+  padding-block: vars.$spacing-primary * 2 !important;
 }
