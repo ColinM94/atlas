@@ -9,6 +9,7 @@ export type ListItemData<T> = {
   name: string;
   subtitle?: string;
   rating?: number;
+  date?: string;
   layout?: 'compact' | 'full';
 };
 

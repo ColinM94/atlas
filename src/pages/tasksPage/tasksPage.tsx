@@ -11,7 +11,7 @@ export const TasksPage = () => {
         items={(item) => ({
           id: item.id,
           name: item.name,
-          subtitle: item.dueDate ? formatDate(item.dueDate) : '',
+          date: item.dueDate ? formatDate(item.dueDate) : '',
           data: item,
         })}
         defaultData={defaultTask}

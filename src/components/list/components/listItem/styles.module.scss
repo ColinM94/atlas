@@ -8,6 +8,7 @@
 
   .containerContent {
     flex-direction: row;
+    flex: 1;
 
     .imageContainer {
       height: 150px;
@@ -46,6 +47,15 @@
           margin-top: auto;
           margin-bottom: vars.$spacing-tertiary;
         }
+      }
+
+      .date {
+        // background-color: rgb(12, 90, 167);
+        border-radius: vars.$roundness;
+        justify-self: flex-end;
+        align-self: flex-end;
+        margin-left: auto;
+        padding-inline: vars.$spacing-secondary;
       }
     }
   }

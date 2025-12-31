@@ -86,6 +86,7 @@ export const ListItem = <T,>(props: Props<T>) => {
         </div>
 
         {Boolean(item.rating) && <div className={styles.infoRating}>{item.rating} / 5</div>}
+        {Boolean(item.date) && <div className={styles.date}>{item.date}</div>}
       </div>
     );
   }
@@ -114,6 +115,8 @@ export const ListItem = <T,>(props: Props<T>) => {
 
               {Boolean(item.rating) && <div className={styles.infoRating}>{item.rating} / 5</div>}
             </div>
+
+            {item.date !== undefined && <div className={styles.date}>{item.date}</div>}
           </div>
         </div>
 
