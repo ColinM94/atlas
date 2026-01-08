@@ -37,7 +37,7 @@ export const BooksPage = () => {
           propertyKey: 'title',
         },
       ]}
-      layout={booksLayout}
+      layout="compact"
       aspectRatio={0.65}
       mainPropertyKey="title"
     />

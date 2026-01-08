@@ -58,6 +58,8 @@ export const ListItem = <T,>(props: Props<T>) => {
     setShowEditor(false);
   };
 
+  if (!item && size == 'compact') return undefined;
+
   if (!item) {
     return (
       <InputText
@@ -72,6 +74,7 @@ export const ListItem = <T,>(props: Props<T>) => {
         layer={1}
         actionIcon="add"
         onActionClick={handleUpdate}
+        style={style}
         inputClassName={styles.input}
       />
     );
@@ -89,8 +92,8 @@ export const ListItem = <T,>(props: Props<T>) => {
           <img src={item.imageUrl} className={styles.image} />
         </div>
 
-        {Boolean(item.rating) && <div className={styles.infoRating}>{item.rating} / 5</div>}
-        {Boolean(item.date) && <div className={styles.date}>{item.date}</div>}
+        {/* {Boolean(item.rating) && <div className={styles.infoRating}>{item.rating} / 5</div>}
+        {Boolean(item.date) && <div className={styles.date}>{item.date}</div>} */}
       </div>
     );
   }
@@ -132,6 +135,7 @@ export const ListItem = <T,>(props: Props<T>) => {
             <Button
               icon={item.checked ? 'check_box' : 'check_box_outline_blank'}
               type="secondary"
+              layer={1}
               onClick={(e) => {
                 e.stopPropagation();
 

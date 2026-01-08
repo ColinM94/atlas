@@ -18,11 +18,20 @@ export const LoginPage = () => {
   return (
     <div className={styles.container}>
       <form onSubmit={handleLogin} className={styles.loginForm}>
-        <InputText value={email} setValue={setEmail} type="email" className={styles.input} />
+        <InputText
+          value={email}
+          setValue={setEmail}
+          type="email"
+          placeholder="Email"
+          layer={2}
+          className={styles.input}
+        />
         <InputText
           value={password}
           setValue={setPassword}
           type="password"
+          layer={2}
+          placeholder="Password"
           className={styles.input}
         />
 

@@ -73,7 +73,7 @@ export const List = <T,>(props: Props<T>) => {
           <ListItem
             item={item}
             collection={collection}
-            size={layout}
+            size={layout || 'full'}
             key={item.id}
             style={{ aspectRatio }}
             inputs={inputs}
