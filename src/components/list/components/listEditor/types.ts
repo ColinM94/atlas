@@ -1,8 +1,8 @@
-import { Collection, DatabaseRecord } from 'types/general';
+import { Collection } from 'types/general';
 
 export interface ListEditorProps<T> {
-  state: T & DatabaseRecord;
-  updateState: (update: T & DatabaseRecord) => void;
+  state: T;
+  updateState: (update: T) => void;
   show: boolean;
   setShow: (show: boolean) => void;
   collection: Collection;

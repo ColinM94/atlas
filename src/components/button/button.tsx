@@ -63,7 +63,7 @@ export const Button = (props: ButtonProps) => {
           styles[type],
           icon && !label ? styles.containerIconOnly : styles.containerNotIconOnly,
           className,
-          type === 'secondary' && `layer${props.layer ?? 0} layer${props.layer ?? 0}Hover`
+          props.type === 'secondary' && `layer${props.layer ?? 0} layer${props.layer ?? 0}Hover`
         )}
       >
         {content()}
@@ -83,7 +83,7 @@ export const Button = (props: ButtonProps) => {
         styles[type],
         icon && !label ? styles.containerIconOnly : styles.containerNotIconOnly,
         className,
-        type === 'secondary' && `layer${props.layer ?? 0} layer${props.layer ?? 0}Hover`
+        props.type === 'secondary' && `layer${props.layer ?? 0} layer${props.layer ?? 0}Hover`
       )}
     >
       {content()}

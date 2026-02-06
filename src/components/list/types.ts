@@ -1,4 +1,5 @@
 import { Collection, DatabaseRecord } from 'types/general';
+import { ListEditorProps } from './components/listEditor/types';
 
 export type ListItemData<T> = {
   id: string;
@@ -16,7 +17,7 @@ export type ListItemData<T> = {
 export interface Props<T> {
   items: (data: T) => ListItemData<T & DatabaseRecord>;
   defaultData: () => T & DatabaseRecord;
-  mainPropertyKey: keyof T;
+  mainPropertyKey: keyof (T & DatabaseRecord);
   collection: Collection;
   layout?: 'compact' | 'full';
   aspectRatio?: number;

@@ -17,16 +17,16 @@ import styles from './styles.module.scss';
 
 interface Props<T> {
   size: 'compact' | 'full';
-  item?: ListItemData<T>;
+  item?: ListItemData<T & DatabaseRecord>;
   collection: Collection;
-  inputs: ListEditorProps<T>['inputs'];
-  mainPropertyKey: keyof T;
+  inputs: ListEditorProps<T & DatabaseRecord>['inputs'];
+  mainPropertyKey: keyof (T & DatabaseRecord);
   defaultData: () => T & DatabaseRecord;
   style?: CSSProperties;
   className?: string;
 }
 
-export const ListItem = <T,>(props: Props<T>) => {
+export const ListItem = <T,>(props: Props<T & DatabaseRecord>) => {
   const { item, size, collection, inputs, defaultData, mainPropertyKey, style, className } = props;
 
   const [showEditor, setShowEditor] = React.useState(false);
@@ -65,16 +65,19 @@ export const ListItem = <T,>(props: Props<T>) => {
       <InputText
         ref={inputRef}
         value={String(state[mainPropertyKey])}
-        setValue={(value) => updateState({ [mainPropertyKey]: String(value) })}
+        setValue={(value) =>
+          updateState({
+            [mainPropertyKey]: value,
+          } as Partial<T & DatabaseRecord>)
+        }
         onKeyDown={(event) => {
           if (event.key === 'Enter') {
-            handleUpdate();
+            void handleUpdate();
           }
         }}
         layer={1}
         actionIcon="add"
         onActionClick={handleUpdate}
-        style={style}
         inputClassName={styles.input}
       />
     );
@@ -139,7 +142,9 @@ export const ListItem = <T,>(props: Props<T>) => {
               onClick={(e) => {
                 e.stopPropagation();
 
-                updateRecord({
+                console.log('hello');
+
+                void updateRecord({
                   id: item.id,
                   collection,
                   data: {

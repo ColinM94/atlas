@@ -5,15 +5,16 @@ import { subscribeToCollection } from 'services/database/subscribeToCollection';
 import { MainLayout } from 'layouts/mainLayout/mainLayout';
 import { useAppStore } from 'stores/useAppStore/useAppStore';
 import { Divider } from 'components/divider/divider';
+import { DatabaseRecord } from 'types/general';
 
 import { ListItemData, Props } from './types';
 import { ListItem } from './components/listItem/listItem';
 import styles from './styles.module.scss';
 
-export const List = <T,>(props: Props<T>) => {
+export const List = <T,>(props: Props<T & DatabaseRecord>) => {
   const { items, layout, aspectRatio, inputs, collection, mainPropertyKey, defaultData } = props;
 
-  const [data, setData] = React.useState<T[]>([]);
+  const [data, setData] = React.useState<(T & DatabaseRecord)[]>([]);
 
   React.useEffect(() => {
     const unsubcribe = subscribeToCollection<T>({
@@ -28,7 +29,7 @@ export const List = <T,>(props: Props<T>) => {
 
   const renderItems = () => {
     return data.map((dataItem) => {
-      const item: ListItemData<T> = { ...items(dataItem), data: dataItem };
+      const item: ListItemData<T & DatabaseRecord> = { ...items(dataItem), data: dataItem };
       return item;
     });
   };
@@ -55,7 +56,7 @@ export const List = <T,>(props: Props<T>) => {
         layout === 'compact' && styles.containerCompact
       )}
     >
-      <ListItem<T>
+      <ListItem<T & DatabaseRecord>
         size="compact"
         collection={collection}
         defaultData={defaultData}

@@ -15,10 +15,13 @@ export const useAppStoreSlice = <K extends keyof AppStoreState>(...keys: [K, ...
   useStoreWithEqualityFn(
     useAppStore,
     (s) =>
-      keys.reduce((obj, key) => {
-        obj[key] = s[key];
-        return obj;
-      }, {} as Pick<AppStoreState, K>),
+      keys.reduce(
+        (obj, key) => {
+          obj[key] = s[key];
+          return obj;
+        },
+        {} as Pick<AppStoreState, K>
+      ),
     shallow
   );
 
