@@ -1,17 +1,17 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { InputText } from "components/inputText/inputText";
-import { Modal } from "components/modal/modal";
-import { Button } from "components/button/button";
-import { Divider } from "components/divider/divider";
-import { createRecord } from "services/database/createRecord";
-import { mergeReducer } from "utils/mergeReducer";
-import { updateRecord } from "services/database/updateRecord";
-import { deleteRecord } from "services/database/deleteRecord";
-import { Film } from "types/entertainment";
-import { defaultfilm } from "constants/defaults";
+import { InputText } from 'components/inputText/inputText';
+import { Modal } from 'components/modal/modal';
+import { Button } from 'components/button/button';
+import { Divider } from 'components/divider/divider';
+import { createRecord } from 'services/database/createRecord';
+import { mergeReducer } from 'utils/mergeReducer';
+import { updateRecord } from 'services/database/updateRecord';
+import { deleteRecord } from 'services/database/deleteRecord';
+import { Film } from 'types/entertainment';
+import { defaultfilm } from 'constants/defaults';
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 interface Props {
   film?: Film | undefined;
@@ -23,12 +23,9 @@ interface Props {
 export const FilmEditor = (props: Props) => {
   const { film, show, setShow, onClose } = props;
 
-  const [search, setSearch] = React.useState("");
+  const [search, setSearch] = React.useState('');
 
-  const [state, updateState] = React.useReducer(
-    mergeReducer<Film>,
-    film || defaultfilm()
-  );
+  const [state, updateState] = React.useReducer(mergeReducer<Film>, film || defaultfilm());
 
   React.useEffect(() => {
     updateState(film || defaultfilm());
@@ -38,12 +35,12 @@ export const FilmEditor = (props: Props) => {
     if (!film) return;
 
     const response = await deleteRecord({
-      collection: "films",
+      collection: 'films',
       id: film.id,
     });
 
     if (!response.success) {
-      alert("Failed to delete record");
+      alert('Failed to delete record');
     }
 
     setShow(false);
@@ -53,12 +50,12 @@ export const FilmEditor = (props: Props) => {
     if (film) {
       await updateRecord({
         id: film?.id,
-        collection: "films",
+        collection: 'films',
         data: state,
       });
     } else {
       await createRecord({
-        collection: "films",
+        collection: 'films',
         data: state,
       });
     }
@@ -73,13 +70,13 @@ export const FilmEditor = (props: Props) => {
 
     const result = await fetch(url, {
       headers: {
-        accept: "application/json",
+        accept: 'application/json',
         Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MGVhNGFjMDBlMTkxNDU5M2EzZTIwM2MwODI0NDIzZSIsIm5iZiI6MTc2Mzk4MTIyMi45Njg5OTk5LCJzdWIiOiI2OTI0MzdhNjZjMmJhY2YxMWQwYmFjOTciLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.lBUqeOkaaQHIo1TLTCcO_DPUaDz6qeNijRnBFM5PXFI`,
       },
     });
 
     if (!result.ok) {
-      throw new Error("Failed to fetch from TMDB");
+      throw new Error('Failed to fetch from TMDB');
     }
 
     type FilmData = {
@@ -89,11 +86,9 @@ export const FilmEditor = (props: Props) => {
       original_language: string;
     };
 
-    const data: { results: FilmData[] } = await result.json();
+    const data = (await result.json()) as { results: FilmData[] };
 
-    const filmData = data.results.find(
-      (item) => item.original_language === "en"
-    );
+    const filmData = data.results.find((item) => item.original_language === 'en');
 
     if (!filmData) return;
 
@@ -102,7 +97,7 @@ export const FilmEditor = (props: Props) => {
       coverImageUrl: `https://image.tmdb.org/t/p/original${filmData.poster_path}`,
       backgroundImageUrl: `https://image.tmdb.org/t/p/original${filmData.backdrop_path}`,
       rating: 0,
-      director: "",
+      director: '',
     });
   };
 
@@ -110,9 +105,9 @@ export const FilmEditor = (props: Props) => {
     <Modal
       show={show}
       setShow={setShow}
-      label={film?.name || "New Film"}
+      label={film?.name || 'New Film'}
       onClose={() => {
-        setSearch("");
+        setSearch('');
         onClose();
       }}
       contentClassName={styles.content}
@@ -129,12 +124,7 @@ export const FilmEditor = (props: Props) => {
           className={styles.inputText}
         />
 
-        <Button
-          type="secondary"
-          icon="search"
-          layer={2}
-          onClick={searchMovie}
-        />
+        <Button type="secondary" icon="search" layer={2} onClick={searchMovie} />
       </div>
 
       <Divider layer={2} />
@@ -193,7 +183,7 @@ export const FilmEditor = (props: Props) => {
         )}
 
         <Button
-          label={film ? "Update" : "Add"}
+          label={film ? 'Update' : 'Add'}
           onClick={handleUpdate}
           type="primary"
           className={styles.createButton}
