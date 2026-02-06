@@ -79,9 +79,13 @@ export const BookEditor = (props: Props) => {
 
     const response = await fetch(`https://openlibrary.org/isbn/${state.isbn}.json`);
 
-    if (!response.ok) throw 'Open Library API error';
+    if (!response.ok) throw new Error('Open Library API error');
 
-    const result = await response.json();
+    const result = (await response.json()) as {
+      title: string;
+      authors: { key: string; title: string }[];
+    };
+
     const authorPath = result?.authors?.[0]?.key;
 
     let author = '';
@@ -89,7 +93,7 @@ export const BookEditor = (props: Props) => {
     if (authorPath) {
       const authorResponse = await fetch(`https://openlibrary.org${authorPath}.json`);
 
-      const authorResult = await authorResponse?.json();
+      const authorResult = (await authorResponse?.json()) as { personal_name: string };
       author = authorResult.personal_name;
     }
 

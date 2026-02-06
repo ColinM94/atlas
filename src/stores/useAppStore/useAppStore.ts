@@ -27,7 +27,8 @@ export const useAppStoreSlice = <K extends keyof AppStoreState>(...keys: [K, ...
 
 export const useAppStore = create<AppStoreState>()(
   persist(
-    (set, get) => ({
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    (get, set) => ({
       showNavbar: false,
       darkMode: false,
       filmsLayout: 'compact',
@@ -36,6 +37,7 @@ export const useAppStore = create<AppStoreState>()(
     }),
     {
       name: 'app',
+      version: 1,
     }
   )
 );

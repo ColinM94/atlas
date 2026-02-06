@@ -1,40 +1,38 @@
-import { isObject } from "./isObject";
+import { isObject } from './isObject';
 
 /**
- * Compares two objects by value, including nested objects.
- *
- * @param object1 - The first object to compare.
- * @param object2 - The second object to compare.
- * @returns `true` if the objects are equal, otherwise `false`.
+ * Deeply compares two objects
  */
 export const areObjectsEqual = (
-  object1: object,
-  object2: object,
-  ignoreKeys?: string[]
+  a: unknown,
+  b: unknown,
+  ignoreKeys?: readonly PropertyKey[]
 ): boolean => {
-  if (!object1 || !object2) return false;
+  if (a === b) {
+    return true;
+  }
 
-  const objKeys1 = Object.keys(object1);
-  const objKeys2 = Object.keys(object2);
+  if (!isObject(a) || !isObject(b)) {
+    return false;
+  }
 
-  if (objKeys1.length !== objKeys2.length) return false;
+  const obj1 = a as Record<PropertyKey, unknown>;
+  const obj2 = b as Record<PropertyKey, unknown>;
 
-  for (const key of objKeys1) {
+  const keys1 = Reflect.ownKeys(obj1);
+  const keys2 = Reflect.ownKeys(obj2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (const key of keys1) {
     if (ignoreKeys?.includes(key)) continue;
 
-    // @ts-expect-error Might not be an object
-    const value1 = object1[key];
-    // @ts-expect-error Might not be an object
-    const value2 = object2[key];
-
-    const isObjects = isObject(value1) && isObject(value2);
-
-    if (
-      (isObjects && !areObjectsEqual(value1, value2, ignoreKeys)) ||
-      (!isObjects && value1 !== value2)
-    ) {
+    if (!areObjectsEqual(obj1[key], obj2[key], ignoreKeys)) {
       return false;
     }
   }
+
   return true;
 };
