@@ -57,7 +57,7 @@ export const List = <T,>(props: Props<T & DatabaseRecord>) => {
       )}
     >
       <ListItem<T & DatabaseRecord>
-        size="compact"
+        size="full"
         collection={collection}
         defaultData={defaultData}
         mainPropertyKey={mainPropertyKey}
