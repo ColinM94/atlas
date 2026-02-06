@@ -66,23 +66,25 @@ export const List = <T,>(props: Props<T & DatabaseRecord>) => {
 
       <Divider layer={1} />
 
-      {renderItems()
-        .sort((a, b) => Number(a.date) - Number(b.date))
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .sort((a, b) => Number(a.checked) - Number(b.checked))
-        .map((item) => (
-          <ListItem
-            item={item}
-            collection={collection}
-            size={layout || 'full'}
-            key={item.id}
-            style={{ aspectRatio }}
-            inputs={inputs}
-            defaultData={defaultData}
-            mainPropertyKey={mainPropertyKey}
-            className={classes(styles.item)}
-          />
-        ))}
+      <div className={styles.items}>
+        {renderItems()
+          .sort((a, b) => Number(a.date) - Number(b.date))
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .sort((a, b) => Number(a.checked) - Number(b.checked))
+          .map((item) => (
+            <ListItem
+              item={item}
+              collection={collection}
+              size={layout || 'full'}
+              key={item.id}
+              style={{ aspectRatio }}
+              inputs={inputs}
+              defaultData={defaultData}
+              mainPropertyKey={mainPropertyKey}
+              className={classes(styles.item)}
+            />
+          ))}
+      </div>
     </MainLayout>
   );
 };

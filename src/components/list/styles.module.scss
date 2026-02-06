@@ -1,5 +1,9 @@
 .container {
   gap: vars.$spacing-primary;
+
+  .items {
+    gap: vars.$spacing-primary !important;
+  }
 }
 
 .containerFull {
@@ -7,13 +11,14 @@
 }
 
 .containerCompact {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  gap: vars.$spacing-primary;
 
-  .item {
-  }
+  .items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 
-  @media (min-width: vars.$breakpoint-medium) {
-    grid-template-columns: repeat(6, 1fr);
+    @media (min-width: vars.$breakpoint-medium) {
+      grid-template-columns: repeat(6, 1fr);
+    }
   }
 }
