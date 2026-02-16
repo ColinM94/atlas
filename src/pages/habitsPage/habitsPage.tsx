@@ -1,18 +1,18 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { subscribeToCollection } from "services/database/subscribeToCollection";
-import { Habit } from "types/habit";
+import { subscribeToCollection } from 'services/database/subscribeToCollection';
+import { Habit } from 'types/habit';
 
-import { HabitsMonth } from "./habitsMonth/habitsMonth";
-import { MainLayout } from "layouts/mainLayout/mainLayout";
-import styles from "./styles.module.scss";
+import { HabitsMonth } from './habitsMonth/habitsMonth';
+import { MainLayout } from 'layouts/mainLayout/mainLayout';
+import styles from './styles.module.scss';
 
 export const HabitsPage = () => {
   const [habits, setHabits] = React.useState<Habit[]>([]);
 
   React.useEffect(() => {
     const unsubscribe = subscribeToCollection<Habit>({
-      collection: "habits",
+      collection: 'habits',
       onData: setHabits,
     });
 
@@ -23,13 +23,10 @@ export const HabitsPage = () => {
 
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getUTCMonth() + 1;
-  const startYear = 2025;
-  const startMonth = 10;
+  const startYear = 2026;
+  const startMonth = 1;
 
-  const years = Array.from(
-    { length: currentYear - startYear + 1 },
-    (_, i) => 2025 + i
-  );
+  const years = Array.from({ length: currentYear - startYear + 1 }, (_, i) => 2026 + i);
 
   const months = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 

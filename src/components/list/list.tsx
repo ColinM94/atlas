@@ -3,7 +3,7 @@ import * as React from 'react';
 import { classes } from 'utils/classes';
 import { subscribeToCollection } from 'services/database/subscribeToCollection';
 import { MainLayout } from 'layouts/mainLayout/mainLayout';
-import { useAppStore } from 'stores/useAppStore/useAppStore';
+// import { useAppStore } from 'stores/useAppStore/useAppStore';
 import { Divider } from 'components/divider/divider';
 import { DatabaseRecord } from 'types/general';
 
@@ -34,22 +34,22 @@ export const List = <T,>(props: Props<T & DatabaseRecord>) => {
     });
   };
 
-  const handleLayoutClick = () => {
-    useAppStore.setState({
-      [`${collection}Layout`]: `${collection}Layout` === 'compact' ? 'full' : 'compact',
-    });
-  };
+  // const handleLayoutClick = () => {
+  //   useAppStore.setState({
+  //     [`${collection}Layout`]: `${collection}Layout` === 'compact' ? 'full' : 'compact',
+  //   });
+  // };
 
   return (
     <MainLayout
-      buttons={[
-        {
-          type: 'secondary',
-          icon: layout === 'compact' ? 'dashboard' : 'list',
-          onClick: handleLayoutClick,
-          hidden: layout === undefined,
-        },
-      ]}
+      // buttons={[
+      //   {
+      //     type: 'secondary',
+      //     icon: layout === 'compact' ? 'dashboard' : 'list',
+      //     onClick: handleLayoutClick,
+      //     hidden: layout === undefined,
+      //   },
+      // ]}
       className={classes(
         styles.container,
         layout === 'full' && styles.containerFull,
