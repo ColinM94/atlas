@@ -95,8 +95,8 @@ export const ListItem = <T,>(props: Props<T & DatabaseRecord>) => {
           <img src={item.imageUrl} className={styles.image} />
         </div>
 
-        {/* {Boolean(item.rating) && <div className={styles.infoRating}>{item.rating} / 5</div>}
-        {Boolean(item.date) && <div className={styles.date}>{item.date}</div>} */}
+        {Boolean(item.rating) && <div className={styles.infoRating}>{item.rating} / 5</div>}
+        {Boolean(item.date) && <div className={styles.date}>{item.date}</div>}
       </div>
     );
   }

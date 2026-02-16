@@ -102,15 +102,15 @@
     }
   }
 
-  // .infoRating {
-  //   position: absolute;
-  //   top: vars.$spacing-tertiary;
-  //   right: vars.$spacing-tertiary;
-  //   background-color: vars.$color-background-translucent;
-  //   padding-block: calc(vars.$spacing-tertiary / 2);
-  //   padding-inline: vars.$spacing-secondary;
-  //   border-radius: vars.$roundness;
-  // }
+  .infoRating {
+    position: absolute;
+    top: vars.$spacing-tertiary;
+    right: vars.$spacing-tertiary;
+    background-color: vars.$color-background-translucent;
+    padding-block: calc(vars.$spacing-tertiary / 2);
+    padding-inline: vars.$spacing-secondary;
+    border-radius: vars.$roundness;
+  }
 }
 
 .input {
