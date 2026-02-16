@@ -1,0 +1,14 @@
+.container {
+  gap: vars.$spacing-primary;
+  align-items: center;
+
+  .content {
+    width: 100%;
+    max-width: 400px;
+    flex: 1;
+
+    .signOutButton {
+      margin-top: auto;
+    }
+  }
+}

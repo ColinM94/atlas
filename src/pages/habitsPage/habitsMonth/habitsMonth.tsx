@@ -8,7 +8,6 @@ import { Button } from 'components/button/button';
 import { updateDocument } from 'services/database/updateDocument';
 import { addDocument } from 'services/database/addDocument';
 import { deleteDocument } from 'services/database/deleteDocument';
-import { pb } from 'inits/backend';
 
 import { HabitsMonthHeader } from './components/habitsMonthHeader/habitsMonthHeader';
 import styles from './styles.module.scss';

@@ -1,18 +1,21 @@
 import * as React from 'react';
-import { useLocation } from 'wouter';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
+import { auth } from 'inits/firebase';
 import { InputText } from 'components/inputText/inputText';
 import { Button } from 'components/button/button';
 
 import styles from './styles.module.scss';
 
 export const LoginPage = () => {
-  const [, navigate] = useLocation();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  const handleLogin = () => {
-    navigate('tasks');
+  const handleLogin = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    if (result.user) return;
+    alert('Login Failed');
   };
 
   return (
@@ -26,6 +29,7 @@ export const LoginPage = () => {
           layer={2}
           className={styles.input}
         />
+
         <InputText
           value={password}
           setValue={setPassword}

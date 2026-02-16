@@ -42,13 +42,13 @@ export const ListItem = <T,>(props: Props<T & DatabaseRecord>) => {
 
   const handleUpdate = async () => {
     if (state.id) {
-      await updateDocument<Omit<T, 'id'>>({
+      await updateDocument({
         id: state.id,
         collection,
         data: state,
       });
     } else {
-      await addDocument<Omit<T, 'id'>>({
+      await addDocument({
         collection,
         data: state,
       });
@@ -144,7 +144,7 @@ export const ListItem = <T,>(props: Props<T & DatabaseRecord>) => {
 
                 console.log('hello');
 
-                void updateRecord({
+                void updateDocument({
                   id: item.id,
                   collection,
                   data: {

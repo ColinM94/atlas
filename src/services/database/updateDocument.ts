@@ -21,7 +21,7 @@ export const updateDocument = async <T>(params: Params<T>) => {
   } catch (error) {
     trackError({
       error: error as Error,
-      source: 'updateRecord',
+      source: 'updateDocument',
       description: `Failed to update document ${id} in collection ${collectionName}`,
     });
 

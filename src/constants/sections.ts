@@ -2,6 +2,7 @@ import { BooksPage } from 'pages/booksPage/booksPage';
 import { FilmsPage } from 'pages/filmsPage/filmsPage';
 import { HabitsPage } from 'pages/habitsPage/habitsPage';
 import { PeoplePage } from 'pages/peoplePage/peoplePage';
+import { SettingsPage } from 'pages/settingsPage/settingsPage';
 import { ShoppingPage } from 'pages/shoppingPage/shoppingPage';
 import { TasksPage } from 'pages/tasksPage/tasksPage';
 import { Section } from 'types/section';
@@ -48,5 +49,11 @@ export const sections: Record<string, Section> = {
     icon: 'tv',
     name: 'TV Series',
     component: FilmsPage,
+  },
+  settings: {
+    id: 'settings',
+    icon: 'settings',
+    name: 'Settings,',
+    component: SettingsPage,
   },
 } as const;
