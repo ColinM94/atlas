@@ -18,7 +18,7 @@
     gap: vars.$spacing-primary;
 
     .labelContainer {
-      margin-top: 12.5%;
+      margin-top: 10%;
       margin-bottom: 10%;
 
       .label {
@@ -34,11 +34,13 @@
 
     .sections {
       gap: calc(vars.$spacing-primary * 4);
+      width: 100%;
 
       .section {
         gap: vars.$spacing-secondary;
         justify-content: center;
         align-items: center;
+        width: 100%;
 
         .sectionLabel {
           text-align: center;
@@ -48,26 +50,63 @@
         .icons {
           flex-direction: row;
           gap: vars.$spacing-primary;
+          width: 100%;
+          justify-content: center;
+          padding-inline: vars.$spacing-primary;
 
-          .icon {
-            height: 70px;
-            width: 70px;
-            border-radius: 8px;
+          .reactLink {
           }
 
-          .sassIcon {
+          .jsLink {
+            background-color: #f7df1e;
+          }
+
+          .tsLink {
+            background-color: #3178c6;
+          }
+
+          .sassLink {
             background-color: vars.$color-surface;
-            padding: 8px;
           }
 
-          .githubIcon {
+          .firebaseLink {
+            background-color: #191919;
+          }
+
+          .nodeLink {
+            background-color: #191919;
+          }
+
+          .expressLink {
+            background-color: #f1c40f;
+            padding: 0 !important;
+
+            img {
+              padding: 0;
+            }
+          }
+
+          .linkedinLink {
+            background-color: #0077b5;
+          }
+
+          .githubLink {
             background-color: white;
-            border: 1px solid white;
+            border: 2px solid white;
+
+            img {
+              min-height: 110%;
+              min-width: 110%;
+              padding: 0;
+            }
           }
 
           .nodeIcon {
             background-color: vars.$color-surface;
-            padding: 6px;
+          }
+
+          .linkedInIcon {
+            background-color: #0077b5;
           }
         }
       }

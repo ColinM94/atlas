@@ -10,8 +10,8 @@ import firebaseIcon from 'assets/images/firebase.svg';
 import nodeIcon from 'assets/images/node.png';
 import expressIcon from 'assets/images/express-js.png';
 
+import { HomeLink } from './components/homeLink/homeLInk';
 import styles from './styles.module.scss';
-import { classes } from 'utils/classes';
 
 export const HomePage = () => {
   return (
@@ -25,6 +25,7 @@ export const HomePage = () => {
           className={styles.loginButton}
         />
       </div>
+
       <div className={styles.content}>
         <div className={styles.labelContainer}>
           <div className={styles.label}>Colin Maher</div>
@@ -34,51 +35,76 @@ export const HomePage = () => {
         <div className={styles.sections}>
           <div className={styles.section}>
             <div className={styles.sectionLabel}>The tech I use all the time</div>
-            <div className={styles.icons}>
-              <a target="_blank" href="https://react.dev" title="ReactJS">
-                <img src={reactIcon} className={styles.icon} />
-              </a>
 
-              <a
-                target="_blank"
+            <div className={styles.icons}>
+              <HomeLink
+                href="https://react.dev"
+                title="ReactJS"
+                image={reactIcon}
+                className={styles.reactLink}
+              />
+
+              <HomeLink
                 href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
                 title="Javascript"
-              >
-                <img src={jsIcon} className={styles.icon} />
-              </a>
+                image={jsIcon}
+                className={styles.jsLink}
+              />
 
-              <a target="_blank" href="https://www.typescriptlang.org/docs/" title="Typescript">
-                <img src={tsIcon} className={styles.icon} />
-              </a>
+              <HomeLink
+                href="https://www.typescriptlang.org/docs/"
+                title="Typescript"
+                image={tsIcon}
+                className={styles.tsLink}
+              />
 
-              <a target="_blank" href="https://www.typescriptlang.org/docs/" title="SASS">
-                <img src={sassIcon} className={classes(styles.icon, styles.sassIcon)} />
-              </a>
+              <HomeLink
+                href="https://www.typescriptlang.org/docs/"
+                title="SASS"
+                image={sassIcon}
+                className={styles.sassLink}
+              />
 
-              <a target="_blank" href="https://firebase.google.com" title="Firebase">
-                <img src={firebaseIcon} className={classes(styles.icon, styles.sassIcon)} />
-              </a>
+              <HomeLink
+                href="https://firebase.google.com"
+                title="Firebase"
+                image={firebaseIcon}
+                className={styles.firebaseLink}
+              />
 
-              <a target="_blank" href="https://nodejs.org/en" title="Node JS">
-                <img src={nodeIcon} className={classes(styles.icon, styles.nodeIcon)} />
-              </a>
+              <HomeLink
+                href="https://nodejs.org/en"
+                title="Node JS"
+                image={nodeIcon}
+                className={styles.nodeLink}
+              />
 
-              <a target="_blank" href="https://expressjs.com" title="Express JS">
-                <img src={expressIcon} className={classes(styles.icon, styles.nodeIcon)} />
-              </a>
+              <HomeLink
+                href="https://expressjs.com"
+                title="Express JS"
+                image={expressIcon}
+                className={styles.expressLink}
+              />
             </div>
           </div>
 
           <div className={styles.section}>
             <div className={styles.sectionLabel}>Links to my socials</div>
-            <div className={styles.icons}>
-              <a target="_blank" href="https://www.linkedin.com/in/colinm94" title="Linkedin">
-                <img src={linkedinIcon} className={styles.icon} />
-              </a>
 
-              <a target="_blank" href="https://github.com/ColinM94" title="GitHub">
-                <img src={githubIcon} className={classes(styles.icon, styles.githubIcon)} />
-              </a>
+            <div className={styles.icons}>
+              <HomeLink
+                href="https://www.linkedin.com/in/colinm94"
+                title="Linkedin"
+                image={linkedinIcon}
+                className={styles.linkedinLink}
+              />
+
+              <HomeLink
+                href="https://github.com/ColinM94"
+                title="GitHub"
+                image={githubIcon}
+                className={styles.githubLink}
+              />
             </div>
           </div>
         </div>
