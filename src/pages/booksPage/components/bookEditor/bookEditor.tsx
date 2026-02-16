@@ -4,12 +4,12 @@ import { InputText } from 'components/inputText/inputText';
 import { Modal } from 'components/modal/modal';
 import { Button } from 'components/button/button';
 import { Divider } from 'components/divider/divider';
-import { createRecord } from 'services/database/createRecord';
+import { addDocument } from 'services/database/addDocument';
 import { mergeReducer } from 'utils/mergeReducer';
-import { updateRecord } from 'services/database/updateRecord';
-import { deleteRecord } from 'services/database/deleteRecord';
 import { Book } from 'types/entertainment';
 import { defaultBook } from 'constants/defaults';
+import { deleteDocument } from 'services/database/deleteDocument';
+import { updateDocument } from 'services/database/updateDocument';
 
 import styles from './styles.module.scss';
 
@@ -33,7 +33,7 @@ export const BookEditor = (props: Props) => {
   const handleDelete = async () => {
     if (!book) return;
 
-    const response = await deleteRecord({
+    const response = await deleteDocument({
       collection: 'books',
       id: book.id,
     });
@@ -45,13 +45,13 @@ export const BookEditor = (props: Props) => {
 
   const handleUpdate = async () => {
     if (book) {
-      await updateRecord({
+      await updateDocument({
         id: book?.id,
         collection: 'books',
         data: state,
       });
     } else {
-      await createRecord({
+      await addDocument({
         collection: 'books',
         data: state,
       });

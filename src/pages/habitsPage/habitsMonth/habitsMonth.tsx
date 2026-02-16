@@ -1,19 +1,17 @@
- 
-/* eslint-disable @typescript-eslint/no-floating-promises */
-import React from "react";
+import React from 'react';
 
-import { daysInMonth } from "utils/daysInMonth";
-import { classes } from "utils/classes";
-import { numberOfDaysInMonth } from "utils/numberOfDaysInMonth";
-import { Habit, HabitData } from "types/habit";
-import { Button } from "components/button/button";
-import { updateRecord } from "services/database/updateRecord";
-import { createRecord } from "services/database/createRecord";
-import { deleteRecord } from "services/database/deleteRecord";
-import { pb } from "inits/backend";
+import { daysInMonth } from 'utils/daysInMonth';
+import { classes } from 'utils/classes';
+import { numberOfDaysInMonth } from 'utils/numberOfDaysInMonth';
+import { Habit, HabitData } from 'types/habit';
+import { Button } from 'components/button/button';
+import { updateDocument } from 'services/database/updateDocument';
+import { addDocument } from 'services/database/addDocument';
+import { deleteDocument } from 'services/database/deleteDocument';
+import { pb } from 'inits/backend';
 
-import { HabitsMonthHeader } from "./components/habitsMonthHeader/habitsMonthHeader";
-import styles from "./styles.module.scss";
+import { HabitsMonthHeader } from './components/habitsMonthHeader/habitsMonthHeader';
+import styles from './styles.module.scss';
 
 interface Props {
   year: number;
@@ -31,32 +29,26 @@ export const HabitsMonth = (props: Props) => {
   const numDays = numberOfDaysInMonth(year, month);
 
   const loadData = async () => {
-    const yearString = String(year);
-    const monthString = String(month).padStart(2, "0");
-
-    const value = await pb.collection("habitsData").getFullList<HabitData>({
-      filter: `date ~ '${yearString}-${monthString}'`,
-      requestKey: `habitData_${year}_${month}`,
-    });
-
-    setHabitsData(value);
+    // const yearString = String(year);
+    // const monthString = String(month).padStart(2, '0');
+    // // const value = await pb.collection('habitsData').getFullList<HabitData>({
+    // //   filter: `date ~ '${yearString}-${monthString}'`,
+    // //   requestKey: `habitData_${year}_${month}`,
+    // // });
+    // setHabitsData(value);
   };
 
   React.useEffect(() => {
-    loadData();
+    void loadData();
   }, [month, year]);
 
   const formatDate = (year: number, month: number, day: number) =>
-    `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 
-  const toggleHabit = async (
-    date: string,
-    habitId: string,
-    habitData: HabitData | undefined
-  ) => {
+  const toggleHabit = async (date: string, habitId: string, habitData: HabitData | undefined) => {
     if (!habitData) {
-      await createRecord<HabitData>({
-        collection: "habitsData",
+      await addDocument<HabitData>({
+        collection: 'habitsData',
         data: {
           date,
           habitId,
@@ -64,21 +56,21 @@ export const HabitsMonth = (props: Props) => {
         },
       });
     } else if (habitData.isAchieved === false) {
-      await deleteRecord({
+      await deleteDocument({
         id: habitData.id,
-        collection: "habitsData",
+        collection: 'habitsData',
       });
     } else if (habitData.isAchieved === true) {
-      await updateRecord<HabitData>({
+      await updateDocument<HabitData>({
         id: habitData.id,
-        collection: "habitsData",
+        collection: 'habitsData',
         data: {
           isAchieved: false,
         },
       });
     }
 
-    loadData();
+    void loadData();
   };
 
   const numDaysInMonth = daysInMonth(year, month);
@@ -114,9 +106,7 @@ export const HabitsMonth = (props: Props) => {
                   type="secondary"
                   layer={1}
                   title={date}
-                  onClick={() =>
-                    void toggleHabit(date, habit.id, habitDataItem)
-                  }
+                  onClick={() => void toggleHabit(date, habit.id, habitDataItem)}
                   iconClassName={styles.habitIcon}
                   className={classes(
                     styles.habitDay,
@@ -124,8 +114,8 @@ export const HabitsMonth = (props: Props) => {
                     habitDataItem?.isAchieved === undefined
                       ? styles.habitDayUnselected
                       : habitDataItem?.isAchieved
-                      ? styles.habitDaySuccess
-                      : styles.habitDayFailed
+                        ? styles.habitDaySuccess
+                        : styles.habitDayFailed
                   )}
                 />
               );

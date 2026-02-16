@@ -2,7 +2,7 @@ import { Button } from 'components/button/button';
 import { Modal } from 'components/modal/modal';
 import { InputText } from 'components/inputText/inputText';
 import { InputDate } from 'components/inputDate/inputDate';
-import { deleteRecord } from 'services/database/deleteRecord';
+import { deleteDocument } from 'services/database/deleteDocument';
 
 import { ListEditorProps } from './types';
 import styles from './styles.module.scss';
@@ -14,7 +14,7 @@ export const ListEditor = <T,>(props: ListEditorProps<T & DatabaseRecord>) => {
   const handleDelete = async () => {
     if (!state.id) return;
 
-    const response = await deleteRecord({
+    const response = await deleteDocument({
       collection,
       id: state.id,
     });

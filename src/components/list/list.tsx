@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { classes } from 'utils/classes';
-import { subscribeToCollection } from 'services/database/subscribeToCollection';
+import { getDocumentsSnapshot } from 'services/database/getDocumentsSnapshot';
 import { MainLayout } from 'layouts/mainLayout/mainLayout';
 // import { useAppStore } from 'stores/useAppStore/useAppStore';
 import { Divider } from 'components/divider/divider';
@@ -17,13 +17,13 @@ export const List = <T,>(props: Props<T & DatabaseRecord>) => {
   const [data, setData] = React.useState<(T & DatabaseRecord)[]>([]);
 
   React.useEffect(() => {
-    const unsubcribe = subscribeToCollection<T>({
+    const unsubscribe = getDocumentsSnapshot({
       collection,
       onData: setData,
     });
 
     return () => {
-      unsubcribe?.();
+      unsubscribe?.();
     };
   }, []);
 

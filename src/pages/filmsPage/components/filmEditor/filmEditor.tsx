@@ -4,10 +4,10 @@ import { InputText } from 'components/inputText/inputText';
 import { Modal } from 'components/modal/modal';
 import { Button } from 'components/button/button';
 import { Divider } from 'components/divider/divider';
-import { createRecord } from 'services/database/createRecord';
+import { addDocument } from 'services/database/addDocument';
+import { deleteDocument } from 'services/database/deleteDocument';
+import { updateDocument } from 'services/database/updateDocument';
 import { mergeReducer } from 'utils/mergeReducer';
-import { updateRecord } from 'services/database/updateRecord';
-import { deleteRecord } from 'services/database/deleteRecord';
 import { Film } from 'types/entertainment';
 import { defaultfilm } from 'constants/defaults';
 
@@ -34,7 +34,7 @@ export const FilmEditor = (props: Props) => {
   const handleDelete = async () => {
     if (!film) return;
 
-    const response = await deleteRecord({
+    const response = await deleteDocument({
       collection: 'films',
       id: film.id,
     });
@@ -48,13 +48,13 @@ export const FilmEditor = (props: Props) => {
 
   const handleUpdate = async () => {
     if (film) {
-      await updateRecord({
+      await updateDocument({
         id: film?.id,
         collection: 'films',
         data: state,
       });
     } else {
-      await createRecord({
+      await addDocument({
         collection: 'films',
         data: state,
       });

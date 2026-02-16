@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { subscribeToCollection } from 'services/database/subscribeToCollection';
+import { getDocumentsSnapshot } from 'services/database/getDocumentsSnapshot';
 import { Habit } from 'types/habit';
 
 import { HabitsMonth } from './habitsMonth/habitsMonth';
@@ -11,7 +11,7 @@ export const HabitsPage = () => {
   const [habits, setHabits] = React.useState<Habit[]>([]);
 
   React.useEffect(() => {
-    const unsubscribe = subscribeToCollection<Habit>({
+    const unsubscribe = getDocumentsSnapshot({
       collection: 'habits',
       onData: setHabits,
     });

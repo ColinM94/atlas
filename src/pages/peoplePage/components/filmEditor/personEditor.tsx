@@ -1,16 +1,16 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { InputText } from "components/inputText/inputText";
-import { Modal } from "components/modal/modal";
-import { Button } from "components/button/button";
-import { createRecord } from "services/database/createRecord";
-import { mergeReducer } from "utils/mergeReducer";
-import { updateRecord } from "services/database/updateRecord";
-import { deleteRecord } from "services/database/deleteRecord";
-import { defaultPerson } from "constants/defaults";
-import { Person } from "types/person";
+import { InputText } from 'components/inputText/inputText';
+import { Modal } from 'components/modal/modal';
+import { Button } from 'components/button/button';
+import { addDocument } from 'services/database/addDocument';
+import { mergeReducer } from 'utils/mergeReducer';
+import { updateDocument } from 'services/database/updateDocument';
+import { deleteDocument } from 'services/database/deleteDocument';
+import { defaultPerson } from 'constants/defaults';
+import { Person } from 'types/person';
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 interface Props {
   person?: Person | undefined;
@@ -22,10 +22,7 @@ interface Props {
 export const PersonEditor = (props: Props) => {
   const { person, show, setShow, onClose } = props;
 
-  const [state, updateState] = React.useReducer(
-    mergeReducer<Person>,
-    person || defaultPerson()
-  );
+  const [state, updateState] = React.useReducer(mergeReducer<Person>, person || defaultPerson());
 
   React.useEffect(() => {
     updateState(person || defaultPerson());
@@ -34,13 +31,13 @@ export const PersonEditor = (props: Props) => {
   const handleDelete = async () => {
     if (!person) return;
 
-    const response = await deleteRecord({
-      collection: "people",
+    const response = await deleteDocument({
+      collection: 'people',
       id: person.id,
     });
 
     if (!response.success) {
-      alert("Failed to delete record");
+      alert('Failed to delete record');
     }
 
     setShow(false);
@@ -48,14 +45,14 @@ export const PersonEditor = (props: Props) => {
 
   const handleUpdate = async () => {
     if (person) {
-      await updateRecord({
+      await updateDocument({
         id: person?.id,
-        collection: "people",
+        collection: 'people',
         data: state,
       });
     } else {
-      await createRecord({
-        collection: "people",
+      await addDocument({
+        collection: 'people',
         data: state,
       });
     }
@@ -67,7 +64,7 @@ export const PersonEditor = (props: Props) => {
     <Modal
       show={show}
       setShow={setShow}
-      label={person?.name || "New Person"}
+      label={person?.name || 'New Person'}
       onClose={onClose}
       contentClassName={styles.content}
       className={styles.container}
@@ -92,7 +89,7 @@ export const PersonEditor = (props: Props) => {
         )}
 
         <Button
-          label={person ? "Update" : "Add"}
+          label={person ? 'Update' : 'Add'}
           onClick={handleUpdate}
           type="primary"
           className={styles.createButton}

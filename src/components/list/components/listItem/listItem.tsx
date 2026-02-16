@@ -7,8 +7,8 @@ import { classes } from 'utils/classes';
 import { Collection, DatabaseRecord } from 'types/general';
 import { mergeReducer } from 'utils/mergeReducer';
 import { Button } from 'components/button/button';
-import { updateRecord } from 'services/database/updateRecord';
-import { createRecord } from 'services/database/createRecord';
+import { updateDocument } from 'services/database/updateDocument';
+import { addDocument } from 'services/database/addDocument';
 import { formatDate } from 'utils/formatDate';
 
 import { ListEditorProps } from '../listEditor/types';
@@ -42,13 +42,13 @@ export const ListItem = <T,>(props: Props<T & DatabaseRecord>) => {
 
   const handleUpdate = async () => {
     if (state.id) {
-      await updateRecord<Omit<T, 'id'>>({
+      await updateDocument<Omit<T, 'id'>>({
         id: state.id,
         collection,
         data: state,
       });
     } else {
-      await createRecord<Omit<T, 'id'>>({
+      await addDocument<Omit<T, 'id'>>({
         collection,
         data: state,
       });
