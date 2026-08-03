@@ -26,7 +26,7 @@ export const PersonEditor = (props: Props) => {
 
   React.useEffect(() => {
     updateState(person || defaultPerson());
-  }, [show]);
+  }, [show, person]);
 
   const handleDelete = async () => {
     if (!person) return;

@@ -8,7 +8,7 @@ import {
   limit,
 } from 'firebase/firestore';
 import { db } from 'inits/firebase';
-import { FirestoreOrderByGeneric, FirestoreWhereGeneric, Metadata } from 'types/firebase';
+import { FirestoreOrderByGeneric, FirestoreWhereGeneric } from 'types/firebase';
 import { Collection } from 'types/general';
 import { trackError } from 'utils/trackError';
 
@@ -21,7 +21,7 @@ interface Config<T> {
   limit?: number;
 }
 
-export const getDocumentsSnapshot = <T extends Metadata>(config: Config<T>) => {
+export const getDocumentsSnapshot = <T>(config: Config<T>) => {
   const {
     collection: collectionName,
     where: whereClauses,

@@ -2,16 +2,16 @@ import * as React from 'react';
 
 import { getDocumentsSnapshot } from 'services/database/getDocumentsSnapshot';
 import { Habit } from 'types/habit';
+import { MainLayout } from 'layouts/mainLayout/mainLayout';
 
 import { HabitsMonth } from './habitsMonth/habitsMonth';
-import { MainLayout } from 'layouts/mainLayout/mainLayout';
 import styles from './styles.module.scss';
 
 export const HabitsPage = () => {
   const [habits, setHabits] = React.useState<Habit[]>([]);
 
   React.useEffect(() => {
-    const unsubscribe = getDocumentsSnapshot({
+    const unsubscribe = getDocumentsSnapshot<Habit>({
       collection: 'habits',
       onData: setHabits,
     });

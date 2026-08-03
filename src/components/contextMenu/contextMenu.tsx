@@ -1,6 +1,6 @@
-import { Button } from "components/button/button";
-import { ButtonProps } from "components/button/types";
-import { Modal } from "components/modal/modal";
+import { Button } from 'components/button/button';
+import { ButtonProps } from 'components/button/types';
+import { Modal } from 'components/modal/modal';
 
 interface Props {
   show: boolean;
@@ -13,8 +13,8 @@ export const ContextMenu = (props: Props) => {
 
   return (
     <Modal show={show} setShow={setShow}>
-      {buttons.map((button) => (
-        <Button {...button} />
+      {buttons.map((button, index) => (
+        <Button key={index} {...button} />
       ))}
     </Modal>
   );

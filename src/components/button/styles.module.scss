@@ -7,8 +7,10 @@
   border-radius: vars.$roundness;
   gap: vars.$spacing-secondary;
   height: vars.$input-height;
+  background-color: red !important;
 
   &:hover {
+    background-color: blue !important;
   }
 
   .icon {

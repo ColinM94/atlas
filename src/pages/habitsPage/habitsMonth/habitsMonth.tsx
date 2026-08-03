@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 
 import { daysInMonth } from 'utils/daysInMonth';
@@ -23,17 +25,17 @@ interface Props {
 export const HabitsMonth = (props: Props) => {
   const { habits, year, month, isCurrentYear, isCurrentMonth } = props;
 
-  const [habitsData, setHabitsData] = React.useState<HabitData[]>([]);
+  const [habitsData] = React.useState<HabitData[]>([]);
   // const [show, setShow] = React.useState(isCurrentYear);
   const numDays = numberOfDaysInMonth(year, month);
 
   const loadData = async () => {
     // const yearString = String(year);
     // const monthString = String(month).padStart(2, '0');
-    // // const value = await pb.collection('habitsData').getFullList<HabitData>({
-    // //   filter: `date ~ '${yearString}-${monthString}'`,
-    // //   requestKey: `habitData_${year}_${month}`,
-    // // });
+    // const value = await pb.collection('habitsData').getFullList<HabitData>({
+    //   filter: `date ~ '${yearString}-${monthString}'`,
+    //   requestKey: `habitData_${year}_${month}`,
+    // });
     // setHabitsData(value);
   };
 

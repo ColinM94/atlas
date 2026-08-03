@@ -3,8 +3,6 @@ import * as React from 'react';
 import { classes } from 'utils/classes';
 import { getDocumentsSnapshot } from 'services/database/getDocumentsSnapshot';
 import { MainLayout } from 'layouts/mainLayout/mainLayout';
-// import { useAppStore } from 'stores/useAppStore/useAppStore';
-import { Divider } from 'components/divider/divider';
 import { DatabaseRecord } from 'types/general';
 
 import { ListItemData, Props } from './types';
@@ -25,7 +23,7 @@ export const List = <T,>(props: Props<T & DatabaseRecord>) => {
     return () => {
       unsubscribe?.();
     };
-  }, []);
+  }, [collection]);
 
   const renderItems = () => {
     return data.map((dataItem) => {
@@ -34,38 +32,27 @@ export const List = <T,>(props: Props<T & DatabaseRecord>) => {
     });
   };
 
-  // const handleLayoutClick = () => {
-  //   useAppStore.setState({
-  //     [`${collection}Layout`]: `${collection}Layout` === 'compact' ? 'full' : 'compact',
-  //   });
-  // };
-
   return (
     <MainLayout
-      // buttons={[
-      //   {
-      //     type: 'secondary',
-      //     icon: layout === 'compact' ? 'dashboard' : 'list',
-      //     onClick: handleLayoutClick,
-      //     hidden: layout === undefined,
-      //   },
-      // ]}
+      footer={
+        <div className={styles.footer}>
+          {/* <Divider layer={1} /> */}
+
+          <ListItem<T & DatabaseRecord>
+            size="full"
+            collection={collection}
+            defaultData={defaultData}
+            mainPropertyKey={mainPropertyKey}
+            inputs={[{ inputType: 'text', propertyKey: mainPropertyKey }]}
+          />
+        </div>
+      }
       className={classes(
         styles.container,
         layout === 'full' && styles.containerFull,
         layout === 'compact' && styles.containerCompact
       )}
     >
-      <ListItem<T & DatabaseRecord>
-        size="full"
-        collection={collection}
-        defaultData={defaultData}
-        mainPropertyKey={mainPropertyKey}
-        inputs={[{ inputType: 'text', propertyKey: mainPropertyKey }]}
-      />
-
-      <Divider layer={1} />
-
       <div className={styles.items}>
         {renderItems()
           .sort((a, b) => Number(a.date) - Number(b.date))
@@ -85,6 +72,8 @@ export const List = <T,>(props: Props<T & DatabaseRecord>) => {
             />
           ))}
       </div>
+
+      {/* <Button type="primary" icon="add" className={styles.addButton} /> */}
     </MainLayout>
   );
 };

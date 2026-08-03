@@ -72,6 +72,12 @@
   flex-direction: row;
   align-items: center;
   cursor: pointer;
+
+  &:hover {
+    scale: 1.01;
+    transition: scale 0.15s ease-in-out;
+    background-color: vars.$color-surface2;
+  }
 }
 
 .containerCompact {
@@ -86,6 +92,7 @@
   &:hover {
     scale: 1.03;
     transition: scale 0.15s ease-in-out;
+    background-color: vars.$color-surface2;
   }
 
   .imageContainer {

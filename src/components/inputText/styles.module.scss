@@ -2,6 +2,9 @@
   // height: 100%;
 
   .input {
+    border: 1px solid vars.$color-surface2;
+    border-right: 1px solid vars.$color-surface2;
+
     &:focus {
       outline: 1px solid vars.$color-primary;
     }

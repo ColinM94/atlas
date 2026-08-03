@@ -30,5 +30,5 @@
     "noFallthroughCasesInSwitch": true,
     "allowJs": true
   },
-  "include": ["src", "global.d.ts", "vite.config.ts", "eslint.config.mjs"]
+  "include": ["src", "global.d.ts", "vite.config.ts", "oxlint.config.ts"]
 }

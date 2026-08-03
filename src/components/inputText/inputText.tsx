@@ -54,7 +54,7 @@ export const InputText = (props: InputTextProps) => {
     if (focusOnLoad) {
       inputField.current?.focus();
     }
-  }, [focusOnLoad]);
+  }, [focusOnLoad, inputField.current]);
 
   return (
     <FormField className={classes(className, styles.container)} {...rest}>

@@ -1,8 +1,16 @@
 .container {
   gap: vars.$spacing-primary;
+  flex: 1;
 
   .items {
     gap: vars.$spacing-primary !important;
+  }
+
+  .addButton {
+    position: absolute;
+    bottom: vars.$spacing-primary;
+    right: vars.$spacing-primary;
+    z-index: 999;
   }
 }
 
@@ -21,4 +29,10 @@
       grid-template-columns: repeat(6, 1fr);
     }
   }
+}
+
+.footer {
+  padding: vars.$spacing-primary;
+  padding-top: 0;
+  gap: vars.$spacing-primary;
 }

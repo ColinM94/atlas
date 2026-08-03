@@ -14,13 +14,14 @@ interface Props {
   onLayoutClick?: () => void;
   onAddClick?: () => void;
   children: Children;
+  footer?: Children;
   className?: string;
 }
 
 export const MainLayout = (props: Props) => {
   const [location] = useLocation();
 
-  const { children, buttons, layout, onLayoutClick, onAddClick, className } = props;
+  const { children, buttons, layout, onLayoutClick, onAddClick, footer, className } = props;
 
   return (
     <>
@@ -38,6 +39,8 @@ export const MainLayout = (props: Props) => {
           <div className={classes(styles.content, className)}>{children}</div>
         </div>
       </div>
+
+      {footer}
 
       <Navbar />
     </>

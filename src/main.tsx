@@ -7,10 +7,10 @@ import 'material-symbols/rounded.css';
 import { NotFoundPage } from 'pages/notFoundPage/notFoundPage';
 import { HomePage } from 'pages/homePage/homePage';
 import { sections as sectionsObject } from 'constants/sections';
+import { auth } from 'inits/firebase';
+import { LoginPage } from 'pages/loginPage/loginPage';
 
 import './styles/global.scss';
-import { LoginPage } from 'pages/loginPage/loginPage';
-import { auth } from 'inits/firebase';
 
 export const App = () => {
   const [location, navigate] = useLocation();
@@ -32,7 +32,7 @@ export const App = () => {
 
     if (isLoggedIn && noAuthRoutes.includes(location)) navigate(`/${firstSection.id}`);
     if (!isLoggedIn && !noAuthRoutes.includes(location)) navigate('/');
-  }, [isLoggedIn && location]);
+  }, [isLoggedIn, location, firstSection.id, navigate]);
 
   return (
     <>
@@ -41,7 +41,7 @@ export const App = () => {
           const Component = section.component;
 
           return (
-            <Route path={`/${section.id}`}>
+            <Route key={section.id} path={`/${section.id}`}>
               <Component />
             </Route>
           );

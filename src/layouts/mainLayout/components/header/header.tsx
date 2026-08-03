@@ -52,11 +52,11 @@ export const Header = (props: Props) => {
       /> */}
 
       <div className={styles.buttons}>
-        {renderButtons().map((button) => {
+        {renderButtons().map((button, index) => {
           if (button.hidden) return;
-          if (button) if (button.type === 'secondary') return <Button {...button} layer={0} />;
+          if (button.type === 'secondary') return <Button key={index} {...button} layer={0} />;
 
-          return <Button {...button} />;
+          return <Button key={index} {...button} />;
         })}
       </div>
     </div>

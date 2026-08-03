@@ -28,7 +28,7 @@ export const BookEditor = (props: Props) => {
 
   React.useEffect(() => {
     updateState(book || defaultBook());
-  }, [show]);
+  }, [show, book]);
 
   const handleDelete = async () => {
     if (!book) return;

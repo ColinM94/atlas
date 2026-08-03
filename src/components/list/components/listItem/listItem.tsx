@@ -14,6 +14,7 @@ import { formatDate } from 'utils/formatDate';
 import { ListEditorProps } from '../listEditor/types';
 import { ListEditor } from '../listEditor/listEditor';
 import styles from './styles.module.scss';
+import { createPortal } from 'react-dom';
 
 interface Props<T> {
   size: 'compact' | 'full';
@@ -155,7 +156,9 @@ export const ListItem = <T,>(props: Props<T & DatabaseRecord>) => {
             />
           </div>
         </div>
+      </div>
 
+      {createPortal(
         <ListEditor
           state={state}
           updateState={updateState}
@@ -164,8 +167,9 @@ export const ListItem = <T,>(props: Props<T & DatabaseRecord>) => {
           setShow={setShowEditor}
           inputs={inputs}
           onUpdate={handleUpdate}
-        />
-      </div>
+        />,
+        document.body
+      )}
     </>
   );
 };

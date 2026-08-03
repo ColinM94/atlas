@@ -29,7 +29,7 @@ export const FilmEditor = (props: Props) => {
 
   React.useEffect(() => {
     updateState(film || defaultfilm());
-  }, [show]);
+  }, [show, film]);
 
   const handleDelete = async () => {
     if (!film) return;
