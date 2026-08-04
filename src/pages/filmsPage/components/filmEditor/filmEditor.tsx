@@ -110,7 +110,6 @@ export const FilmEditor = (props: Props) => {
         setSearch('');
         onClose();
       }}
-      contentClassName={styles.content}
       className={styles.container}
     >
       {/* {!film && (

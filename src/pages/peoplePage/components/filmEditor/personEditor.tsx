@@ -66,7 +66,6 @@ export const PersonEditor = (props: Props) => {
       setShow={setShow}
       label={person?.name || 'New Person'}
       onClose={onClose}
-      contentClassName={styles.content}
       className={styles.container}
     >
       <InputText

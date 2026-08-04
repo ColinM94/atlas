@@ -3,10 +3,23 @@
     /* Environment */
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "baseUrl": "./src",
     "types": ["vite/client"],
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "paths": {
+      "assets/*": ["./src/assets/*"],
+      "components/*": ["./src/components/*"],
+      "constants/*": ["./src/constants/*"],
+      "hooks/*": ["./src/hooks/*"],
+      "inits/*": ["./src/inits/*"],
+      "layouts/*": ["./src/layouts/*"],
+      "pages/*": ["./src/pages/*"],
+      "services/*": ["./src/services/*"],
+      "styles/*": ["./src/styles/*"],
+      "stores/*": ["./src/stores/*"],
+      "types/*": ["./src/types/*"],
+      "utils/*": ["./src/utils/*"]
+    },
 
     /* Module & Interop */
     "module": "ESNext",

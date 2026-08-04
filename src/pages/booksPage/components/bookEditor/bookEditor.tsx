@@ -105,13 +105,7 @@ export const BookEditor = (props: Props) => {
   };
 
   return (
-    <Modal
-      show={show}
-      setShow={setShow}
-      label="New Book"
-      contentClassName={styles.content}
-      className={styles.container}
-    >
+    <Modal show={show} setShow={setShow} label="New Book" className={styles.container}>
       <div className={styles.searchContainer}>
         <div className={styles.row}>
           <InputText

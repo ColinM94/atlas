@@ -86,7 +86,9 @@ export const ListEditor = <T,>(props: ListEditorProps<T & DatabaseRecord>) => {
         show={showEditor}
         setShow={setShowEditor}
         inputs={inputs}
-        // onUpdate={handleUpdate}
+        onUpdate={function (): void {
+          throw new Error('Function not implemented.');
+        }} // onUpdate={handleUpdate}
       />
     </>
   );
