@@ -1,3 +1,5 @@
+import { icons } from 'constants/icons';
+
 export type RequestResponseSuccess<T> = {
   data: T;
   success: true;
@@ -42,3 +44,5 @@ export type Layout = 'compact' | 'full';
 export type KeyOf<T> = {
   [K in keyof T & (string | number)]: T[K] extends object ? `${K}` | `${K}.${KeyOf<T[K]>}` : `${K}`;
 }[keyof T & (string | number)];
+
+export type IconName = keyof typeof icons;

@@ -13,6 +13,7 @@
     "visualise": "pnpm dlx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
+    "@material-symbols-svg/react": "^0.13.0",
     "firebase": "^12.17.0",
     "material-symbols": "^0.45.10",
     "react": "^19.2.8",

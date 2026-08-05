@@ -1,5 +1,4 @@
 import { Button } from 'components/button/button';
-
 import linkedinIcon from 'assets/images/linkedin.png';
 import githubIcon from 'assets/images/github.png';
 import reactIcon from 'assets/images/react.svg';

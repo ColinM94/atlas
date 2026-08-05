@@ -1,12 +1,11 @@
 import { CSSProperties } from 'react';
-import { MaterialSymbol } from 'material-symbols';
-import { Layer } from 'types/general';
+import { IconName, Layer } from 'types/general';
 
 interface ButtonPropsBase {
   to?: string;
   label?: string | number;
-  icon?: MaterialSymbol;
-  rightIcon?: MaterialSymbol;
+  icon?: IconName;
+  rightIcon?: IconName;
   iconColor?: 'primary' | 'secondary' | 'danger';
   isFormSubmit?: boolean;
   onClick?: ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;

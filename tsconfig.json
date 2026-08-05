@@ -27,7 +27,7 @@
     "moduleDetection": "force",
     // "verbatimModuleSyntax": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": false,
 
     /* Build Behavior */
     "noEmit": true,

@@ -1,9 +1,10 @@
-import { MaterialSymbol } from 'material-symbols';
+import { IconName } from 'types/general';
 
-export interface Props {
-  icon: MaterialSymbol;
+export interface IconProps {
+  icon: IconName;
   title?: string;
-  onClick?: () => void;
+  size?: 'small' | 'medium' | 'large';
+  onClick?: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
   style?: React.CSSProperties;
   className?: string;
 }

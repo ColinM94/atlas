@@ -6,13 +6,13 @@ import { Section } from 'types/section';
 export const sections: Record<string, Section> = {
   tasks: {
     id: 'tasks',
-    icon: 'check_box',
+    icon: 'CheckBox',
     name: 'Tasks',
     component: TasksPage,
   },
   shopping: {
     id: 'shopping',
-    icon: 'shopping_bag',
+    icon: 'ShoppingBag',
     name: 'Shopping',
     component: ShoppingPage,
   },
@@ -48,7 +48,7 @@ export const sections: Record<string, Section> = {
   // },
   settings: {
     id: 'settings',
-    icon: 'settings',
+    icon: 'Settings',
     name: 'Settings,',
     component: SettingsPage,
   },

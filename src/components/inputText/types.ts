@@ -1,5 +1,4 @@
-import { MaterialSymbol } from 'material-symbols';
-import { Children } from 'types/general';
+import { Children, IconName } from 'types/general';
 import { FormFieldProps } from '../formField/types';
 
 export interface InputTextProps extends FormFieldProps {
@@ -11,8 +10,8 @@ export interface InputTextProps extends FormFieldProps {
   disabled?: boolean;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
   rightText?: string;
-  inputIcon?: MaterialSymbol;
-  actionIcon?: MaterialSymbol;
+  inputIcon?: IconName;
+  actionIcon?: IconName;
   onActionClick?: () => void;
   focusOnLoad?: boolean;
   characterLimit?: number;

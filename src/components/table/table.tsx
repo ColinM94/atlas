@@ -1,10 +1,10 @@
-import * as React from "react";
-import { MaterialSymbol } from "material-symbols";
+import * as React from 'react';
 
-import { classes } from "utils/classes";
-import { Button } from "components/button/button";
+import { classes } from 'utils/classes';
+import { Button } from 'components/button/button';
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
+import { IconName } from 'types/general';
 
 interface TableProps<T> {
   data: T[];
@@ -23,17 +23,17 @@ interface CellBase {
 
 interface CellImage extends CellBase {
   url: string;
-  type: "image";
+  type: 'image';
 }
 
 interface CellText extends CellBase {
-  type: "text";
+  type: 'text';
   value: string;
 }
 
 interface CellButton extends CellBase {
-  type: "button";
-  icon: MaterialSymbol;
+  type: 'button';
+  icon: IconName;
 }
 
 type Cell = CellText | CellImage | CellButton;
@@ -45,14 +45,7 @@ interface Row<T> {
 }
 
 export const Table = <T,>(props: TableProps<T>) => {
-  const {
-    data,
-    items,
-    keyExtractor,
-    onRowClick,
-    rowHeight = 40,
-    overscan = 5,
-  } = props;
+  const { data, items, keyExtractor, onRowClick, rowHeight = 40, overscan = 5 } = props;
 
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [visibleRange, setVisibleRange] = React.useState({ start: 0, end: 20 });
@@ -75,8 +68,7 @@ export const Table = <T,>(props: TableProps<T>) => {
       const viewportHeight = container.clientHeight;
 
       const startIndex = Math.floor(scrollTop / rowHeight) - overscan;
-      const endIndex =
-        Math.ceil((scrollTop + viewportHeight) / rowHeight) + overscan;
+      const endIndex = Math.ceil((scrollTop + viewportHeight) / rowHeight) + overscan;
 
       setVisibleRange({
         start: Math.max(0, startIndex),
@@ -84,10 +76,10 @@ export const Table = <T,>(props: TableProps<T>) => {
       });
     };
 
-    container.addEventListener("scroll", handleScroll);
+    container.addEventListener('scroll', handleScroll);
 
     return () => {
-      container.removeEventListener("scroll", handleScroll);
+      container.removeEventListener('scroll', handleScroll);
     };
   }, [overscan, rowHeight, rows.length]);
 
@@ -101,7 +93,7 @@ export const Table = <T,>(props: TableProps<T>) => {
           <tr>
             {rows[0]?.cells.map((cell) => (
               <th key={`heading_${cell.id}`} className={styles.heading}>
-                {cell.heading || ""}
+                {cell.heading || ''}
               </th>
             ))}
           </tr>
@@ -114,63 +106,58 @@ export const Table = <T,>(props: TableProps<T>) => {
             </tr>
           )}
 
-          {rows
-            .slice(visibleRange.start, visibleRange.end + 1)
-            .map((row, index) => {
-              const isEvenRow = (visibleRange.start + index) % 2 === 0;
+          {rows.slice(visibleRange.start, visibleRange.end + 1).map((row, index) => {
+            const isEvenRow = (visibleRange.start + index) % 2 === 0;
 
-              return (
-                <tr
-                  key={row.id}
-                  onKeyDown={(e) => console.log(e.key)}
-                  onClick={() => {
-                    onRowClick?.(row.data);
-                  }}
-                  style={{ height: rowHeight }}
-                  className={classes(
-                    styles.row,
-                    onRowClick && styles.rowClickable,
-                    isEvenRow ? styles.rowEven : styles.rowOdd
-                  )}
-                >
-                  {row.cells.map((cell) => {
-                    const isCellClickable =
-                      cell.type !== "button" && Boolean(cell?.onClick);
+            return (
+              <tr
+                key={row.id}
+                onKeyDown={(e) => console.log(e.key)}
+                onClick={() => {
+                  onRowClick?.(row.data);
+                }}
+                style={{ height: rowHeight }}
+                className={classes(
+                  styles.row,
+                  onRowClick && styles.rowClickable,
+                  isEvenRow ? styles.rowEven : styles.rowOdd
+                )}
+              >
+                {row.cells.map((cell) => {
+                  const isCellClickable = cell.type !== 'button' && Boolean(cell?.onClick);
 
-                    return (
-                      <td
-                        key={cell.id}
-                        onClick={(e) => {
-                          if (!isCellClickable) return;
-                          e.stopPropagation();
-                          cell.onClick?.();
-                        }}
-                        className={classes(
-                          styles[`${cell.type}Cell`],
-                          isCellClickable && styles.cellClickable
-                        )}
-                      >
-                        {cell.type === "text" && cell.value}
+                  return (
+                    <td
+                      key={cell.id}
+                      onClick={(e) => {
+                        if (!isCellClickable) return;
+                        e.stopPropagation();
+                        cell.onClick?.();
+                      }}
+                      className={classes(
+                        styles[`${cell.type}Cell`],
+                        isCellClickable && styles.cellClickable
+                      )}
+                    >
+                      {cell.type === 'text' && cell.value}
 
-                        {cell.type === "image" && (
-                          <img src={cell.url} className={styles.image} />
-                        )}
+                      {cell.type === 'image' && <img src={cell.url} className={styles.image} />}
 
-                        {cell.type === "button" && (
-                          <Button
-                            type="secondary"
-                            icon={cell.icon}
-                            onClick={cell?.onClick}
-                            layer={2}
-                            className={styles.button}
-                          />
-                        )}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
+                      {cell.type === 'button' && (
+                        <Button
+                          type="secondary"
+                          icon={cell.icon}
+                          onClick={cell?.onClick}
+                          layer={2}
+                          className={styles.button}
+                        />
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
 
           {afterHeight > 0 && (
             <tr style={{ height: afterHeight }}>

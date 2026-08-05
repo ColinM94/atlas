@@ -1,8 +1,8 @@
-import { MaterialSymbol } from 'material-symbols';
+import { IconName } from './general';
 
 export interface Section {
   id: string;
-  icon: MaterialSymbol;
+  icon: IconName;
   name: string;
   component: React.ComponentType;
 }

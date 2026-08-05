@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@material-symbols-svg/react':
+        specifier: ^0.13.0
+        version: 0.13.0(react@19.2.8)
       firebase:
         specifier: ^12.17.0
         version: 12.17.0
@@ -385,6 +388,12 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@material-symbols-svg/react@0.13.0':
+    resolution: {integrity: sha512-V3JWSuOjP8/mhSSxDH4pVFWpBhsVPLj9I4FcqqSkb9NRgqifQzTIejJVXV62XrMlwgsEjmJ7kD3564KRhhTRsA==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   '@oxc-project/types@0.142.0':
     resolution: {integrity: sha512-7W+2q5AKQVU36fkaryontrHn3YDt1RyUYXatw9i5H8ocYe2sPKSFB6eS8WNPeRKiN1qAWWZUPm7gwFzJGrccqQ==}
@@ -1914,6 +1923,10 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@material-symbols-svg/react@0.13.0(react@19.2.8)':
+    dependencies:
+      react: 19.2.8
 
   '@oxc-project/types@0.142.0': {}
 
